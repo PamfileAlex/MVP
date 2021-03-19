@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
+using Microsoft.Win32;
 
 namespace MVP_Tema1_WPF
 {
@@ -28,6 +29,11 @@ namespace MVP_Tema1_WPF
             this.mainWindow = window;
             //WordTextBox.TextChanged += TBTextChanged;
             //WordTextBox.PreviewKeyDown += DelPressed;
+
+            /*AutoCompleteStringCollection source = new AutoCompleteStringCollection();
+            source.Add("some string");
+            WordTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            WordTextBox.AutoCompleteCustomSource = source;*/
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -66,7 +72,18 @@ namespace MVP_Tema1_WPF
             }
         }
 
-
+        private void UploadPhotoButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                ImgPhoto.Source = new BitmapImage(new Uri(op.FileName));
+            }
+        }
 
 
 
@@ -101,5 +118,6 @@ namespace MVP_Tema1_WPF
         private static bool DelKeyPressed;
         internal static void DelPressed(object sender, KeyEventArgs e)
         { if (e.Key == Key.Back) { DelKeyPressed = true; } else { DelKeyPressed = false; } }
+
     }
 }

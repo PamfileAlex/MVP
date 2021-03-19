@@ -15,20 +15,14 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
             <TextBlock HorizontalAlignment="Center" Margin="0,50,0,0" Text="Meniu" FontSize="48" FontWeight="Bold" Foreground="Red"/>
-            <Button Uid="0" Content="Acasa" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-            <Button Uid="1" Content="Adauga" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+            <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button x:Name="AddButtonMenu" Uid="1" Content="Adauga" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
         </StackPanel>
-        <StackPanel Grid.Column="1" Margin="20">
+        <StackPanel Grid.Column="1" Margin="10">
             <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Text="TEST" Margin="0,30,0,0"/>
             <TextBox x:Name="DescriptionTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="150" RenderTransformOrigin="0.733,0.522" FontSize="30" Margin="0,30,0,0"/>
             <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
-                <CheckBox x:Name="CategoryCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="110,0,8,0" Click="CategoryCheckBox_Click">
+                <CheckBox x:Name="CategoryCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="110,0,18,0" Click="CategoryCheckBox_Click">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="2" ScaleY="2" />
                     </CheckBox.LayoutTransform>
@@ -39,7 +33,13 @@
                 </Grid>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="button" Content="Button"/>
+                <Button x:Name="UploadPhotoButton" Content="Incarca" VerticalAlignment="Top" Margin="150,30,100,30" Width="150" FontSize="30" FontWeight="DemiBold" Click="UploadPhotoButton_Click" Template="{DynamicResource RoundedButtonTemplate}" Height="50"/>
+            <Image x:Name="ImgPhoto" Width="500" Height="280" Margin="0,20,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,0" HorizontalAlignment="Center">
+                <Button x:Name="AddButton" Uid="0" Content="Adauga" Margin="20,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+                <Button x:Name="ModifyButton" Uid="1" Content="Modifica" Margin="20,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+                <Button x:Name="DeleteButton" Uid="2" Content="Sterge" Margin="20,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
