@@ -19,7 +19,7 @@
             <Button x:Name="AddButtonMenu" Uid="10" Content="Adauga" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="10">
-            <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Text="TEST" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged"/>
+            <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged"/>
             <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
                 <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="800" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" />
             </Popup>

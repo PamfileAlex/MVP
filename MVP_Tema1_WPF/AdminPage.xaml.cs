@@ -56,8 +56,11 @@ namespace MVP_Tema1_WPF
                     if (Check())
                     {
                         dictionary.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
-                        string imagePath = ImgPhoto.Source.ToString().Replace("file:///", "");
-                        System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
+                        if (ImgPhoto.Source != null)
+                        {
+                            string imagePath = ImgPhoto.Source.ToString().Replace("file:///", "");
+                            System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
+                        }
                         Reset();
                     }
                     else
@@ -106,7 +109,7 @@ namespace MVP_Tema1_WPF
             }
         }
 
-        private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        /*private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (autoComplete == null)
             {
@@ -122,7 +125,70 @@ namespace MVP_Tema1_WPF
                 return;
             }
             autoComplete.AutoList_SelectionChanged(sender, e);
+        }*/
+
+
+
+        private void OpenAutoSuggestionBox()
+        {
+            this.AutoCompletePopup.Visibility = Visibility.Visible;
+            this.AutoCompletePopup.IsOpen = true;
+            this.AutoCompleteList.Visibility = Visibility.Visible;
         }
+
+        private void CloseAutoSuggestionBox()
+        {
+            this.AutoCompletePopup.Visibility = Visibility.Collapsed;
+            this.AutoCompletePopup.IsOpen = false;
+            this.AutoCompleteList.Visibility = Visibility.Collapsed;
+        }
+
+        public void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.WordTextBox.Text))
+            {
+                this.CloseAutoSuggestionBox();
+                return;
+            }
+            this.OpenAutoSuggestionBox();
+            this.AutoCompleteList.ItemsSource = this.dictionary.Where(x => x.WordText.IndexOf(WordTextBox.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.WordText);
+            if (this.AutoCompleteList.Items.Count == 0)
+            {
+                this.CloseAutoSuggestionBox();
+            }
+        }
+
+        public void AutoCompleteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.AutoCompleteList.SelectedIndex <= -1)
+            {
+                this.CloseAutoSuggestionBox();
+                return;
+            }
+            this.CloseAutoSuggestionBox();
+            this.WordTextBox.Text = this.AutoCompleteList.SelectedItem.ToString();
+            //int index = DictionaryIndexOf(this.AutoCompleteList.SelectedItem.ToString());
+            int index = dictionary.FindIndex(word => word.WordText.Equals(this.AutoCompleteList.SelectedItem.ToString()));
+            this.DescriptionTextBox.Text = dictionary[index].Description;
+            this.AutoCompleteList.SelectedIndex = -1;
+        }
+
+        private int DictionaryIndexOf(string searchedWord)
+        {
+            dictionary.FindIndex(word => word.WordText.Equals(searchedWord));
+
+            foreach (var (item, index) in dictionary.Select((value, i) => (value, i)))
+            {
+                if (searchedWord.Equals(item))
+                {
+                    return index;
+                }
+            }
+            return -1;
+        }
+
+
+
 
         private bool Check()
         {
