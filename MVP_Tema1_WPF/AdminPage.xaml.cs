@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
 using Microsoft.Win32;
+using System.IO;
 
 namespace MVP_Tema1_WPF
 {
@@ -23,10 +24,17 @@ namespace MVP_Tema1_WPF
     public partial class AdminPage : Page
     {
         private MainWindow mainWindow;
+        private AutoComplete autoComplete;
+        private List<Word> dictionary;
+
         public AdminPage(MainWindow window)
         {
             InitializeComponent();
             this.mainWindow = window;
+            List<string> list = new List<string> { "cuvant", "test", "ananas", "alfabet", "alfa" };
+            //autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, list);
+            dictionary = new List<Word>();
+            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, dictionary);
             //WordTextBox.TextChanged += TBTextChanged;
             //WordTextBox.PreviewKeyDown += DelPressed;
 
@@ -45,7 +53,17 @@ namespace MVP_Tema1_WPF
                     mainWindow.Content = mainWindow.mainPage;
                     break;
                 case 1:
-                    //mainWindow.Content = mainWindow.mainPage;
+                    if (Check())
+                    {
+                        dictionary.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
+                        string imagePath = ImgPhoto.Source.ToString().Replace("file:///", "");
+                        System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
+                        Reset();
+                    }
+                    else
+                    {
+                        Console.WriteLine("ERROR");
+                    }
                     break;
                 case 2:
 
@@ -82,7 +100,50 @@ namespace MVP_Tema1_WPF
             if (op.ShowDialog() == true)
             {
                 ImgPhoto.Source = new BitmapImage(new Uri(op.FileName));
+                //System.IO.File.Copy(op.FileName, "..\\Photos\\" + WordTextBox.Text);
+                //Console.WriteLine(".\\" + WordTextBox.Text + System.IO.Path.GetExtension(op.FileName));
+                //System.IO.File.Copy(op.FileName, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(op.FileName), true);
             }
+        }
+
+        private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (autoComplete == null)
+            {
+                return;
+            }
+            autoComplete.AutoTextBox_TextChanged(sender, e);
+        }
+
+        private void AutoCompleteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (autoComplete == null)
+            {
+                return;
+            }
+            autoComplete.AutoList_SelectionChanged(sender, e);
+        }
+
+        private bool Check()
+        {
+            return !String.IsNullOrEmpty(WordTextBox.Text) && !String.IsNullOrEmpty(DescriptionTextBox.Text) &&
+                (CategoryCheckBox.IsChecked ?? false) ? String.IsNullOrEmpty(CategoryTextBox.Text) ||
+                !dictionary.Exists(x => x.WordText.Equals(WordTextBox.Text)) : CategoryComboBox.SelectedIndex != -1;
+            /*Console.WriteLine(String.IsNullOrEmpty(WordTextBox.Text));
+            Console.WriteLine(String.IsNullOrEmpty(DescriptionTextBox.Text));
+            Console.WriteLine(String.IsNullOrEmpty(CategoryTextBox.Text) ||
+                dictionary.Exists(x => x.WordText.Equals(WordTextBox.Text)));
+            Console.WriteLine();
+            return false;*/
+        }
+
+        private void Reset()
+        {
+            WordTextBox.Text = "";
+            DescriptionTextBox.Text = "";
+            CategoryTextBox.Text = "";
+            CategoryComboBox.SelectedIndex = -1;
+            ImgPhoto.Source = null;
         }
 
 
@@ -91,7 +152,7 @@ namespace MVP_Tema1_WPF
 
 
 
-        private List<string> test = new List<string> { "Test", "banana", "girafa","ananas","babilon" };
+        private List<string> test = new List<string> { "Test", "banana", "girafa", "ananas", "babilon" };
         private bool InProg;
         internal void TBTextChanged(object sender, TextChangedEventArgs e)
         {

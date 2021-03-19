@@ -39,7 +39,7 @@ namespace MVP_Tema1_WPF
                     mainWindow.Content = mainWindow.adminPage;
                     break;
                 case 1:
-
+                    mainWindow.Content = mainWindow.searchPage;
                     break;
                 case 2:
 

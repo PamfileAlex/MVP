@@ -8,8 +8,36 @@ namespace MVP_Tema1_WPF
 {
     class Word
     {
-        private string word;
+        private string wordText;
         private string description;
-        private string filePath;
+
+        public string WordText{ get { return wordText; } set { wordText = value; } }
+        public string Description{ get { return description; } set { description = value; } }
+
+        public Word(string wordText,string description)
+        {
+            WordText = wordText;
+            Description = description;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            Word objAsWord = obj as Word;
+            if (objAsWord == null) return false;
+            else return Equals(objAsWord);
+        }
+
+        public bool Equals(Word other)
+        {
+            if (other == null) return false;
+            return (this.WordText.Equals(other.WordText));
+        }
+
+        public bool Equals(string other)
+        {
+            if (other == null) return false;
+            return (this.WordText.Equals(other));
+        }
     }
 }

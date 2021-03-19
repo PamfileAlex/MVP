@@ -25,6 +25,20 @@ namespace MVP_Tema1_WPF
         {
             InitializeComponent();
             this.mainWindow = window;
+            List<string> list = new List<string> { "cuvant", "test", "ananas", "alfabet", "alfa" };
+            //autoComplete = new AutoComplete(this.autoTextBox, this.autoListPopup, this.autoList, list);
         }
+
+        private void AutoTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //autoComplete.AutoTextBox_TextChanged(sender, e);
+        }
+
+        private void AutoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //autoComplete.AutoList_SelectionChanged(sender, e);
+        }
+
+        private AutoComplete autoComplete;
     }
 }
