@@ -26,12 +26,10 @@ namespace MVP_Tema1_WPF
         {
             InitializeComponent();
             this.mainWindow = window;
-            //this.Background = window.Background;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Console.WriteLine(sender.ToString());
             int index = int.Parse(((Button)e.Source).Uid);
             switch (index)
             {

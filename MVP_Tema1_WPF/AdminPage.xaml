@@ -15,16 +15,16 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
             <TextBlock HorizontalAlignment="Center" Margin="0,50,0,0" Text="Admin" FontSize="48" FontWeight="Bold" Foreground="LightGray"/>
-            <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-            <Button x:Name="AddButton" Uid="1" Content="Adauga" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-            <Button x:Name="ModifyButton" Uid="2" Content="Modifica" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-            <Button x:Name="DeleteButton" Uid="3" Content="Sterge" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-            <Button x:Name="ClearButton" Uid="4" Content="Reseteaza" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button x:Name="AddButton" Uid="1" Content="Adauga" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="AddButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button x:Name="ModifyButton" Uid="2" Content="Modifica" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="ModifyButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button x:Name="DeleteButton" Uid="3" Content="Sterge" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="DeleteButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button x:Name="ClearButton" Uid="4" Content="Reseteaza" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="ResetButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="20" Background="#666262">
             <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged"/>
             <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
-                <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="800" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" />
+                <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="800" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" FontSize="22" />
             </Popup>
             <TextBox x:Name="DescriptionTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="150" RenderTransformOrigin="0.733,0.522" FontSize="30" Margin="0,30,0,0"/>
             <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
@@ -34,7 +34,7 @@
                     </CheckBox.LayoutTransform>
                 </CheckBox>
                 <Grid>
-                    <ComboBox x:Name="CategoryComboBox" Width="800" Height="55"/>
+                    <ComboBox x:Name="CategoryComboBox" Width="800" Height="55" FontSize="32"/>
                     <TextBox x:Name="CategoryTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Visibility="Hidden"/>
                 </Grid>
             </StackPanel>
@@ -45,7 +45,7 @@
                 </StackPanel>
                 <Image x:Name="ImgPhoto" Width="500" Height="300" Margin="0,15,0,0"/>
             </StackPanel>
-            <TextBlock x:Name="ErrorText" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="30" Text="test" FontWeight="Bold" Foreground="#991f1f"/>
+            <TextBlock x:Name="ErrorText" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="30" FontWeight="Bold" Foreground="#991f1f"/>
             <!--<StackPanel Orientation="Horizontal" Margin="0,30,0,0" HorizontalAlignment="Center">
                 <Button x:Name="AddtButton" Uid="1" Content="Adauga" Margin="20,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
                 <Button x:Name="ModtifyButton" Uid="2" Content="Modifica" Margin="20,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>

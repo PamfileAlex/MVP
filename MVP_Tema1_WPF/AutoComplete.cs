@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,10 @@ namespace MVP_Tema1_WPF
         private TextBox textBox;
         private Popup popup;
         private ListBox listBox;
-        private List<Word> list;
+        private ObservableCollection<Category> list;
         private Action action;
 
-        public AutoComplete(TextBox textBox, Popup popup, ListBox listBox, List<Word> list, Action action = null)
+        public AutoComplete(TextBox textBox, Popup popup, ListBox listBox, ObservableCollection<Category> list, Action action = null)
         {
             this.textBox = textBox;
             this.popup = popup;
@@ -48,7 +49,13 @@ namespace MVP_Tema1_WPF
                 return;
             }
             this.OpenAutoSuggestionBox();
-            this.listBox.ItemsSource = this.list.Where(x => x.WordText.IndexOf(textBox.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.WordText);
+            //this.listBox.ItemsSource = this.list.Where(x => x.WordText.IndexOf(textBox.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.WordText);
+            List<string> listBoxWords = new List<string> ();
+            foreach(var category in this.list)
+            {
+                listBoxWords.AddRange(category.Words.Where(x => x.WordText.IndexOf(textBox.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.WordText));
+            }
+            this.listBox.ItemsSource = listBoxWords;
             if (this.listBox.Items.Count == 0)
             {
                 this.CloseAutoSuggestionBox();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,13 +26,13 @@ namespace MVP_Tema1_WPF
         public SearchPage searchPage;
         //private List<Word> dictionary;
 
-        public List<Word> Dictionary { get; set; }
+        public ObservableCollection<Category> Dictionary { get; set; }
 
 
         public MainWindow()
         {
             InitializeComponent();
-            Dictionary = new List<Word>();
+            Dictionary = new ObservableCollection<Category>();
             PageInit();
             this.Content = mainPage;
         }

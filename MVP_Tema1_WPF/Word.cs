@@ -16,8 +16,8 @@ namespace MVP_Tema1_WPF
 
         public Word(string wordText,string description)
         {
-            WordText = wordText;
-            Description = description;
+            this.WordText = wordText;
+            this.Description = description;
         }
 
         public override bool Equals(object obj)
