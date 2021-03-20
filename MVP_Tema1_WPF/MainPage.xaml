@@ -14,6 +14,7 @@
             <Button Uid="0" Content="Administativ" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Width="350" FontSize="48" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
             <Button Uid="1" Content="Cautare" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Width="350" FontSize="48" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
             <Button Uid="2" Content="Divertisment" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Width="350" FontSize="48" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button Uid="3" Content="Iesire" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Width="350" FontSize="48" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
         </StackPanel>
     </Grid>
 </Page>

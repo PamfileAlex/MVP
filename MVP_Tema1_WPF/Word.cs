@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MVP_Tema1_WPF
 {
-    class Word
+    public class Word
     {
         private string wordText;
         private string description;

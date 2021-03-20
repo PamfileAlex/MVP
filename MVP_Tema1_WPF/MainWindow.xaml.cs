@@ -23,9 +23,15 @@ namespace MVP_Tema1_WPF
         public MainPage mainPage;
         public AdminPage adminPage;
         public SearchPage searchPage;
+        //private List<Word> dictionary;
+
+        public List<Word> Dictionary { get; set; }
+
+
         public MainWindow()
         {
             InitializeComponent();
+            Dictionary = new List<Word>();
             PageInit();
             this.Content = mainPage;
         }

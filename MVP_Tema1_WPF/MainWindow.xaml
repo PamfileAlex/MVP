@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Dictionar" Height="800" Width="1440"
         WindowStartupLocation="CenterScreen" WindowState="Normal"
-        Background="Gray" ResizeMode="NoResize">
+        Background="#4a4a4a" ResizeMode="CanMinimize">
     <Grid>
         
     </Grid>

@@ -15,13 +15,15 @@ namespace MVP_Tema1_WPF
         private Popup popup;
         private ListBox listBox;
         private List<Word> list;
+        private Action action;
 
-        public AutoComplete(TextBox textBox, Popup popup, ListBox listBox, List<Word> list)
+        public AutoComplete(TextBox textBox, Popup popup, ListBox listBox, List<Word> list, Action action = null)
         {
             this.textBox = textBox;
             this.popup = popup;
             this.listBox = listBox;
             this.list = list;
+            this.action = action;
         }
 
         private void OpenAutoSuggestionBox()
@@ -62,6 +64,10 @@ namespace MVP_Tema1_WPF
             }
             this.CloseAutoSuggestionBox();
             this.textBox.Text = this.listBox.SelectedItem.ToString();
+            if (action != null)
+            {
+                action();
+            }
             this.listBox.SelectedIndex = -1;
         }
     }

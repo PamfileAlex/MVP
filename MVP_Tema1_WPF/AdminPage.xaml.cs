@@ -25,23 +25,15 @@ namespace MVP_Tema1_WPF
     {
         private MainWindow mainWindow;
         private AutoComplete autoComplete;
-        private List<Word> dictionary;
 
         public AdminPage(MainWindow window)
         {
             InitializeComponent();
             this.mainWindow = window;
-            List<string> list = new List<string> { "cuvant", "test", "ananas", "alfabet", "alfa" };
-            //autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, list);
-            dictionary = new List<Word>();
-            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, dictionary);
-            //WordTextBox.TextChanged += TBTextChanged;
-            //WordTextBox.PreviewKeyDown += DelPressed;
-
-            /*AutoCompleteStringCollection source = new AutoCompleteStringCollection();
-            source.Add("some string");
-            WordTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            WordTextBox.AutoCompleteCustomSource = source;*/
+            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, mainWindow.Dictionary, AutoCompleteAction);
+            /*AddButton.Visibility = Visibility.Hidden;
+            ModifyButton.Visibility = Visibility.Hidden;
+            DeleteButton.Visibility = Visibility.Hidden;*/
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -55,7 +47,7 @@ namespace MVP_Tema1_WPF
                 case 1:
                     if (Check())
                     {
-                        dictionary.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
+                        mainWindow.Dictionary.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
                         if (ImgPhoto.Source != null)
                         {
                             string imagePath = ImgPhoto.Source.ToString().Replace("file:///", "");
@@ -66,6 +58,7 @@ namespace MVP_Tema1_WPF
                     else
                     {
                         Console.WriteLine("ERROR");
+                        ErrorText.Text = "ERROR";
                     }
                     break;
                 case 2:
@@ -78,7 +71,6 @@ namespace MVP_Tema1_WPF
 
         private void CategoryCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            //textBlock.Text = CategoryCheckBox.IsChecked.ToString();
             if (CategoryCheckBox.IsChecked ?? false)
             {
                 CategoryComboBox.SelectedIndex = -1;
@@ -103,13 +95,20 @@ namespace MVP_Tema1_WPF
             if (op.ShowDialog() == true)
             {
                 ImgPhoto.Source = new BitmapImage(new Uri(op.FileName));
+                ClearPhotoButton.IsEnabled = true;
                 //System.IO.File.Copy(op.FileName, "..\\Photos\\" + WordTextBox.Text);
                 //Console.WriteLine(".\\" + WordTextBox.Text + System.IO.Path.GetExtension(op.FileName));
                 //System.IO.File.Copy(op.FileName, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(op.FileName), true);
             }
         }
 
-        /*private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void ClearPhotoButton_Click(object sender, RoutedEventArgs e)
+        {
+            ImgPhoto.Source = null;
+            ClearPhotoButton.IsEnabled = false;
+        }
+
+        private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (autoComplete == null)
             {
@@ -125,82 +124,20 @@ namespace MVP_Tema1_WPF
                 return;
             }
             autoComplete.AutoList_SelectionChanged(sender, e);
-        }*/
-
-
-
-        private void OpenAutoSuggestionBox()
-        {
-            this.AutoCompletePopup.Visibility = Visibility.Visible;
-            this.AutoCompletePopup.IsOpen = true;
-            this.AutoCompleteList.Visibility = Visibility.Visible;
         }
 
-        private void CloseAutoSuggestionBox()
+        private void AutoCompleteAction()
         {
-            this.AutoCompletePopup.Visibility = Visibility.Collapsed;
-            this.AutoCompletePopup.IsOpen = false;
-            this.AutoCompleteList.Visibility = Visibility.Collapsed;
-        }
-
-        public void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(this.WordTextBox.Text))
-            {
-                this.CloseAutoSuggestionBox();
-                return;
-            }
-            this.OpenAutoSuggestionBox();
-            this.AutoCompleteList.ItemsSource = this.dictionary.Where(x => x.WordText.IndexOf(WordTextBox.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.WordText);
-            if (this.AutoCompleteList.Items.Count == 0)
-            {
-                this.CloseAutoSuggestionBox();
-            }
-        }
-
-        public void AutoCompleteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (this.AutoCompleteList.SelectedIndex <= -1)
-            {
-                this.CloseAutoSuggestionBox();
-                return;
-            }
-            this.CloseAutoSuggestionBox();
             this.WordTextBox.Text = this.AutoCompleteList.SelectedItem.ToString();
-            //int index = DictionaryIndexOf(this.AutoCompleteList.SelectedItem.ToString());
-            int index = dictionary.FindIndex(word => word.WordText.Equals(this.AutoCompleteList.SelectedItem.ToString()));
-            this.DescriptionTextBox.Text = dictionary[index].Description;
-            this.AutoCompleteList.SelectedIndex = -1;
+            int index = mainWindow.Dictionary.FindIndex(word => word.WordText.Equals(this.AutoCompleteList.SelectedItem.ToString()));
+            this.DescriptionTextBox.Text = mainWindow.Dictionary[index].Description;
         }
-
-        private int DictionaryIndexOf(string searchedWord)
-        {
-            dictionary.FindIndex(word => word.WordText.Equals(searchedWord));
-
-            foreach (var (item, index) in dictionary.Select((value, i) => (value, i)))
-            {
-                if (searchedWord.Equals(item))
-                {
-                    return index;
-                }
-            }
-            return -1;
-        }
-
-
-
 
         private bool Check()
         {
             return !String.IsNullOrEmpty(WordTextBox.Text) && !String.IsNullOrEmpty(DescriptionTextBox.Text) &&
                 (CategoryCheckBox.IsChecked ?? false) ? String.IsNullOrEmpty(CategoryTextBox.Text) ||
-                !dictionary.Exists(x => x.WordText.Equals(WordTextBox.Text)) : CategoryComboBox.SelectedIndex != -1;
-            /*Console.WriteLine(String.IsNullOrEmpty(WordTextBox.Text));
-            Console.WriteLine(String.IsNullOrEmpty(DescriptionTextBox.Text));
-            Console.WriteLine(String.IsNullOrEmpty(CategoryTextBox.Text) ||
-                dictionary.Exists(x => x.WordText.Equals(WordTextBox.Text)));
-            Console.WriteLine();
-            return false;*/
+                !mainWindow.Dictionary.Exists(x => x.WordText.Equals(WordTextBox.Text)) : CategoryComboBox.SelectedIndex != -1;
         }
 
         private void Reset()
@@ -211,40 +148,5 @@ namespace MVP_Tema1_WPF
             CategoryComboBox.SelectedIndex = -1;
             ImgPhoto.Source = null;
         }
-
-
-
-
-
-
-
-        private List<string> test = new List<string> { "Test", "banana", "girafa", "ananas", "babilon" };
-        private bool InProg;
-        internal void TBTextChanged(object sender, TextChangedEventArgs e)
-        {
-            var change = e.Changes.FirstOrDefault();
-            if (!InProg)
-            {
-                InProg = true;
-                var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
-                var source = ((TextBox)sender);
-                if (((change.AddedLength - change.RemovedLength) > 0 || source.Text.Length > 0) && !DelKeyPressed)
-                {
-                    if (test.Where(x => x.IndexOf(source.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Count() > 0)
-                    {
-                        var _appendtxt = test.FirstOrDefault(ap => (culture.CompareInfo.IndexOf(ap, source.Text, CompareOptions.IgnoreCase) == 0));
-                        _appendtxt = _appendtxt.Remove(0, change.Offset + 1);
-                        source.Text += _appendtxt;
-                        source.SelectionStart = change.Offset + 1;
-                        source.SelectionLength = source.Text.Length;
-                    }
-                }
-                InProg = false;
-            }
-        }
-        private static bool DelKeyPressed;
-        internal static void DelPressed(object sender, KeyEventArgs e)
-        { if (e.Key == Key.Back) { DelKeyPressed = true; } else { DelKeyPressed = false; } }
-
     }
 }

@@ -44,6 +44,9 @@ namespace MVP_Tema1_WPF
                 case 2:
 
                     break;
+                case 3:
+                    mainWindow.Close();
+                    break;
                 default:
                     break;
             }
