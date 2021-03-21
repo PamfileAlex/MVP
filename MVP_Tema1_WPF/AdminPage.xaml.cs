@@ -25,6 +25,7 @@ namespace MVP_Tema1_WPF
     {
         private MainWindow mainWindow;
         private AutoComplete autoComplete;
+        private Tuple<int, int> indexes;
 
         public AdminPage(MainWindow window)
         {
@@ -32,43 +33,7 @@ namespace MVP_Tema1_WPF
             this.mainWindow = window;
             autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, mainWindow.Dictionary, AutoCompleteAction);
             //this.CategoryComboBox.ItemsSource = mainWindow.Dictionary;//.Select(category => category.Title);
-            /*AddButton.Visibility = Visibility.Hidden;
-            ModifyButton.Visibility = Visibility.Hidden;
-            DeleteButton.Visibility = Visibility.Hidden;*/
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CommonEventAction();
-            int index = int.Parse(((Button)e.Source).Uid);
-            switch (index)
-            {
-                case 0:
-                    mainWindow.Content = mainWindow.mainPage;
-                    break;
-                case 1:
-                    if (Check())
-                    {
-                        //mainWindow.Dictionary.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
-                        if (ImgPhoto.Source != null)
-                        {
-                            string imagePath = ImgPhoto.Source.ToString().Replace("file:///", "");
-                            System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
-                        }
-                        Reset();
-                    }
-                    else
-                    {
-                        Console.WriteLine("ERROR");
-                        ErrorText.Text = "ERROR";
-                    }
-                    break;
-                case 2:
-
-                    break;
-                default:
-                    break;
-            }
+            ModifyRemoveClearButtonsEnabled(false);
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
@@ -80,47 +45,40 @@ namespace MVP_Tema1_WPF
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (Check())
+            if (!Check())
             {
-                //mainWindow.Dictionary.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
-                if (CategoryComboBox.SelectedIndex != -1)
-                {
-                    mainWindow.Dictionary[CategoryComboBox.SelectedIndex].Words.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
-                }
-                else
-                {
-                    mainWindow.Dictionary.Add(new Category(CategoryTextBox.Text));
-                    mainWindow.Dictionary[mainWindow.Dictionary.Count-1].Words.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
-                    CategoryComboBox.Items.Add(CategoryTextBox.Text);
-                }
-                if (ImgPhoto.Source != null)
-                {
-                    string imagePath = ImgPhoto.Source.ToString().Replace("file:///", "");
-                    System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
-                }
-                Reset();
+                return;
             }
-            else
+            AddWord();
+            if (ImgPhoto.Source != null)
             {
-                Console.WriteLine("ERROR");
-                ErrorText.Text = "ERROR";
+                string imagePath = ImgPhoto.Source.ToString().Replace("file:///", "");
+                System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
             }
+            Reset();
         }
 
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (Check())
+            if (!Check() || indexes == null)
             {
-
-                Reset();
+                return;
             }
+            //mainWindow.Dictionary[indexes.Item1].Words[indexes.Item2];
+            AddWord();
+            RemoveWord();
+            Reset();
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-
+            if (indexes == null)
+            {
+                return;
+            }
+            RemoveWord();
             Reset();
         }
 
@@ -158,6 +116,7 @@ namespace MVP_Tema1_WPF
         private void CommonEventAction()
         {
             ErrorText.Text = "";
+            ClearButton.IsEnabled = true;
         }
 
         private void CategoryCheckBox_Click(object sender, RoutedEventArgs e)
@@ -202,18 +161,48 @@ namespace MVP_Tema1_WPF
             this.WordTextBox.Text = this.AutoCompleteList.SelectedItem.ToString();
             //int index = mainWindow.Dictionary.FindIndex(word => word.WordText.Equals(this.AutoCompleteList.SelectedItem.ToString()));
             //int index = mainWindow.Dictionary.FindIndex(category => category.Words.Exists(word => word.WordText.Equals(this.AutoCompleteList.SelectedItem.ToString())));
-            var indexes = GetWordIndexes();
+            indexes = GetWordIndexes();
             if (indexes == null)
             {
+                ModifyRemoveClearButtonsEnabled(false);
                 return;
             }
+            ModifyRemoveClearButtonsEnabled(true);
             this.DescriptionTextBox.Text = mainWindow.Dictionary[indexes.Item1].Words[indexes.Item2].Description;
             CategoryComboBox.SelectedIndex = indexes.Item1;
             CategoryCheckBox.IsChecked = false;
             CategoryCheckBox_Click(null, null);
         }
 
-        private Tuple<int,int> GetWordIndexes()
+        private void AddWord()
+        {
+            int index;
+            if (CategoryComboBox.SelectedIndex != -1)
+            {
+                //mainWindow.Dictionary[CategoryComboBox.SelectedIndex].Words.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
+                index = CategoryComboBox.SelectedIndex;
+            }
+            else
+            {
+                mainWindow.Dictionary.Add(new Category(CategoryTextBox.Text));
+                //mainWindow.Dictionary[mainWindow.Dictionary.Count - 1].Words.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
+                index = mainWindow.Dictionary.Count - 1;
+                CategoryComboBox.Items.Add(CategoryTextBox.Text);
+            }
+            mainWindow.Dictionary[index].Words.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
+        }
+
+        private void RemoveWord()
+        {
+            mainWindow.Dictionary[indexes.Item1].Words.RemoveAt(indexes.Item2);
+            if (mainWindow.Dictionary[indexes.Item1].Words.Count == 0)
+            {
+                mainWindow.Dictionary.RemoveAt(indexes.Item1);
+                this.CategoryComboBox.Items.RemoveAt(indexes.Item1);
+            }
+        }
+
+        private Tuple<int, int> GetWordIndexes()
         {
             for (int index = 0; index < mainWindow.Dictionary.Count; ++index)
             {
@@ -226,12 +215,35 @@ namespace MVP_Tema1_WPF
             return null;
         }
 
+        private void ModifyRemoveClearButtonsEnabled(bool option)
+        {
+            ModifyButton.IsEnabled = option;
+            RemoveButton.IsEnabled = option;
+            //ClearButton.IsEnabled = option;
+        }
+
         private bool Check()
         {
             /*return !String.IsNullOrEmpty(WordTextBox.Text) && !String.IsNullOrEmpty(DescriptionTextBox.Text) &&
                 (CategoryCheckBox.IsChecked ?? false) ? String.IsNullOrEmpty(CategoryTextBox.Text) ||
                 !mainWindow.Dictionary.Exists(x => x.WordText.Equals(WordTextBox.Text)) : CategoryComboBox.SelectedIndex != -1;*/
-            return true;
+            return CheckAllNotEmpty();
+        }
+
+        private bool CheckAllNotEmpty()
+        {
+            /*Console.WriteLine(!String.IsNullOrEmpty(WordTextBox.Text));
+            Console.WriteLine(!String.IsNullOrEmpty(DescriptionTextBox.Text));
+            Console.WriteLine((CategoryCheckBox.IsChecked ?? false));
+            Console.WriteLine((CategoryCheckBox.IsChecked ?? false) ? !String.IsNullOrEmpty(CategoryTextBox.Text) : CategoryComboBox.SelectedIndex != -1);
+            Console.WriteLine("........................");*/
+            if (!String.IsNullOrEmpty(WordTextBox.Text) && !String.IsNullOrEmpty(DescriptionTextBox.Text) &&
+                (CategoryCheckBox.IsChecked ?? false) ? !String.IsNullOrEmpty(CategoryTextBox.Text) : CategoryComboBox.SelectedIndex != -1)
+            {
+                return true;
+            }
+            ErrorText.Text = "Nu sunt completate toate campurile";
+            return false;
         }
 
         private void Reset()
@@ -240,8 +252,10 @@ namespace MVP_Tema1_WPF
             DescriptionTextBox.Text = "";
             CategoryTextBox.Text = "";
             CategoryComboBox.SelectedIndex = -1;
-            ImgPhoto.Source = null;
             ClearButton.IsEnabled = false;
+            ImgPhoto.Source = null;
+            indexes = null;
+            ModifyRemoveClearButtonsEnabled(false);
         }
     }
 }

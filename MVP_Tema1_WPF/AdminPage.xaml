@@ -18,7 +18,7 @@
             <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
             <Button x:Name="AddButton" Uid="1" Content="Adauga" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="AddButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
             <Button x:Name="ModifyButton" Uid="2" Content="Modifica" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="ModifyButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-            <Button x:Name="DeleteButton" Uid="3" Content="Sterge" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="DeleteButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button x:Name="RemoveButton" Uid="3" Content="Sterge" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="RemoveButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
             <Button x:Name="ClearButton" Uid="4" Content="Reseteaza" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="ResetButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="20" Background="#666262">
