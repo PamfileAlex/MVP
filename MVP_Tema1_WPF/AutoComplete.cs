@@ -15,10 +15,10 @@ namespace MVP_Tema1_WPF
         private TextBox textBox;
         private Popup popup;
         private ListBox listBox;
-        private ObservableCollection<Category> list;
+        private List<Category> list;
         private Action action;
 
-        public AutoComplete(TextBox textBox, Popup popup, ListBox listBox, ObservableCollection<Category> list, Action action = null)
+        public AutoComplete(TextBox textBox, Popup popup, ListBox listBox, List<Category> list, Action action = null)
         {
             this.textBox = textBox;
             this.popup = popup;

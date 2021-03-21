@@ -8,11 +8,20 @@ namespace MVP_Tema1_WPF
 {
     public class Word
     {
-        private string wordText;
+        /*private string wordText;
         private string description;
 
         public string WordText{ get { return wordText; } set { wordText = value; } }
-        public string Description{ get { return description; } set { description = value; } }
+        public string Description{ get { return description; } set { description = value; } }*/
+
+        public string WordText { get; set; }
+        public string Description { get; set; }
+
+        public Word()
+        {
+            this.WordText = String.Empty;
+            this.Description = String.Empty;
+        }
 
         public Word(string wordText,string description)
         {

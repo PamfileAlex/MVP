@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Globalization;
 using Microsoft.Win32;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace MVP_Tema1_WPF
 {
@@ -34,6 +35,15 @@ namespace MVP_Tema1_WPF
             autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, mainWindow.Dictionary, AutoCompleteAction);
             //this.CategoryComboBox.ItemsSource = mainWindow.Dictionary;//.Select(category => category.Title);
             ModifyRemoveClearButtonsEnabled(false);
+            ReinitializeCategoryComboBoxItems();
+        }
+
+        private void ReinitializeCategoryComboBoxItems()
+        {
+            foreach(var category in mainWindow.Dictionary)
+            {
+                CategoryComboBox.Items.Add(category.Title);
+            }
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)

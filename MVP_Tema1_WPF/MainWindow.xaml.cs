@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace MVP_Tema1_WPF
 {
@@ -26,15 +28,21 @@ namespace MVP_Tema1_WPF
         public SearchPage searchPage;
         //private List<Word> dictionary;
 
-        public ObservableCollection<Category> Dictionary { get; set; }
+        public List<Category> Dictionary { get; set; }
 
 
         public MainWindow()
         {
             InitializeComponent();
-            Dictionary = new ObservableCollection<Category>();
+            Dictionary = new List<Category>();
+            Deserialize();
             PageInit();
             this.Content = mainPage;
+        }
+
+        ~MainWindow()
+        {
+            Serialize();
         }
 
         private void PageInit()
@@ -42,6 +50,24 @@ namespace MVP_Tema1_WPF
             mainPage = new MainPage(this);
             adminPage = new AdminPage(this);
             searchPage = new SearchPage(this);
+        }
+
+        private void Serialize()
+        {
+            using (StreamWriter myWriter = new StreamWriter("..\\..\\..\\dictionary.xml", false))
+            {
+                XmlSerializer mySerializer = new XmlSerializer(typeof(List<Category>));
+                mySerializer.Serialize(myWriter, Dictionary);
+            }
+        }
+
+        private void Deserialize()
+        {
+            using (var stream = System.IO.File.OpenRead("..\\..\\..\\dictionary.xml"))
+            {
+                var serializer = new XmlSerializer(typeof(List<Category>));
+                Dictionary = serializer.Deserialize(stream) as List<Category>;
+            }
         }
     }
 }
