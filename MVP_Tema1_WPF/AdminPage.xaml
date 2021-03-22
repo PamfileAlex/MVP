@@ -43,7 +43,7 @@
                     <Button x:Name="UploadPhotoButton" Content="Incarca" VerticalAlignment="Top" Margin="0,30,0,20" Width="150" FontSize="30" FontWeight="DemiBold" Click="UploadPhotoButton_Click" Template="{DynamicResource RoundedButtonTemplate}" Height="50"/>
                     <Button x:Name="ClearPhotoButton" Content="Clear" VerticalAlignment="Top" Margin="0,0,0,0" Width="150" FontSize="30" FontWeight="DemiBold" Click="ClearPhotoButton_Click" Template="{DynamicResource RoundedButtonTemplate}" Height="50" IsEnabled="False"/>
                 </StackPanel>
-                <Image x:Name="ImgPhoto" Width="500" Height="300" Margin="0,15,0,0"/>
+                <Image x:Name="WordImage" Width="500" Height="300" Margin="0,15,0,0"/>
             </StackPanel>
             <TextBlock x:Name="ErrorText" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="30" FontWeight="Bold" Foreground="#991f1f"/>
             <!--<StackPanel Orientation="Horizontal" Margin="0,30,0,0" HorizontalAlignment="Center">

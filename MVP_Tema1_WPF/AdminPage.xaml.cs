@@ -33,18 +33,8 @@ namespace MVP_Tema1_WPF
             InitializeComponent();
             this.mainWindow = window;
             autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, mainWindow.Dictionary, AutoCompleteAction);
-            //this.CategoryComboBox.ItemsSource = mainWindow.Dictionary;//.Select(category => category.Title);
             this.CategoryComboBox.ItemsSource = mainWindow.Category;
             ModifyRemoveClearButtonsEnabled(false);
-            //ReinitializeCategoryComboBoxItems();
-        }
-
-        private void ReinitializeCategoryComboBoxItems()
-        {
-            foreach (var category in mainWindow.Dictionary)
-            {
-                CategoryComboBox.Items.Add(category.Title);
-            }
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
@@ -61,11 +51,6 @@ namespace MVP_Tema1_WPF
                 return;
             }
             AddWord();
-            if (ImgPhoto.Source != null)
-            {
-                string imagePath = ImgPhoto.Source.ToString().Replace("file:///", "");
-                System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
-            }
             Reset();
         }
 
@@ -109,7 +94,7 @@ namespace MVP_Tema1_WPF
               "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                ImgPhoto.Source = new BitmapImage(new Uri(op.FileName));
+                WordImage.Source = new BitmapImage(new Uri(op.FileName));
                 ClearPhotoButton.IsEnabled = true;
                 //System.IO.File.Copy(op.FileName, "..\\Photos\\" + WordTextBox.Text);
                 //Console.WriteLine(".\\" + WordTextBox.Text + System.IO.Path.GetExtension(op.FileName));
@@ -120,7 +105,7 @@ namespace MVP_Tema1_WPF
         private void ClearPhotoButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            ImgPhoto.Source = null;
+            WordImage.Source = null;
             ClearPhotoButton.IsEnabled = false;
         }
 
@@ -188,16 +173,17 @@ namespace MVP_Tema1_WPF
             //string path = Environment.CurrentDirectory + "\\..\\..\\..\\Photos\\" + this.AutoCompleteList.SelectedItem.ToString() + ".png";
             //var strings = Directory.GetFiles("..\\..\\..\\Photos\\", this.AutoCompleteList.SelectedItem.ToString() + ".*");
             //string path = Environment.CurrentDirectory + "\\" + strings[0];
-            string path = GetPhotoPath(this.AutoCompleteList.SelectedItem.ToString());
-            /*Console.WriteLine(strings.Length);
+            /*string path = GetPhotoPath(this.AutoCompleteList.SelectedItem.ToString());
+            *//*Console.WriteLine(strings.Length);
             foreach (var x in strings)
             {
                 Console.WriteLine(x);
-            }*/
+            }*//*
             if (File.Exists(path))
             {
-                ImgPhoto.Source = new BitmapImage(new Uri(path));
-            }
+                WordImage.Source = new BitmapImage(new Uri(path));
+            }*/
+            WordImage.Source = Utils.getWordPhoto(this.AutoCompleteList.SelectedItem.ToString());
         }
 
         private string GetPhotoPath(string photoName)
@@ -227,11 +213,16 @@ namespace MVP_Tema1_WPF
                 mainWindow.Category.Add(CategoryTextBox.Text);
             }
             mainWindow.Dictionary[index].Words.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
+            if (WordImage.Source != null)
+            {
+                string imagePath = WordImage.Source.ToString().Replace("file:///", "");
+                System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
+            }
         }
 
         private void RemoveWord()
         {
-            ImgPhoto.Source = null;
+            WordImage.Source = null;
             //File.Delete(GetPhotoPath(mainWindow.Dictionary[indexes.Item1].Words[indexes.Item2].WordText));
             mainWindow.Dictionary[indexes.Item1].Words.RemoveAt(indexes.Item2);
             if (mainWindow.Dictionary[indexes.Item1].Words.Count == 0)
@@ -293,7 +284,7 @@ namespace MVP_Tema1_WPF
             CategoryTextBox.Text = "";
             CategoryComboBox.SelectedIndex = -1;
             ClearButton.IsEnabled = false;
-            ImgPhoto.Source = null;
+            WordImage.Source = null;
             indexes = null;
             ModifyRemoveClearButtonsEnabled(false);
         }

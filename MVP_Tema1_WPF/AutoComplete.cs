@@ -41,7 +41,7 @@ namespace MVP_Tema1_WPF
             this.listBox.Visibility = Visibility.Collapsed;
         }
 
-        public void AutoTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        public void AutoTextBox_TextChanged(object sender, TextChangedEventArgs e, ComboBox CategoryComboBox = null)
         {
             if (string.IsNullOrEmpty(this.textBox.Text))
             {
@@ -50,12 +50,19 @@ namespace MVP_Tema1_WPF
             }
             this.OpenAutoSuggestionBox();
             //this.listBox.ItemsSource = this.list.Where(x => x.WordText.IndexOf(textBox.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.WordText);
-            List<string> listBoxWords = new List<string> ();
-            foreach(var category in this.list)
+            if (CategoryComboBox != null && CategoryComboBox.SelectedIndex != -1)
             {
-                listBoxWords.AddRange(category.Words.Where(x => x.WordText.IndexOf(textBox.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.WordText));
+                this.listBox.ItemsSource = this.list[CategoryComboBox.SelectedIndex].Words.Where(x => x.WordText.IndexOf(textBox.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.WordText);
             }
-            this.listBox.ItemsSource = listBoxWords;
+            else
+            {
+                List<string> listBoxWords = new List<string>();
+                foreach (var category in this.list)
+                {
+                    listBoxWords.AddRange(category.Words.Where(x => x.WordText.IndexOf(textBox.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.WordText));
+                }
+                this.listBox.ItemsSource = listBoxWords;
+            }
             if (this.listBox.Items.Count == 0)
             {
                 this.CloseAutoSuggestionBox();

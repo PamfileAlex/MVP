@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace MVP_Tema1_WPF
             InitializeComponent();
             this.mainWindow = window;
             autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, mainWindow.Dictionary);
+            this.CategoryComboBox.ItemsSource = mainWindow.Category;
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
@@ -37,7 +39,11 @@ namespace MVP_Tema1_WPF
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-
+            WordTextBox.Text = "";
+            DescriptionTextBlock.Text = "";
+            CategoryComboBox.SelectedIndex = -1;
+            //ClearButton.IsEnabled = false;
+            WordImage.Source = null;
         }
 
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
@@ -51,7 +57,7 @@ namespace MVP_Tema1_WPF
             {
                 return;
             }
-            autoComplete.AutoTextBox_TextChanged(sender, e);
+            autoComplete.AutoTextBox_TextChanged(sender, e, CategoryComboBox);
         }
 
         private void AutoCompleteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -61,6 +67,19 @@ namespace MVP_Tema1_WPF
                 return;
             }
             autoComplete.AutoList_SelectionChanged(sender, e);
+        }
+
+        private void AutoCompleteAction()
+        {
+            this.WordTextBox.Text = this.AutoCompleteList.SelectedItem.ToString();
+            /*indexes = GetWordIndexes();
+            if (indexes == null)
+            {
+                return;
+            }
+            this.DescriptionTextBlock.Text = mainWindow.Dictionary[indexes.Item1].Words[indexes.Item2].Description;
+            CategoryTextBlock.Text = mainWindow.Dictionary[indexes.Item1].Title;*/
+            WordImage.Source = Utils.getWordPhoto(this.AutoCompleteList.SelectedItem.ToString());
         }
     }
 }
