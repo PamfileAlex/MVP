@@ -29,13 +29,16 @@ namespace MVP_Tema1_WPF
         //private List<Word> dictionary;
 
         public List<Category> Dictionary { get; set; }
+        public ObservableCollection<string> Category { get; set; }
 
 
         public MainWindow()
         {
             InitializeComponent();
             Dictionary = new List<Category>();
+            Category = new ObservableCollection<string>();
             Deserialize();
+            ReinitializeCategoryComboBoxItems();
             PageInit();
             this.Content = mainPage;
         }
@@ -67,6 +70,14 @@ namespace MVP_Tema1_WPF
             {
                 var serializer = new XmlSerializer(typeof(List<Category>));
                 Dictionary = serializer.Deserialize(stream) as List<Category>;
+            }
+        }
+
+        private void ReinitializeCategoryComboBoxItems()
+        {
+            foreach (var category in Dictionary)
+            {
+                Category.Add(category.Title);
             }
         }
     }

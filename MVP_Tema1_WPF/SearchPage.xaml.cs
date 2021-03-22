@@ -21,24 +21,46 @@ namespace MVP_Tema1_WPF
     public partial class SearchPage : Page
     {
         private MainWindow mainWindow;
+        private AutoComplete autoComplete;
+
         public SearchPage(MainWindow window)
         {
             InitializeComponent();
             this.mainWindow = window;
-            List<string> list = new List<string> { "cuvant", "test", "ananas", "alfabet", "alfa" };
-            //autoComplete = new AutoComplete(this.autoTextBox, this.autoListPopup, this.autoList, list);
+            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, mainWindow.Dictionary);
         }
 
-        private void AutoTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            //autoComplete.AutoTextBox_TextChanged(sender, e);
+            mainWindow.Content = mainWindow.mainPage;
         }
 
-        private void AutoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            //autoComplete.AutoList_SelectionChanged(sender, e);
+
         }
 
-        private AutoComplete autoComplete;
+        private void ModifyButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (autoComplete == null)
+            {
+                return;
+            }
+            autoComplete.AutoTextBox_TextChanged(sender, e);
+        }
+
+        private void AutoCompleteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (autoComplete == null)
+            {
+                return;
+            }
+            autoComplete.AutoList_SelectionChanged(sender, e);
+        }
     }
 }

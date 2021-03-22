@@ -6,43 +6,36 @@
       xmlns:local="clr-namespace:MVP_Tema1_WPF"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1440"
-      Title="SearchPage">
+      Title="SearchPage" Background="#4a4a4a">
 
     <Grid>
-        <StackPanel Orientation="Vertical"    
-                    VerticalAlignment="Center"    
-                    HorizontalAlignment="Center">
-
-            <!-- Text Box -->
-            <TextBox x:Name="autoTextBox"    
-                             Width="220"     
-                             Height="50"    
-                             FontSize="18"      
-                             HorizontalAlignment="Center"     
-                             VerticalAlignment="Center"     
-                             BorderThickness="3"    
-                             VerticalContentAlignment="Center"    
-                             HorizontalContentAlignment="Center"       
-                             Background="Transparent"    
-                             Foreground="Black"    
-                             TextChanged="AutoTextBox_TextChanged"/>
-
-            <!-- Auto Suggestion box -->
-            <Grid>
-                <Popup x:Name="autoListPopup"    
-                   Visibility="Collapsed"                    
-                   Height="100"    
-                   StaysOpen="False"    
-                   Placement="Bottom">
-
-                    <ListBox x:Name="autoList"    
-                         Visibility="Collapsed"    
-                         Width="500"    
-                         Height="100"    
-                         SelectionChanged="AutoList_SelectionChanged" />
-                </Popup>
-                <TextBox x:Name="DescriptionTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="150" RenderTransformOrigin="0.733,0.522" FontSize="30" Margin="0,30,0,0"/>
-            </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <TextBlock HorizontalAlignment="Center" Margin="0,50,0,0" Text="Cautare" FontSize="48" FontWeight="Bold" Foreground="LightGray"/>
+            <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button x:Name="ClearButton" Uid="1" Content="Reseteaza" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="ClearButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button x:Name="ModifyButton" Uid="2" Content="Modifica" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="ModifyButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
         </StackPanel>
+        <StackPanel Grid.Column="1" Margin="20" Background="#666262">
+            <ComboBox x:Name="CategoryComboBox" Width="1000" Height="55" Margin="0,20,0,0" FontSize="32"/>
+            <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged"/>
+            <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
+                <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="1000" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" FontSize="22" />
+            </Popup>
+            <TextBlock x:Name="DescriptionTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="150" Margin="0,20,0,0" FontSize="30"/>
+            <TextBlock x:Name="CategoryTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Width="1000" Margin="0,20,0,0" FontSize="36"/>
+            <Image x:Name="WordImage" Width="700" Height="300" Margin="0,20,0,0"/>
+        </StackPanel>
+
+        <!--<StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged"/>
+            <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
+                <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="800" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" FontSize="22" />
+            </Popup>
+        </StackPanel>-->
     </Grid>
 </Page>

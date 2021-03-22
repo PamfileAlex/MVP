@@ -34,13 +34,14 @@ namespace MVP_Tema1_WPF
             this.mainWindow = window;
             autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, mainWindow.Dictionary, AutoCompleteAction);
             //this.CategoryComboBox.ItemsSource = mainWindow.Dictionary;//.Select(category => category.Title);
+            this.CategoryComboBox.ItemsSource = mainWindow.Category;
             ModifyRemoveClearButtonsEnabled(false);
-            ReinitializeCategoryComboBoxItems();
+            //ReinitializeCategoryComboBoxItems();
         }
 
         private void ReinitializeCategoryComboBoxItems()
         {
-            foreach(var category in mainWindow.Dictionary)
+            foreach (var category in mainWindow.Dictionary)
             {
                 CategoryComboBox.Items.Add(category.Title);
             }
@@ -182,6 +183,31 @@ namespace MVP_Tema1_WPF
             CategoryComboBox.SelectedIndex = indexes.Item1;
             CategoryCheckBox.IsChecked = false;
             CategoryCheckBox_Click(null, null);
+
+            //string path = "D:\\Programming\\Facultate\\MVP_Tema1_WPF\\Photos\\" + this.AutoCompleteList.SelectedItem.ToString() + ".png";
+            //string path = Environment.CurrentDirectory + "\\..\\..\\..\\Photos\\" + this.AutoCompleteList.SelectedItem.ToString() + ".png";
+            //var strings = Directory.GetFiles("..\\..\\..\\Photos\\", this.AutoCompleteList.SelectedItem.ToString() + ".*");
+            //string path = Environment.CurrentDirectory + "\\" + strings[0];
+            string path = GetPhotoPath(this.AutoCompleteList.SelectedItem.ToString());
+            /*Console.WriteLine(strings.Length);
+            foreach (var x in strings)
+            {
+                Console.WriteLine(x);
+            }*/
+            if (File.Exists(path))
+            {
+                ImgPhoto.Source = new BitmapImage(new Uri(path));
+            }
+        }
+
+        private string GetPhotoPath(string photoName)
+        {
+            var files = Directory.GetFiles("..\\..\\..\\Photos\\", photoName + ".*");
+            if (files.Length == 0)
+            {
+                return "";
+            }
+            return Environment.CurrentDirectory + "\\" + files[0];
         }
 
         private void AddWord()
@@ -197,18 +223,22 @@ namespace MVP_Tema1_WPF
                 mainWindow.Dictionary.Add(new Category(CategoryTextBox.Text));
                 //mainWindow.Dictionary[mainWindow.Dictionary.Count - 1].Words.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
                 index = mainWindow.Dictionary.Count - 1;
-                CategoryComboBox.Items.Add(CategoryTextBox.Text);
+                //CategoryComboBox.Items.Add(CategoryTextBox.Text);
+                mainWindow.Category.Add(CategoryTextBox.Text);
             }
             mainWindow.Dictionary[index].Words.Add(new Word(WordTextBox.Text, DescriptionTextBox.Text));
         }
 
         private void RemoveWord()
         {
+            ImgPhoto.Source = null;
+            //File.Delete(GetPhotoPath(mainWindow.Dictionary[indexes.Item1].Words[indexes.Item2].WordText));
             mainWindow.Dictionary[indexes.Item1].Words.RemoveAt(indexes.Item2);
             if (mainWindow.Dictionary[indexes.Item1].Words.Count == 0)
             {
                 mainWindow.Dictionary.RemoveAt(indexes.Item1);
-                this.CategoryComboBox.Items.RemoveAt(indexes.Item1);
+                //this.CategoryComboBox.Items.RemoveAt(indexes.Item1);
+                mainWindow.Category.RemoveAt(indexes.Item1);
             }
         }
 
