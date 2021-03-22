@@ -16,14 +16,16 @@ namespace MVP_Tema1_WPF
         private Popup popup;
         private ListBox listBox;
         private List<Category> list;
+        private IndexPair indexes;
         private Action action;
 
-        public AutoComplete(TextBox textBox, Popup popup, ListBox listBox, List<Category> list, Action action = null)
+        public AutoComplete(TextBox textBox, Popup popup, ListBox listBox, List<Category> list, IndexPair indexes, Action action = null)
         {
             this.textBox = textBox;
             this.popup = popup;
             this.listBox = listBox;
             this.list = list;
+            this.indexes = indexes;
             this.action = action;
         }
 
@@ -78,11 +80,12 @@ namespace MVP_Tema1_WPF
             }
             this.CloseAutoSuggestionBox();
             this.textBox.Text = this.listBox.SelectedItem.ToString();
+            Utils.setWordIndexes(indexes, this.list, this.listBox.SelectedItem.ToString());
+            this.listBox.SelectedIndex = -1;
             if (action != null)
             {
                 action();
             }
-            this.listBox.SelectedIndex = -1;
         }
     }
 }

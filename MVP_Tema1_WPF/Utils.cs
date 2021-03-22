@@ -29,5 +29,24 @@ namespace MVP_Tema1_WPF
             }
             return null;
         }
+
+        public static void setWordIndexes(IndexPair indexPair, List<Category> dictionary, string selectedWord)
+        {
+            if (dictionary == null)
+            {
+                indexPair.set(-1, -1, false);
+                return;
+            }
+            for (int index = 0; index < dictionary.Count; ++index)
+            {
+                int wordIndex = dictionary[index].Words.FindIndex(word => word.WordText.Equals(selectedWord));
+                if (wordIndex != -1)
+                {
+                    indexPair.set(index, wordIndex);
+                    return;
+                }
+            }
+            indexPair.set(-1, -1, false);
+        }
     }
 }

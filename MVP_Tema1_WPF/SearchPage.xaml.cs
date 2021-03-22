@@ -28,27 +28,25 @@ namespace MVP_Tema1_WPF
         {
             InitializeComponent();
             this.mainWindow = window;
-            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, mainWindow.Dictionary);
+            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup,
+                this.AutoCompleteList, mainWindow.Dictionary, mainWindow.Indexes, AutoCompleteAction);
             this.CategoryComboBox.ItemsSource = mainWindow.Category;
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
+            Reset();
             mainWindow.Content = mainWindow.mainPage;
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            WordTextBox.Text = "";
-            DescriptionTextBlock.Text = "";
-            CategoryComboBox.SelectedIndex = -1;
-            //ClearButton.IsEnabled = false;
-            WordImage.Source = null;
+            Reset();
         }
 
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Reset();
         }
 
         private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -71,15 +69,24 @@ namespace MVP_Tema1_WPF
 
         private void AutoCompleteAction()
         {
-            this.WordTextBox.Text = this.AutoCompleteList.SelectedItem.ToString();
-            /*indexes = GetWordIndexes();
-            if (indexes == null)
+            //this.WordTextBox.Text = this.AutoCompleteList.SelectedItem.ToString();
+            if (!mainWindow.Indexes.Active)
             {
                 return;
             }
-            this.DescriptionTextBlock.Text = mainWindow.Dictionary[indexes.Item1].Words[indexes.Item2].Description;
-            CategoryTextBlock.Text = mainWindow.Dictionary[indexes.Item1].Title;*/
-            WordImage.Source = Utils.getWordPhoto(this.AutoCompleteList.SelectedItem.ToString());
+            //this.WordTextBox.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].WordText;
+            this.DescriptionTextBlock.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].Description;
+            this.CategoryTextBlock.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Title;
+            this.WordImage.Source = Utils.getWordPhoto(this.WordTextBox.Text);
+        }
+
+        private void Reset()
+        {
+            WordTextBox.Text = "";
+            DescriptionTextBlock.Text = "";
+            CategoryComboBox.SelectedIndex = -1;
+            //ClearButton.IsEnabled = false;
+            WordImage.Source = null;
         }
     }
 }

@@ -26,10 +26,10 @@ namespace MVP_Tema1_WPF
         public MainPage mainPage;
         public AdminPage adminPage;
         public SearchPage searchPage;
-        //private List<Word> dictionary;
 
         public List<Category> Dictionary { get; set; }
         public ObservableCollection<string> Category { get; set; }
+        public IndexPair Indexes { get; set; }
 
 
         public MainWindow()
@@ -37,6 +37,7 @@ namespace MVP_Tema1_WPF
             InitializeComponent();
             Dictionary = new List<Category>();
             Category = new ObservableCollection<string>();
+            Indexes = new IndexPair();
             Deserialize();
             ReinitializeCategoryComboBoxItems();
             PageInit();

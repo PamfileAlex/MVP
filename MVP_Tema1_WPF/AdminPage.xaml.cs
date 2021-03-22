@@ -26,13 +26,13 @@ namespace MVP_Tema1_WPF
     {
         private MainWindow mainWindow;
         private AutoComplete autoComplete;
-        private Tuple<int, int> indexes;
 
         public AdminPage(MainWindow window)
         {
             InitializeComponent();
             this.mainWindow = window;
-            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup, this.AutoCompleteList, mainWindow.Dictionary, AutoCompleteAction);
+            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup,
+                this.AutoCompleteList, mainWindow.Dictionary, mainWindow.Indexes, AutoCompleteAction);
             this.CategoryComboBox.ItemsSource = mainWindow.Category;
             ModifyRemoveClearButtonsEnabled(false);
         }
@@ -40,6 +40,7 @@ namespace MVP_Tema1_WPF
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
+            Reset();
             mainWindow.Content = mainWindow.mainPage;
         }
 
@@ -57,7 +58,7 @@ namespace MVP_Tema1_WPF
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (!Check() || indexes == null)
+            if (!Check() || !mainWindow.Indexes.Active)
             {
                 return;
             }
@@ -70,7 +71,7 @@ namespace MVP_Tema1_WPF
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (indexes == null)
+            if (!mainWindow.Indexes.Active)
             {
                 return;
             }
@@ -78,7 +79,7 @@ namespace MVP_Tema1_WPF
             Reset();
         }
 
-        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
             Reset();
@@ -154,18 +155,20 @@ namespace MVP_Tema1_WPF
 
         private void AutoCompleteAction()
         {
-            this.WordTextBox.Text = this.AutoCompleteList.SelectedItem.ToString();
+            //this.WordTextBox.Text = this.AutoCompleteList.SelectedItem.ToString();
+
             //int index = mainWindow.Dictionary.FindIndex(word => word.WordText.Equals(this.AutoCompleteList.SelectedItem.ToString()));
             //int index = mainWindow.Dictionary.FindIndex(category => category.Words.Exists(word => word.WordText.Equals(this.AutoCompleteList.SelectedItem.ToString())));
-            indexes = GetWordIndexes();
-            if (indexes == null)
+            //mainWindow.Indexes = Utils.GetWordIndexes(mainWindow.Dictionary, this.AutoCompleteList.SelectedItem.ToString());
+            if (!mainWindow.Indexes.Active)
             {
                 ModifyRemoveClearButtonsEnabled(false);
                 return;
             }
             ModifyRemoveClearButtonsEnabled(true);
-            this.DescriptionTextBox.Text = mainWindow.Dictionary[indexes.Item1].Words[indexes.Item2].Description;
-            CategoryComboBox.SelectedIndex = indexes.Item1;
+            //this.WordTextBox.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].WordText;
+            this.DescriptionTextBox.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].Description;
+            CategoryComboBox.SelectedIndex = mainWindow.Indexes.CategoryIndex;
             CategoryCheckBox.IsChecked = false;
             CategoryCheckBox_Click(null, null);
 
@@ -183,7 +186,7 @@ namespace MVP_Tema1_WPF
             {
                 WordImage.Source = new BitmapImage(new Uri(path));
             }*/
-            WordImage.Source = Utils.getWordPhoto(this.AutoCompleteList.SelectedItem.ToString());
+            WordImage.Source = Utils.getWordPhoto(this.WordTextBox.Text);
         }
 
         private string GetPhotoPath(string photoName)
@@ -224,26 +227,13 @@ namespace MVP_Tema1_WPF
         {
             WordImage.Source = null;
             //File.Delete(GetPhotoPath(mainWindow.Dictionary[indexes.Item1].Words[indexes.Item2].WordText));
-            mainWindow.Dictionary[indexes.Item1].Words.RemoveAt(indexes.Item2);
-            if (mainWindow.Dictionary[indexes.Item1].Words.Count == 0)
+            mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words.RemoveAt(mainWindow.Indexes.WordIndex);
+            if (mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words.Count == 0)
             {
-                mainWindow.Dictionary.RemoveAt(indexes.Item1);
+                mainWindow.Dictionary.RemoveAt(mainWindow.Indexes.CategoryIndex);
                 //this.CategoryComboBox.Items.RemoveAt(indexes.Item1);
-                mainWindow.Category.RemoveAt(indexes.Item1);
+                mainWindow.Category.RemoveAt(mainWindow.Indexes.CategoryIndex);
             }
-        }
-
-        private Tuple<int, int> GetWordIndexes()
-        {
-            for (int index = 0; index < mainWindow.Dictionary.Count; ++index)
-            {
-                int wordIndex = mainWindow.Dictionary[index].Words.FindIndex(word => word.WordText.Equals(this.AutoCompleteList.SelectedItem.ToString()));
-                if (wordIndex != -1)
-                {
-                    return new Tuple<int, int>(index, wordIndex);
-                }
-            }
-            return null;
         }
 
         private void ModifyRemoveClearButtonsEnabled(bool option)
@@ -285,7 +275,8 @@ namespace MVP_Tema1_WPF
             CategoryComboBox.SelectedIndex = -1;
             ClearButton.IsEnabled = false;
             WordImage.Source = null;
-            indexes = null;
+            //mainWindow.Indexes = null;
+            mainWindow.Indexes.set(-1, -1, false);
             ModifyRemoveClearButtonsEnabled(false);
         }
     }
