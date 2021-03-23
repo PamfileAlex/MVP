@@ -39,16 +39,25 @@ namespace MVP_Tema1_WPF
             mainWindow.Content = mainWindow.mainPage;
         }
 
+        private void ModifyButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!mainWindow.Indexes.Active)
+            {
+                return;
+            }
+            mainWindow.adminPage.AutoCompleteActionOutside();
+            Reset();
+            mainWindow.Content = mainWindow.adminPage;
+        }
+
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             Reset();
         }
 
-        private void ModifyButton_Click(object sender, RoutedEventArgs e)
+        private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            mainWindow.adminPage.AutoCompleteActionOutside();
-            Reset();
-            mainWindow.Content = mainWindow.adminPage;
+            this.ClearButton.IsEnabled = true;
         }
 
         private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -82,6 +91,8 @@ namespace MVP_Tema1_WPF
             {
                 this.WordImage.Source = Utils.getWordPhoto("noImageFound");
             }
+            ClearButton.IsEnabled = true;
+            ModifyButton.IsEnabled = true;
         }
 
         private void Reset()
@@ -90,7 +101,8 @@ namespace MVP_Tema1_WPF
             DescriptionTextBlock.Text = "";
             CategoryTextBlock.Text = "";
             CategoryComboBox.SelectedIndex = -1;
-            //ClearButton.IsEnabled = false;
+            ClearButton.IsEnabled = false;
+            ModifyButton.IsEnabled = false;
             WordImage.Source = null;
         }
     }

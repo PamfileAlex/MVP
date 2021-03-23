@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="AutoComplete.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="Checks.cs" />
     <Compile Include="IndexPair.cs" />
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>

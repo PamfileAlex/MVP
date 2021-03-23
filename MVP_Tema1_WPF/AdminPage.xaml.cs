@@ -24,7 +24,8 @@ namespace MVP_Tema1_WPF
     /// </summary>
     public partial class AdminPage : Page
     {
-        private MainWindow mainWindow;
+        //private MainWindow mainWindow;
+        public MainWindow mainWindow { get; }
         private AutoComplete autoComplete;
 
         public AdminPage(MainWindow window)
@@ -47,7 +48,7 @@ namespace MVP_Tema1_WPF
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (!Check())
+            if (!Checks.Check(this))
             {
                 return;
             }
@@ -58,7 +59,7 @@ namespace MVP_Tema1_WPF
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (!Check() || !mainWindow.Indexes.Active)
+            if (!mainWindow.Indexes.Active || !Checks.Check(this))
             {
                 return;
             }
