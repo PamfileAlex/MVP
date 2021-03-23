@@ -187,6 +187,10 @@ namespace MVP_Tema1_WPF
                 WordImage.Source = new BitmapImage(new Uri(path));
             }*/
             WordImage.Source = Utils.getWordPhoto(this.WordTextBox.Text);
+            if (WordImage.Source != null)
+            {
+                this.ClearPhotoButton.IsEnabled = true;
+            }
         }
 
         private string GetPhotoPath(string photoName)
@@ -248,7 +252,17 @@ namespace MVP_Tema1_WPF
             /*return !String.IsNullOrEmpty(WordTextBox.Text) && !String.IsNullOrEmpty(DescriptionTextBox.Text) &&
                 (CategoryCheckBox.IsChecked ?? false) ? String.IsNullOrEmpty(CategoryTextBox.Text) ||
                 !mainWindow.Dictionary.Exists(x => x.WordText.Equals(WordTextBox.Text)) : CategoryComboBox.SelectedIndex != -1;*/
-            return CheckAllNotEmpty();
+            return CheckDictionary() && CheckAllNotEmpty() && !CheckWordExistence() && !CheckCategoryExistence();
+        }
+
+        private bool CheckDictionary()
+        {
+            if (mainWindow.Dictionary == null)
+            {
+                ErrorText.Text = "Dictionarul este null";
+                return false;
+            }
+            return true;
         }
 
         private bool CheckAllNotEmpty()
@@ -264,6 +278,33 @@ namespace MVP_Tema1_WPF
                 return true;
             }
             ErrorText.Text = "Nu sunt completate toate campurile";
+            return false;
+        }
+
+        private bool CheckWordExistence()
+        {
+            foreach (var category in mainWindow.Dictionary)
+            {
+                if (category.Words.Exists(word => word.WordText.Equals(this.WordTextBox.Text)))
+                {
+                    ErrorText.Text = "Exista deja acest cuvant in dictionar";
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool CheckCategoryExistence()
+        {
+            if (this.CategoryTextBox.Text.Equals(""))
+            {
+                return false;
+            }
+            if (mainWindow.Dictionary.Exists(category => category.Title.Equals(this.CategoryTextBox.Text)))
+            {
+                ErrorText.Text = "Exista deja aceasta categorie in dictionar";
+                return true;
+            }
             return false;
         }
 
