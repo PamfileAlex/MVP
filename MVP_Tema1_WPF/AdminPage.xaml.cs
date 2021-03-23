@@ -169,6 +169,13 @@ namespace MVP_Tema1_WPF
             }
         }
 
+        public void AutoCompleteActionOutside()
+        {
+            this.WordTextBox.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].WordText;
+            autoComplete.CloseAutoSuggestionBox();
+            AutoCompleteAction();
+        }
+
         private void AddWord()
         {
             int index;

@@ -46,7 +46,9 @@ namespace MVP_Tema1_WPF
 
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
+            mainWindow.adminPage.AutoCompleteActionOutside();
             Reset();
+            mainWindow.Content = mainWindow.adminPage;
         }
 
         private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -78,7 +80,7 @@ namespace MVP_Tema1_WPF
             this.WordImage.Source = Utils.getWordPhoto(this.WordTextBox.Text);
             if (this.WordImage.Source == null)
             {
-                this.WordImage.Source=Utils.getWordPhoto("noImageFound");
+                this.WordImage.Source = Utils.getWordPhoto("noImageFound");
             }
         }
 

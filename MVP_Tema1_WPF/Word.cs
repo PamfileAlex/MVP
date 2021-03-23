@@ -23,7 +23,7 @@ namespace MVP_Tema1_WPF
             this.Description = String.Empty;
         }
 
-        public Word(string wordText,string description)
+        public Word(string wordText, string description)
         {
             this.WordText = wordText;
             this.Description = description;

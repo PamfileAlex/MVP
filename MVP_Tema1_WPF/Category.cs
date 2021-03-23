@@ -16,7 +16,7 @@ namespace MVP_Tema1_WPF
             this.Title = String.Empty;
             this.Words = new List<Word>();
         }
-        
+
         public Category(string title)
         {
             this.Title = title;

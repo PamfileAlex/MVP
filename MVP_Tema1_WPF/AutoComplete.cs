@@ -29,14 +29,14 @@ namespace MVP_Tema1_WPF
             this.action = action;
         }
 
-        private void OpenAutoSuggestionBox()
+        public void OpenAutoSuggestionBox()
         {
             this.popup.Visibility = Visibility.Visible;
             this.popup.IsOpen = true;
             this.listBox.Visibility = Visibility.Visible;
         }
 
-        private void CloseAutoSuggestionBox()
+        public void CloseAutoSuggestionBox()
         {
             this.popup.Visibility = Visibility.Collapsed;
             this.popup.IsOpen = false;
