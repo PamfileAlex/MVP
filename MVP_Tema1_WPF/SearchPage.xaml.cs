@@ -69,21 +69,24 @@ namespace MVP_Tema1_WPF
 
         private void AutoCompleteAction()
         {
-            //this.WordTextBox.Text = this.AutoCompleteList.SelectedItem.ToString();
             if (!mainWindow.Indexes.Active)
             {
                 return;
             }
-            //this.WordTextBox.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].WordText;
             this.DescriptionTextBlock.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].Description;
             this.CategoryTextBlock.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Title;
             this.WordImage.Source = Utils.getWordPhoto(this.WordTextBox.Text);
+            if (this.WordImage.Source == null)
+            {
+                this.WordImage.Source=Utils.getWordPhoto("noImageFound");
+            }
         }
 
         private void Reset()
         {
             WordTextBox.Text = "";
             DescriptionTextBlock.Text = "";
+            CategoryTextBlock.Text = "";
             CategoryComboBox.SelectedIndex = -1;
             //ClearButton.IsEnabled = false;
             WordImage.Source = null;

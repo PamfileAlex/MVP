@@ -46,11 +46,6 @@
                 <Image x:Name="WordImage" Width="500" Height="300" Margin="0,15,0,0"/>
             </StackPanel>
             <TextBlock x:Name="ErrorText" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="30" FontWeight="Bold" Foreground="#991f1f"/>
-            <!--<StackPanel Orientation="Horizontal" Margin="0,30,0,0" HorizontalAlignment="Center">
-                <Button x:Name="AddtButton" Uid="1" Content="Adauga" Margin="20,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-                <Button x:Name="ModtifyButton" Uid="2" Content="Modifica" Margin="20,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-                <Button x:Name="DelteteButton" Uid="3" Content="Sterge" Margin="20,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="Button_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-            </StackPanel>-->
         </StackPanel>
     </Grid>
 </Page>

@@ -21,7 +21,6 @@
             <ComboBox x:Name="CategoryComboBox" Width="190" Margin="0,40,0,0" FontSize="32"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="20" Background="#666262">
-            <!--<ComboBox x:Name="CategoryComboBox" Width="1000" Height="55" Margin="0,20,0,0" FontSize="32"/>-->
             <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged"/>
             <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
                 <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="1000" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" FontSize="22" />
@@ -30,13 +29,5 @@
             <TextBlock x:Name="DescriptionTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="200" Margin="0,20,0,0" FontSize="30" Foreground="LightGray"/>
             <Image x:Name="WordImage" Width="700" Height="320" Margin="0,20,0,0"/>
         </StackPanel>
-
-        <!--<StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-            <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged"/>
-            <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
-                <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="800" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" FontSize="22" />
-            </Popup>
-        </StackPanel>-->
     </Grid>
 </Page>
