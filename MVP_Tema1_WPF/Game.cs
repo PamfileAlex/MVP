@@ -15,10 +15,9 @@ namespace MVP_Tema1_WPF
         public List<IndexPair> IndexList { get; }
         public int Index { get; set; }
 
-        public Game(List<Category> dictionary, int size)
+        public Game(List<Category> dictionary)
         {
             this.dictionary = dictionary;
-            this.size = size;
             this.IndexList = new List<IndexPair>();
             this.Index = 0;
         }

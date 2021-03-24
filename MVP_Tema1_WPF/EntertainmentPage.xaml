@@ -9,21 +9,53 @@
       Title="EntertainmentPage" Background="#4a4a4a">
 
     <Grid Margin="40" Background="#666262">
-        <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Width="1000" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,40,0,0" TextChanged="WordTextBox_TextChanged"/>
-            <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
-                <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="1000" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" FontSize="22" />
-            </Popup>
-            <TextBlock x:Name="DescriptionTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="300" Margin="0,20,0,0" FontSize="30" Foreground="White"/>
-        <Image x:Name="WordImage" Width="900" Height="350" Margin="0,20,0,0"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,30">
-            <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
-            <CheckBox x:Name="AutoCompleteCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0" Click="AutoCompleteCheckBox_Click">
-                <CheckBox.LayoutTransform>
-                    <ScaleTransform ScaleX="2" ScaleY="2" />
-                </CheckBox.LayoutTransform>
-            </CheckBox>
-            <Button x:Name="QuizButton" Uid="1" Content="Next" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="QuizButton_Click" Template="{DynamicResource RoundedButtonTemplate}" IsEnabled="False"/>
-        </StackPanel>
-
+        <Grid x:Name="StartGrid" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <TextBlock Text="Intoduceti numarul de intrebari" Margin="20,0" FontSize="36" Foreground="White"/>
+                    <TextBox x:Name="QuizSizeTextBox" Width="70" Height="40" Margin="0,5,0,0" FontSize="30" Text="5" PreviewTextInput="QuizSizeTextBox_PreviewTextInput"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <TextBlock Text="AutoComplete" Margin="20,0" FontSize="36" Foreground="White"/>
+                    <CheckBox x:Name="AutoCompleteCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0" Click="AutoCompleteCheckBox_Click">
+                        <CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                        </CheckBox.LayoutTransform>
+                    </CheckBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <Button x:Name="StartHomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+                    <Button x:Name="StartGameButton" Uid="1" Content="Incepe" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="StartGameButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+                </StackPanel>
+                <TextBlock x:Name="StartError" HorizontalAlignment="Center" FontSize="34" Foreground="#991f1f"/>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="GameGrid" Visibility="Hidden">
+            <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Width="1000" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,40,0,0" TextChanged="WordTextBox_TextChanged"/>
+                <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
+                    <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="1000" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" FontSize="22" />
+                </Popup>
+                <TextBlock x:Name="DescriptionTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="300" Margin="0,20,0,0" FontSize="30" Foreground="White"/>
+                <Image x:Name="WordImage" Width="900" Height="350" Margin="0,20,0,0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,30">
+                    <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+                    <!--<CheckBox x:Name="AutoCompleteCheckBox2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0" Click="AutoCompleteCheckBox_Click">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="2" ScaleY="2" />
+                    </CheckBox.LayoutTransform>
+                </CheckBox>-->
+                    <Button x:Name="QuizButton" Uid="2" Content="Next" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="QuizButton_Click" Template="{DynamicResource RoundedButtonTemplate}" IsEnabled="False"/>
+                </StackPanel>
+        </Grid>
+        <Grid x:Name="ResultGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
+            <StackPanel>
+                <TextBlock Text="Rezultatele dumneavoastra:" FontSize="48" Foreground="White" Margin="0,20"/>
+                <ListView x:Name="ResultsListView" Width="600" Height="470" Background="#666262" Foreground="White" FontSize="36"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,30">
+                    <Button x:Name="ResultHomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+                    <Button x:Name="RestartGameButton" Uid="3" Content="Restart" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="RestartGameButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
