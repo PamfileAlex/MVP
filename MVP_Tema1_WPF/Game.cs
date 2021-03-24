@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace MVP_Tema1_WPF
 {
@@ -12,18 +13,52 @@ namespace MVP_Tema1_WPF
         private int size;
         public int Size { get { return size; } }
         public List<IndexPair> IndexList { get; }
+        public int Index { get; set; }
 
-        Game(List<Category> dictionary, int size)
+        public Game(List<Category> dictionary, int size)
         {
             this.dictionary = dictionary;
             this.size = size;
             this.IndexList = new List<IndexPair>();
+            this.Index = 0;
         }
 
         public void Reset(int size = 0)
         {
             this.size = size;
             this.IndexList.Clear();
+            this.Index = 0;
+            if (this.size != 0)
+            {
+                SelectWords();
+            }
+        }
+
+        public string GetWordText()
+        {
+            if (dictionary == null || IndexList.Count == 0)
+            {
+                return null;
+            }
+            return dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].WordText;
+        }
+
+        public void NextWord(TextBlock DescriptionTextBlock, Image WordImage)
+        {
+            if (dictionary == null || IndexList.Count == 0)
+            {
+                return;
+            }
+            Random rand = new Random();
+            if (rand.Next(2) == 0)
+            {
+                WordImage.Source = Utils.GetWordPhoto(dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].WordText);
+                if (WordImage.Source != null)
+                {
+                    return;
+                }
+            }
+            DescriptionTextBlock.Text = dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].Description;
         }
 
         private void SelectWords()

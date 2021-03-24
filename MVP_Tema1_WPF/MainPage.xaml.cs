@@ -41,6 +41,7 @@ namespace MVP_Tema1_WPF
                     break;
                 case 2:
                     mainWindow.Content = mainWindow.entertainmentPage;
+                    mainWindow.entertainmentPage.ResetGame();
                     break;
                 case 3:
                     mainWindow.Close();
