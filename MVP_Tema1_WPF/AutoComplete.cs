@@ -63,9 +63,14 @@ namespace MVP_Tema1_WPF
                 {
                     listBoxWords.AddRange(category.Words.Where(x => x.WordText.IndexOf(textBox.Text, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.WordText));
                 }
+                listBoxWords.Sort();
                 this.listBox.ItemsSource = listBoxWords;
             }
-            if (this.listBox.Items.Count == 0)
+            if(this.listBox.Items.Count == 1 && this.textBox.Text.Equals(this.listBox.Items[0]))
+            {
+                this.listBox.SelectedIndex = 0;
+            }
+            else if (this.listBox.Items.Count == 0)
             {
                 this.CloseAutoSuggestionBox();
             }

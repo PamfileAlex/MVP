@@ -21,11 +21,14 @@ namespace MVP_Tema1_WPF
     public partial class EntertainmentPage : Page
     {
         private MainWindow mainWindow;
+        private AutoComplete autoComplete;
 
         public EntertainmentPage(MainWindow window)
         {
             InitializeComponent();
             this.mainWindow = window;
+            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup,
+                this.AutoCompleteList, mainWindow.Dictionary, mainWindow.Indexes, AutoCompleteAction);
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
@@ -40,12 +43,30 @@ namespace MVP_Tema1_WPF
 
         private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            this.QuizButton.IsEnabled = false;
+            if (autoComplete == null)
+            {
+                return;
+            }
+            autoComplete.AutoTextBox_TextChanged(sender, e);
         }
 
         private void AutoCompleteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (autoComplete == null)
+            {
+                return;
+            }
+            autoComplete.AutoList_SelectionChanged(sender, e);
+        }
 
+        private void AutoCompleteAction()
+        {
+            if (!mainWindow.Indexes.Active)
+            {
+                return;
+            }
+            this.QuizButton.IsEnabled = true;
         }
     }
 }
