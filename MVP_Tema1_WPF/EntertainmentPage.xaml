@@ -1,0 +1,24 @@
+﻿<Page x:Class="MVP_Tema1_WPF.EntertainmentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MVP_Tema1_WPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1440"
+      Title="EntertainmentPage" Background="#4a4a4a">
+
+    <Grid Margin="40" Background="#666262">
+        <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Width="1000" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,40,0,0" TextChanged="WordTextBox_TextChanged"/>
+            <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
+                <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="1000" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" FontSize="22" />
+            </Popup>
+            <TextBlock x:Name="DescriptionTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="300" Margin="0,20,0,0" FontSize="30" Foreground="White"/>
+        <Image x:Name="WordImage" Width="900" Height="350" Margin="0,20,0,0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,30">
+            <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <Button x:Name="QuizButton" Uid="0" Content="Next" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="QuizButton_Click" Template="{DynamicResource RoundedButtonTemplate}" IsEnabled="False"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

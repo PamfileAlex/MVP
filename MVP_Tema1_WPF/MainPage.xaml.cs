@@ -40,7 +40,7 @@ namespace MVP_Tema1_WPF
                     mainWindow.Content = mainWindow.searchPage;
                     break;
                 case 2:
-
+                    mainWindow.Content = mainWindow.entertainmentPage;
                     break;
                 case 3:
                     mainWindow.Close();

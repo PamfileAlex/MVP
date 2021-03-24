@@ -26,6 +26,7 @@ namespace MVP_Tema1_WPF
         public MainPage mainPage;
         public AdminPage adminPage;
         public SearchPage searchPage;
+        public EntertainmentPage entertainmentPage;
 
         public List<Category> Dictionary { get; set; }
         public ObservableCollection<string> Category { get; set; }
@@ -54,6 +55,7 @@ namespace MVP_Tema1_WPF
             mainPage = new MainPage(this);
             adminPage = new AdminPage(this);
             searchPage = new SearchPage(this);
+            entertainmentPage = new EntertainmentPage(this);
         }
 
         private void Serialize()
