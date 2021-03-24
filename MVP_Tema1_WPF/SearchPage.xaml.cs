@@ -86,10 +86,10 @@ namespace MVP_Tema1_WPF
             }
             this.DescriptionTextBlock.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].Description;
             this.CategoryTextBlock.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Title;
-            this.WordImage.Source = Utils.getWordPhoto(this.WordTextBox.Text);
+            this.WordImage.Source = Utils.GetWordPhoto(this.WordTextBox.Text);
             if (this.WordImage.Source == null)
             {
-                this.WordImage.Source = Utils.getWordPhoto("noImageFound");
+                this.WordImage.Source = Utils.GetWordPhoto("noImageFound");
             }
             ClearButton.IsEnabled = true;
             ModifyButton.IsEnabled = true;

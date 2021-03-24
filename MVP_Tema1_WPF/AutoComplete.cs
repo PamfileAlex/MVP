@@ -85,7 +85,7 @@ namespace MVP_Tema1_WPF
             }
             this.CloseAutoSuggestionBox();
             this.textBox.Text = this.listBox.SelectedItem.ToString();
-            Utils.setWordIndexes(indexes, this.list, this.listBox.SelectedItem.ToString());
+            Utils.SetWordIndexes(indexes, this.list, this.listBox.SelectedItem.ToString());
             this.listBox.SelectedIndex = -1;
             if (action != null)
             {

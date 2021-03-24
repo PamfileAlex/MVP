@@ -61,6 +61,7 @@
     <Compile Include="EntertainmentPage.xaml.cs">
       <DependentUpon>EntertainmentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game.cs" />
     <Compile Include="IndexPair.cs" />
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>

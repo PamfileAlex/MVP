@@ -20,7 +20,7 @@ namespace MVP_Tema1_WPF
             return Environment.CurrentDirectory + "\\" + files[0];
         }
 
-        public static BitmapImage getWordPhoto(string photoName)
+        public static BitmapImage GetWordPhoto(string photoName)
         {
             string path = Utils.GetPhotoPath(photoName);
             if (File.Exists(path))
@@ -30,7 +30,7 @@ namespace MVP_Tema1_WPF
             return null;
         }
 
-        public static void setWordIndexes(IndexPair indexPair, List<Category> dictionary, string selectedWord)
+        public static void SetWordIndexes(IndexPair indexPair, List<Category> dictionary, string selectedWord)
         {
             if (dictionary == null)
             {
@@ -47,6 +47,20 @@ namespace MVP_Tema1_WPF
                 }
             }
             indexPair.set(-1, -1, false);
+        }
+
+        public static int GetDictionarySize(List<Category> dictionary)
+        {
+            int size = 0;
+            if (dictionary == null)
+            {
+                return size;
+            }
+            foreach(var category in dictionary)
+            {
+                size += category.Words.Count;
+            }
+            return size;
         }
     }
 }

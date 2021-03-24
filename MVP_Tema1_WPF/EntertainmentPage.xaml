@@ -22,7 +22,7 @@
                     <ScaleTransform ScaleX="2" ScaleY="2" />
                 </CheckBox.LayoutTransform>
             </CheckBox>
-            <Button x:Name="QuizButton" Uid="0" Content="Next" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="QuizButton_Click" Template="{DynamicResource RoundedButtonTemplate}" IsEnabled="False"/>
+            <Button x:Name="QuizButton" Uid="1" Content="Next" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="QuizButton_Click" Template="{DynamicResource RoundedButtonTemplate}" IsEnabled="False"/>
         </StackPanel>
 
     </Grid>

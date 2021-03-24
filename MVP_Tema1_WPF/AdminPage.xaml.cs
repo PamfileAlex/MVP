@@ -163,7 +163,7 @@ namespace MVP_Tema1_WPF
             CategoryComboBox.SelectedIndex = mainWindow.Indexes.CategoryIndex;
             CategoryCheckBox.IsChecked = false;
             CategoryCheckBox_Click(null, null);
-            WordImage.Source = Utils.getWordPhoto(this.WordTextBox.Text);
+            WordImage.Source = Utils.GetWordPhoto(this.WordTextBox.Text);
             if (WordImage.Source != null)
             {
                 this.ClearPhotoButton.IsEnabled = true;
