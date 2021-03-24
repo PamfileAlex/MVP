@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,14 @@ namespace MVP_Tema1_WPF
         public int Size { get { return size; } }
         public List<IndexPair> IndexList { get; }
         public int Index { get; set; }
+        public ObservableCollection<String> ResultsList { get; }
 
         public Game(List<Category> dictionary)
         {
             this.dictionary = dictionary;
             this.IndexList = new List<IndexPair>();
             this.Index = 0;
+            this.ResultsList = new ObservableCollection<string>();
         }
 
         public void Reset(int size = 0)
@@ -27,22 +30,14 @@ namespace MVP_Tema1_WPF
             this.size = size;
             this.IndexList.Clear();
             this.Index = 0;
+            this.ResultsList.Clear();
             if (this.size != 0)
             {
                 SelectWords();
             }
         }
 
-        public string GetWordText()
-        {
-            if (dictionary == null || IndexList.Count == 0)
-            {
-                return null;
-            }
-            return dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].WordText;
-        }
-
-        public void NextWord(TextBlock DescriptionTextBlock, Image WordImage)
+        public void SetWord(TextBlock DescriptionTextBlock, Image WordImage)
         {
             if (dictionary == null || IndexList.Count == 0)
             {
@@ -58,6 +53,18 @@ namespace MVP_Tema1_WPF
                 }
             }
             DescriptionTextBlock.Text = dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].Description;
+        }
+
+        public void AddToResultsList(TextBox WordTextBox)
+        {
+            if (WordTextBox.Text.Equals(dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].WordText))
+            {
+                ResultsList.Add("Correct");
+            }
+            else
+            {
+                ResultsList.Add("Raspunsul correct: " + dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].WordText);
+            }
         }
 
         private void SelectWords()

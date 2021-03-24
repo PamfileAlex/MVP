@@ -32,6 +32,7 @@ namespace MVP_Tema1_WPF
             autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup,
                 this.AutoCompleteList, mainWindow.Dictionary, mainWindow.Indexes, AutoCompleteAction);
             game = new Game(mainWindow.Dictionary);
+            this.ResultsListView.ItemsSource = game.ResultsList;
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
@@ -57,7 +58,7 @@ namespace MVP_Tema1_WPF
                 return;
             }
             game.Reset(String.IsNullOrEmpty(QuizSizeTextBox.Text) ? Utils.GetDictionarySize(mainWindow.Dictionary) : int.Parse(QuizSizeTextBox.Text));
-            game.NextWord(DescriptionTextBlock, WordImage);
+            game.SetWord(DescriptionTextBlock, WordImage);
             if (game.Size == 1)
             {
                 QuizButton.Content = "Finish";
@@ -68,6 +69,7 @@ namespace MVP_Tema1_WPF
 
         private void QuizButton_Click(object sender, RoutedEventArgs e)
         {
+            game.AddToResultsList(WordTextBox);
             DescriptionTextBlock.Text = String.Empty;
             WordImage.Source = null;
             WordTextBox.Text = String.Empty;
@@ -80,11 +82,9 @@ namespace MVP_Tema1_WPF
             {
                 GameGrid.Visibility = Visibility.Hidden;
                 ResultGrid.Visibility = Visibility.Visible;
-                //ResultsListView.Items.Add("Acesta este un test");
-                //ResultsListView.Items.Add("Acesta este alt test");
                 return;
             }
-            game.NextWord(this.DescriptionTextBlock, this.WordImage);
+            game.SetWord(this.DescriptionTextBlock, this.WordImage);
         }
 
         private void QuizSizeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
