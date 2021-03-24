@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminChecks.cs" />
     <Compile Include="AutoComplete.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Checks.cs" />

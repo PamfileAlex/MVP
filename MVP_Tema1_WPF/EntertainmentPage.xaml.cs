@@ -52,6 +52,7 @@ namespace MVP_Tema1_WPF
 
         private void StartGameButton_Click(object sender, RoutedEventArgs e)
         {
+            QuizButton.Content = "Next";
             if (mainWindow.Dictionary.Count == 0)
             {
                 StartError.Text = "Dictionarul este gol";

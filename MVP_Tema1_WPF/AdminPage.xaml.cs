@@ -48,7 +48,7 @@ namespace MVP_Tema1_WPF
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (!Checks.Check(this))
+            if (!Check())
             {
                 return;
             }
@@ -59,7 +59,7 @@ namespace MVP_Tema1_WPF
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (!mainWindow.Indexes.Active || !Checks.Check(this))
+            if (!mainWindow.Indexes.Active || !Check())
             {
                 return;
             }
@@ -215,59 +215,6 @@ namespace MVP_Tema1_WPF
             ModifyButton.IsEnabled = option;
             RemoveButton.IsEnabled = option;
             //ClearButton.IsEnabled = option;
-        }
-
-        private bool Check()
-        {
-            return CheckDictionary() && CheckAllNotEmpty() && !CheckWordExistence() && !CheckCategoryExistence();
-        }
-
-        private bool CheckDictionary()
-        {
-            if (mainWindow.Dictionary == null)
-            {
-                ErrorText.Text = "Dictionarul este null";
-                return false;
-            }
-            return true;
-        }
-
-        private bool CheckAllNotEmpty()
-        {
-            if (!String.IsNullOrEmpty(WordTextBox.Text) && !String.IsNullOrEmpty(DescriptionTextBox.Text) &&
-                (CategoryCheckBox.IsChecked ?? false) ? !String.IsNullOrEmpty(CategoryTextBox.Text) : CategoryComboBox.SelectedIndex != -1)
-            {
-                return true;
-            }
-            ErrorText.Text = "Nu sunt completate toate campurile";
-            return false;
-        }
-
-        private bool CheckWordExistence()
-        {
-            foreach (var category in mainWindow.Dictionary)
-            {
-                if (category.Words.Exists(word => word.WordText.Equals(this.WordTextBox.Text)))
-                {
-                    ErrorText.Text = "Exista deja acest cuvant in dictionar";
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private bool CheckCategoryExistence()
-        {
-            if (this.CategoryTextBox.Text.Equals(""))
-            {
-                return false;
-            }
-            if (mainWindow.Dictionary.Exists(category => category.Title.Equals(this.CategoryTextBox.Text)))
-            {
-                ErrorText.Text = "Exista deja aceasta categorie in dictionar";
-                return true;
-            }
-            return false;
         }
 
         private void Reset()
