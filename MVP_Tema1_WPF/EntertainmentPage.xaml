@@ -17,6 +17,11 @@
         <Image x:Name="WordImage" Width="900" Height="350" Margin="0,20,0,0"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,30">
             <Button x:Name="HomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
+            <CheckBox x:Name="AutoCompleteCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0" Click="AutoCompleteCheckBox_Click">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="2" ScaleY="2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
             <Button x:Name="QuizButton" Uid="0" Content="Next" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="QuizButton_Click" Template="{DynamicResource RoundedButtonTemplate}" IsEnabled="False"/>
         </StackPanel>
 

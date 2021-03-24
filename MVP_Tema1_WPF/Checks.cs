@@ -27,8 +27,8 @@ namespace MVP_Tema1_WPF
         private static bool CheckAllNotEmpty(AdminPage adminPage)
         {
             if (!String.IsNullOrEmpty(adminPage.WordTextBox.Text) && !String.IsNullOrEmpty(adminPage.DescriptionTextBox.Text) &&
-                (adminPage.CategoryCheckBox.IsChecked ?? false) ? !String.IsNullOrEmpty(adminPage.CategoryTextBox.Text) :
-                adminPage.CategoryComboBox.SelectedIndex != -1)
+                ((adminPage.CategoryCheckBox.IsChecked ?? false) ? !String.IsNullOrEmpty(adminPage.CategoryTextBox.Text) :
+                adminPage.CategoryComboBox.SelectedIndex != -1))
             {
                 return true;
             }
@@ -51,7 +51,7 @@ namespace MVP_Tema1_WPF
 
         private static bool CheckCategoryExistence(AdminPage adminPage)
         {
-            if (adminPage.CategoryTextBox.Text.Equals(""))
+            if (String.IsNullOrEmpty(adminPage.CategoryTextBox.Text))
             {
                 return false;
             }

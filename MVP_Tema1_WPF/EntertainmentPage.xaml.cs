@@ -33,6 +33,8 @@ namespace MVP_Tema1_WPF
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
+            this.AutoCompleteCheckBox.IsChecked = false;
+            this.WordTextBox.Text = "";
             mainWindow.Content = mainWindow.mainPage;
         }
 
@@ -41,9 +43,24 @@ namespace MVP_Tema1_WPF
 
         }
 
+        private void AutoCompleteCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.AutoCompleteCheckBox.IsChecked ?? false)
+            {
+                string aux = this.WordTextBox.Text;
+                this.WordTextBox.Text = string.Empty;
+                this.WordTextBox.Text = aux;
+            }
+        }
+
         private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             this.QuizButton.IsEnabled = false;
+            if (!(this.AutoCompleteCheckBox.IsChecked ?? false))
+            {
+                this.QuizButton.IsEnabled = !String.IsNullOrEmpty(this.WordTextBox.Text);
+                return;
+            }
             if (autoComplete == null)
             {
                 return;
