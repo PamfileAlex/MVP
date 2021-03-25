@@ -1,2 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfCategory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfCategory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Category>
+    <Title>Producator auto</Title>
+    <Words>
+      <Word>
+        <WordText>Ferrari</WordText>
+        <Description>Ferrari este un producător de mașini sport cu sediul în Maranello. Fondată în 1929 de Enzo Ferrari, ca Scuderia Ferrari, compania a sponsorizat piloți și a produs mașini de curse înainte de a produce mașini adecvate pentru a fi conduse pe drumurile publice.</Description>
+      </Word>
+      <Word>
+        <WordText>Aston Martin</WordText>
+        <Description>Aston Martin este o marcă britanică de automobile sport de lux.</Description>
+      </Word>
+      <Word>
+        <WordText>McLaren</WordText>
+        <Description>McLaren Automotive este un constructor britanic de automobile de stradă bazate de tehnologiile folosite în Formula 1. Compania a fost înființată în 1990 și este parte a McLaren Group, un holding din care mai face parte și echipa de Formula 1 McLaren.</Description>
+      </Word>
+      <Word>
+        <WordText>Honda</WordText>
+        <Description>Honda este o corporație multinațională cu sediul în Japonia. Compania produce automobile și motociclete, camioane, scutere, roboți, avioane cu reacție și motoare pentru aceste avioane, ATVuri, bărci cu motor și motoare pentru ambarcațiuni, generatoare de electricitate, utilaje pentru îngrijirea gazonului și a grădinii, etc.</Description>
+      </Word>
+    </Words>
+  </Category>
+  <Category>
+    <Title>Sport</Title>
+    <Words>
+      <Word>
+        <WordText>Formula 1</WordText>
+        <Description>Formula 1 (abreviată F1) este o întrecere de automobilism care se organizează anual sub forma a două campionate mondiale, care au loc în paralel, ambele fiind patronate de Federația Internațională a Automobilului (FIA).</Description>
+      </Word>
+      <Word>
+        <WordText>fotbal</WordText>
+        <Description>Joc sportiv cu mingea între două echipe de câte 11 jucători, fiecare dintre jucători căutând să introducă mingea în poarta celeilalte echipe, lovind-o cu piciorul sau cu oricare altă parte a corpului, în afară de mâini.</Description>
+      </Word>
+      <Word>
+        <WordText>tenis</WordText>
+        <Description>Joc sportiv care se practică cu mingi mici, lovite cu rachete de către doi sportivi sau două perechi, pe un teren special amenajat, despărțit în două printr-o plasă joasă; sportul alb.</Description>
+      </Word>
+    </Words>
+  </Category>
+  <Category>
+    <Title>Companie</Title>
+    <Words>
+      <Word>
+        <WordText>Red Bull</WordText>
+        <Description>Red Bull GmbH este o companie austriacă care produce și vinde băutura energizantă Red Bull. Sediul Red Bull GmbH este în Fuschl am See, Austria.</Description>
+      </Word>
+      <Word>
+        <WordText>Microsoft</WordText>
+        <Description>Microsoft Corp. este o companie americană, cea mai mare producătoare de software din lume, cu peste 90.000 de angajați în mai mult de 100 de țări. Deseori numele firmei se prescurtează „MS”.</Description>
+      </Word>
+      <Word>
+        <WordText>Oracle</WordText>
+        <Description>Oracle Corporation este o companie multinațională americană din industria calculatoarelor, cu sediul în Redwood City, Silicon Valley, California, Statele Unite. Compania este specializată în conceperea și comercializarea de componente hardware și de soluții software pentru alte companii și organizații.</Description>
+      </Word>
+    </Words>
+  </Category>
+  <Category>
+    <Title>Vehicul</Title>
+    <Words>
+      <Word>
+        <WordText>bicicleta</WordText>
+        <Description>Vehicul cu două roți, pus în mișcare prin două pedale acționate cu picioarele și folosit, de obicei, pentru transportul unei singure persoane.</Description>
+      </Word>
+      <Word>
+        <WordText>masina</WordText>
+        <Description>Sistem tehnic alcătuit din piese cu mișcări determinate, care transformă o formă de energie în altă formă de energie sau în lucru mecanic util</Description>
+      </Word>
+      <Word>
+        <WordText>motocicleta</WordText>
+        <Description>Autovehicul pe două roți în linie sau cu trei roți în triunghi isoscel, montate pe un cadru, cu motor cu ardere internă, construit pentru una sau două persoane.</Description>
+      </Word>
+    </Words>
+  </Category>
+  <Category>
+    <Title>Aliment</Title>
+    <Words>
+      <Word>
+        <WordText>mar</WordText>
+        <Description>Fruct al mărului, de formă rotundă-turtită și de diferite culori.</Description>
+      </Word>
+      <Word>
+        <WordText>paine</WordText>
+        <Description>Aliment de bază al omului, preparat dintr-un aluat de faină (de grâu, de secară etc.) și ingrediente, afânat prin fermentația drojdiei, frământat cu apă și copt în cuptor</Description>
+      </Word>
+      <Word>
+        <WordText>lapte</WordText>
+        <Description>Lichid alb-gălbui cu gust dulceag, foarte hrănitor, secretat de glandele mamare ale femelelor mamiferelor (care constituie hrana exclusivă a sugarului și a puiului de animal).</Description>
+      </Word>
+    </Words>
+  </Category>
+  <Category>
+    <Title>Tara</Title>
+    <Words>
+      <Word>
+        <WordText>Romania</WordText>
+        <Description>România este un stat situat în sud-estul Europei Centrale, pe cursul inferior al Dunării, la nord de peninsula Balcanică și la țărmul nord-vestic al Mării Negre. Pe teritoriul ei este situată aproape toată suprafața Deltei Dunării și partea sudică și centrală a Munților Carpați.</Description>
+      </Word>
+      <Word>
+        <WordText>Germania</WordText>
+        <Description>Republica Federală Germania, acronim RFG, colocvial, Germania, este un stat în Europa Centrală. Face parte din organizații internaționale importante, precum: Consiliul Europei, OCDE, Uniunea Vest-Europeană, NATO, Uniunea Europeană, ONU, OSCE, și din zona euro.</Description>
+      </Word>
+      <Word>
+        <WordText>Danemarca</WordText>
+        <Description>Danemarca, oficial Regatul Danemarcei, este un stat suveran din Europa de Nord, având și două teritorii autonome constituente de peste mări, care fac parte integrantă din regat: Insulele Feroe în Atlanticul de Nord și Groenlanda în America de Nord.</Description>
+      </Word>
+    </Words>
+  </Category>
+  <Category>
+    <Title>Companie aeriana</Title>
+    <Words>
+      <Word>
+        <WordText>Lufthansa</WordText>
+        <Description>Deutsche Lufthansa AG este cea mai mare companie aeriană germană și din Europa. Numele provine de la Luft, și Hansa. Concernul a apărut la jumătatea anilor 90 pornind de la compania aeriană Lufthansa, având numele Deutsche Lufthansa AG, dar operând și alte companii.</Description>
+      </Word>
+    </Words>
+  </Category>
+</ArrayOfCategory>

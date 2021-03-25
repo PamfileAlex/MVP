@@ -186,7 +186,14 @@ namespace MVP_Tema1_WPF
                     if (!mainWindow.Indexes.Active) { return; }
                     string previousWord = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].WordText;
                     imagePath = Utils.GetPhotoPath(previousWord);
-                    System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
+                    try
+                    {
+                        System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }
