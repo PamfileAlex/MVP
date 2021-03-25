@@ -21,7 +21,7 @@
             <ComboBox x:Name="CategoryComboBox" Width="190" Margin="0,40,0,0" FontSize="32" SelectionChanged="CategoryComboBox_SelectionChanged"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="20" Background="#666262">
-            <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged"/>
+            <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="1000" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged" Style="{StaticResource TextBoxHint}" Tag="Cautati un cuvant"/>
             <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
                 <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="1000" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" FontSize="22" />
             </Popup>

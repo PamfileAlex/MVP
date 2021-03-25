@@ -72,6 +72,7 @@ namespace MVP_Tema1_WPF
             }
             else if (game.Index >= game.Size)
             {
+                ResultsTextBlock.Text = "Rezultatul dumneavoastra: " + game.GetOutOf();
                 GameGrid.Visibility = Visibility.Hidden;
                 ResultGrid.Visibility = Visibility.Visible;
                 return;

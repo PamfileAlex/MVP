@@ -22,11 +22,11 @@
             <Button x:Name="ClearButton" Uid="4" Content="Reseteaza" HorizontalAlignment="Center" Margin="44,20,44,0" Width="200" FontSize="30" FontWeight="DemiBold" Click="ClearButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="20" Background="#666262">
-            <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged"/>
+            <TextBox x:Name="WordTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Margin="0,30,0,0" TextChanged="WordTextBox_TextChanged" Style="{StaticResource TextBoxHint}" Tag="Introduceti cuvantul"/>
             <Popup x:Name="AutoCompletePopup" Visibility="Collapsed" StaysOpen="False" PlacementTarget="{Binding ElementName=WordTextBox}">
                 <ListBox x:Name="AutoCompleteList" Visibility="Collapsed" Width="800" Height="200" SelectionChanged="AutoCompleteList_SelectionChanged" FontSize="22" />
             </Popup>
-            <TextBox x:Name="DescriptionTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="150" RenderTransformOrigin="0.733,0.522" FontSize="30" Margin="0,30,0,0"/>
+            <TextBox x:Name="DescriptionTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="150" RenderTransformOrigin="0.733,0.522" FontSize="30" Margin="0,30,0,0"  Style="{StaticResource TextBoxHint}" Tag="Introduceti descrierea"/>
             <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
                 <CheckBox x:Name="CategoryCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="100,0,18,0" Click="CategoryCheckBox_Click">
                     <CheckBox.LayoutTransform>
@@ -35,7 +35,7 @@
                 </CheckBox>
                 <Grid>
                     <ComboBox x:Name="CategoryComboBox" Width="800" Height="55" FontSize="32"/>
-                    <TextBox x:Name="CategoryTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Visibility="Hidden"/>
+                    <TextBox x:Name="CategoryTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="800" Height="55" RenderTransformOrigin="0.733,0.522" FontSize="36" Visibility="Hidden" Style="{StaticResource TextBoxHint}" Tag="Introduceti categoria"/>
                 </Grid>
             </StackPanel>
             <StackPanel Orientation="Horizontal">

@@ -12,6 +12,7 @@ namespace MVP_Tema1_WPF
     {
         private List<Category> dictionary;
         private int size;
+        private int correct;
         public int Size { get { return size; } }
         public List<IndexPair> IndexList { get; }
         public int Index { get; set; }
@@ -28,6 +29,7 @@ namespace MVP_Tema1_WPF
         public void Reset(int size = 0)
         {
             this.size = size;
+            this.correct = 0;
             this.IndexList.Clear();
             this.Index = 0;
             this.ResultsList.Clear();
@@ -54,11 +56,17 @@ namespace MVP_Tema1_WPF
             if (WordTextBox.Text.Equals(dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].WordText))
             {
                 ResultsList.Add("Correct");
+                ++correct;
             }
             else
             {
                 ResultsList.Add("Raspunsul correct: " + dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].WordText);
             }
+        }
+
+        public string GetOutOf()
+        {
+            return correct.ToString() + "/" + size.ToString();
         }
 
         private void SelectWords()

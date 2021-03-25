@@ -44,7 +44,7 @@
         </Grid>
         <Grid x:Name="ResultGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
             <StackPanel>
-                <TextBlock Text="Rezultatele dumneavoastra:" FontSize="48" Foreground="White" Margin="0,20"/>
+                <TextBlock x:Name="ResultsTextBlock" Text="Rezultatul dumneavoastra:" FontSize="48" Foreground="White" Margin="0,20"/>
                 <ListView x:Name="ResultsListView" Width="600" Height="470" Background="#666262" Foreground="White" FontSize="36"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,30">
                     <Button x:Name="ResultHomeButton" Uid="0" Content="Acasa" HorizontalAlignment="Center" Width="200" Height="50" Margin="20,0" FontSize="34" FontWeight="DemiBold" Click="HomeButton_Click" Template="{DynamicResource RoundedButtonTemplate}"/>
