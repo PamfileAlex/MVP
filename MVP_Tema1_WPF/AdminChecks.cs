@@ -9,10 +9,10 @@ namespace MVP_Tema1_WPF
 {
     public partial class AdminPage : Page
     {
-        private bool Check()
+        private bool Check(bool modify = false)
         {
             return CheckDictionary() && CheckAllNotEmpty() &&
-                !CheckWordExistence() && !CheckCategoryExistence();
+                !CheckWordExistence(modify) && !CheckCategoryExistence();
         }
 
         private bool CheckDictionary()
@@ -37,8 +37,9 @@ namespace MVP_Tema1_WPF
             return false;
         }
 
-        private bool CheckWordExistence()
+        private bool CheckWordExistence(bool modify = false)
         {
+            if (modify) { return false; }
             foreach (var category in this.mainWindow.Dictionary)
             {
                 if (category.Words.Exists(word => word.WordText.Equals(this.WordTextBox.Text)))

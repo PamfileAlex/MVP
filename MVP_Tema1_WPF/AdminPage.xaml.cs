@@ -27,6 +27,7 @@ namespace MVP_Tema1_WPF
         //private MainWindow mainWindow;
         public MainWindow mainWindow { get; }
         private AutoComplete autoComplete;
+        private bool modifyImage;
 
         public AdminPage(MainWindow window)
         {
@@ -36,6 +37,7 @@ namespace MVP_Tema1_WPF
                 this.AutoCompleteList, mainWindow.Dictionary, mainWindow.Indexes, AutoCompleteAction);
             this.CategoryComboBox.ItemsSource = mainWindow.Category;
             ModifyRemoveClearButtonsEnabled(false);
+            this.modifyImage = false;
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
@@ -48,10 +50,7 @@ namespace MVP_Tema1_WPF
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (!Check())
-            {
-                return;
-            }
+            if (!Check()) { return; }
             AddWord();
             Reset();
         }
@@ -59,10 +58,8 @@ namespace MVP_Tema1_WPF
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (!mainWindow.Indexes.Active || !Check())
-            {
-                return;
-            }
+            if (!mainWindow.Indexes.Active || !Check(true)) { return; }
+            modifyImage = true;
             AddWord();
             RemoveWord();
             Reset();
@@ -71,10 +68,7 @@ namespace MVP_Tema1_WPF
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             CommonEventAction();
-            if (!mainWindow.Indexes.Active)
-            {
-                return;
-            }
+            if (!mainWindow.Indexes.Active) { return; }
             RemoveWord();
             Reset();
         }
@@ -96,6 +90,7 @@ namespace MVP_Tema1_WPF
             if (op.ShowDialog() == true)
             {
                 WordImage.Source = new BitmapImage(new Uri(op.FileName));
+                //WordImage.Source = Utils.GetWordPhotoFromPath(op.FileName);
                 ClearPhotoButton.IsEnabled = true;
             }
         }
@@ -109,7 +104,7 @@ namespace MVP_Tema1_WPF
 
         private void CommonEventAction()
         {
-            ErrorText.Text = "";
+            ErrorText.Text = String.Empty;
             ClearButton.IsEnabled = true;
         }
 
@@ -124,7 +119,7 @@ namespace MVP_Tema1_WPF
             }
             else
             {
-                CategoryTextBox.Text = "";
+                CategoryTextBox.Text = String.Empty;
                 CategoryTextBox.Visibility = Visibility.Hidden;
                 CategoryComboBox.Visibility = Visibility.Visible;
             }
@@ -133,20 +128,14 @@ namespace MVP_Tema1_WPF
         private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             CommonEventAction();
-            if (autoComplete == null)
-            {
-                return;
-            }
+            if (autoComplete == null) { return; }
             autoComplete.AutoTextBox_TextChanged(sender, e);
         }
 
         private void AutoCompleteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CommonEventAction();
-            if (autoComplete == null)
-            {
-                return;
-            }
+            if (autoComplete == null) { return; }
             autoComplete.AutoList_SelectionChanged(sender, e);
         }
 
@@ -194,14 +183,36 @@ namespace MVP_Tema1_WPF
             if (WordImage.Source != null)
             {
                 string imagePath = WordImage.Source.ToString().Replace("file:///", "");
-                System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
+                WordImage.Source = null;
+                try
+                {
+                    System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    //System.Windows.Media.Imaging.BitmapImage
+                    if (!mainWindow.Indexes.Active)
+                    {
+                        return;
+                    }
+                    string previousWord = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].WordText;
+                    imagePath = Utils.GetPhotoPath(previousWord);
+                    System.IO.File.Copy(imagePath, "..\\..\\..\\Photos\\" + WordTextBox.Text + System.IO.Path.GetExtension(imagePath), true);
+                }
             }
         }
 
         private void RemoveWord()
         {
             WordImage.Source = null;
-            //File.Delete(GetPhotoPath(mainWindow.Dictionary[indexes.Item1].Words[indexes.Item2].WordText));
+            string wordText = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].WordText;
+            string path = Utils.GetPhotoPath(wordText);
+            if (path != null && (!modifyImage || !ClearPhotoButton.IsEnabled || !WordTextBox.Text.Equals(wordText)))
+            {
+                File.Delete(path);
+            }
+            modifyImage = false;
             mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words.RemoveAt(mainWindow.Indexes.WordIndex);
             if (mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words.Count == 0)
             {

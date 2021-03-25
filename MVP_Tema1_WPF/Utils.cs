@@ -10,7 +10,7 @@ namespace MVP_Tema1_WPF
 {
     public class Utils
     {
-        private static string GetPhotoPath(string photoName)
+        public static string GetPhotoPath(string photoName)
         {
             var files = Directory.GetFiles("..\\..\\..\\Photos\\", photoName + ".*");
             if (files.Length == 0)
@@ -25,7 +25,16 @@ namespace MVP_Tema1_WPF
             string path = Utils.GetPhotoPath(photoName);
             if (File.Exists(path))
             {
-                return new BitmapImage(new Uri(path));
+                var bi = new BitmapImage();
+                using (var fs = new FileStream(path, FileMode.Open))
+                {
+                    bi.BeginInit();
+                    bi.StreamSource = fs;
+                    bi.CacheOption = BitmapCacheOption.OnLoad;
+                    bi.EndInit();
+                }
+                bi.Freeze();
+                return bi;
             }
             return null;
         }
@@ -56,7 +65,7 @@ namespace MVP_Tema1_WPF
             {
                 return size;
             }
-            foreach(var category in dictionary)
+            foreach (var category in dictionary)
             {
                 size += category.Words.Count;
             }

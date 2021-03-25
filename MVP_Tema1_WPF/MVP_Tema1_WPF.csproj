@@ -58,7 +58,6 @@
     <Compile Include="AdminChecks.cs" />
     <Compile Include="AutoComplete.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="Checks.cs" />
     <Compile Include="EntertainmentPage.xaml.cs">
       <DependentUpon>EntertainmentPage.xaml</DependentUpon>
     </Compile>
