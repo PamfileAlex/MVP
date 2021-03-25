@@ -28,25 +28,16 @@ namespace MVP_Tema1_WPF
         public EntertainmentPage(MainWindow window)
         {
             InitializeComponent();
-            this.mainWindow = window;
-            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup,
-                this.AutoCompleteList, mainWindow.Dictionary, mainWindow.Indexes, AutoCompleteAction);
+            mainWindow = window;
+            autoComplete = new AutoComplete(WordTextBox, AutoCompletePopup,
+                AutoCompleteList, mainWindow.Dictionary, mainWindow.Indexes, AutoCompleteAction);
             game = new Game(mainWindow.Dictionary);
-            this.ResultsListView.ItemsSource = game.ResultsList;
+            ResultsListView.ItemsSource = game.ResultsList;
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            this.AutoCompleteCheckBox.IsChecked = false;
-            this.WordTextBox.Text = String.Empty;
-            game.Reset();
-            this.QuizButton.Content = "Next";
-            this.DescriptionTextBlock.Text = String.Empty;
-            this.WordImage.Source = null;
-            this.StartError.Text = String.Empty;
-            this.StartGrid.Visibility = Visibility.Visible;
-            this.GameGrid.Visibility = Visibility.Hidden;
-            this.ResultGrid.Visibility = Visibility.Hidden;
+            Reset();
             mainWindow.Content = mainWindow.mainPage;
         }
 
@@ -85,7 +76,7 @@ namespace MVP_Tema1_WPF
                 ResultGrid.Visibility = Visibility.Visible;
                 return;
             }
-            game.SetWord(this.DescriptionTextBlock, this.WordImage);
+            game.SetWord(DescriptionTextBlock, WordImage);
         }
 
         private void QuizSizeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -102,45 +93,50 @@ namespace MVP_Tema1_WPF
 
         private void AutoCompleteCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            if (this.AutoCompleteCheckBox.IsChecked ?? false)
+            if (AutoCompleteCheckBox.IsChecked ?? false)
             {
-                string aux = this.WordTextBox.Text;
-                this.WordTextBox.Text = string.Empty;
-                this.WordTextBox.Text = aux;
+                string aux = WordTextBox.Text;
+                WordTextBox.Text = string.Empty;
+                WordTextBox.Text = aux;
             }
         }
 
         private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.QuizButton.IsEnabled = false;
-            if (!(this.AutoCompleteCheckBox.IsChecked ?? false))
+            QuizButton.IsEnabled = false;
+            if (!(AutoCompleteCheckBox.IsChecked ?? false))
             {
-                this.QuizButton.IsEnabled = !String.IsNullOrEmpty(this.WordTextBox.Text);
+                QuizButton.IsEnabled = !String.IsNullOrEmpty(WordTextBox.Text);
                 return;
             }
-            if (autoComplete == null)
-            {
-                return;
-            }
+            if (autoComplete == null) { return; }
             autoComplete.AutoTextBox_TextChanged(sender, e);
         }
 
         private void AutoCompleteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (autoComplete == null)
-            {
-                return;
-            }
+            if (autoComplete == null) { return; }
             autoComplete.AutoList_SelectionChanged(sender, e);
         }
 
         private void AutoCompleteAction()
         {
-            if (!mainWindow.Indexes.Active)
-            {
-                return;
-            }
-            this.QuizButton.IsEnabled = true;
+            if (!mainWindow.Indexes.Active) { return; }
+            QuizButton.IsEnabled = true;
+        }
+
+        private void Reset()
+        {
+            AutoCompleteCheckBox.IsChecked = false;
+            WordTextBox.Text = String.Empty;
+            game.Reset();
+            QuizButton.Content = "Next";
+            DescriptionTextBlock.Text = String.Empty;
+            WordImage.Source = null;
+            StartError.Text = String.Empty;
+            StartGrid.Visibility = Visibility.Visible;
+            GameGrid.Visibility = Visibility.Hidden;
+            ResultGrid.Visibility = Visibility.Hidden;
         }
     }
 }

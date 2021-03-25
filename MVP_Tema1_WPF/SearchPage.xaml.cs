@@ -27,10 +27,10 @@ namespace MVP_Tema1_WPF
         public SearchPage(MainWindow window)
         {
             InitializeComponent();
-            this.mainWindow = window;
-            autoComplete = new AutoComplete(this.WordTextBox, this.AutoCompletePopup,
-                this.AutoCompleteList, mainWindow.Dictionary, mainWindow.Indexes, AutoCompleteAction);
-            this.CategoryComboBox.ItemsSource = mainWindow.Category;
+            mainWindow = window;
+            autoComplete = new AutoComplete(WordTextBox, AutoCompletePopup,
+                AutoCompleteList, mainWindow.Dictionary, mainWindow.Indexes, AutoCompleteAction);
+            CategoryComboBox.ItemsSource = mainWindow.Category;
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
@@ -41,10 +41,7 @@ namespace MVP_Tema1_WPF
 
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!mainWindow.Indexes.Active)
-            {
-                return;
-            }
+            if (!mainWindow.Indexes.Active) { return; }
             mainWindow.adminPage.AutoCompleteActionOutside();
             Reset();
             mainWindow.Content = mainWindow.adminPage;
@@ -57,39 +54,30 @@ namespace MVP_Tema1_WPF
 
         private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.ClearButton.IsEnabled = true;
+            ClearButton.IsEnabled = true;
         }
 
         private void WordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (autoComplete == null)
-            {
-                return;
-            }
+            if (autoComplete == null) { return; }
             autoComplete.AutoTextBox_TextChanged(sender, e, CategoryComboBox);
         }
 
         private void AutoCompleteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (autoComplete == null)
-            {
-                return;
-            }
+            if (autoComplete == null) { return; }
             autoComplete.AutoList_SelectionChanged(sender, e);
         }
 
         private void AutoCompleteAction()
         {
-            if (!mainWindow.Indexes.Active)
+            if (!mainWindow.Indexes.Active) { return; }
+            DescriptionTextBlock.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].Description;
+            CategoryTextBlock.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Title;
+            WordImage.Source = Utils.GetWordPhoto(WordTextBox.Text);
+            if (WordImage.Source == null)
             {
-                return;
-            }
-            this.DescriptionTextBlock.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Words[mainWindow.Indexes.WordIndex].Description;
-            this.CategoryTextBlock.Text = mainWindow.Dictionary[mainWindow.Indexes.CategoryIndex].Title;
-            this.WordImage.Source = Utils.GetWordPhoto(this.WordTextBox.Text);
-            if (this.WordImage.Source == null)
-            {
-                this.WordImage.Source = Utils.GetWordPhoto("noImageFound");
+                WordImage.Source = Utils.GetWordPhoto("noImageFound");
             }
             ClearButton.IsEnabled = true;
             ModifyButton.IsEnabled = true;
@@ -97,9 +85,9 @@ namespace MVP_Tema1_WPF
 
         private void Reset()
         {
-            WordTextBox.Text = "";
-            DescriptionTextBlock.Text = "";
-            CategoryTextBlock.Text = "";
+            WordTextBox.Text = String.Empty;
+            DescriptionTextBlock.Text = String.Empty;
+            CategoryTextBlock.Text = String.Empty;
             CategoryComboBox.SelectedIndex = -1;
             ClearButton.IsEnabled = false;
             ModifyButton.IsEnabled = false;

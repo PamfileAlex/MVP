@@ -13,10 +13,7 @@ namespace MVP_Tema1_WPF
         public static string GetPhotoPath(string photoName)
         {
             var files = Directory.GetFiles("..\\..\\..\\Photos\\", photoName + ".*");
-            if (files.Length == 0)
-            {
-                return null;
-            }
+            if (files.Length == 0) { return null; }
             return Environment.CurrentDirectory + "\\" + files[0];
         }
 
@@ -61,10 +58,7 @@ namespace MVP_Tema1_WPF
         public static int GetDictionarySize(List<Category> dictionary)
         {
             int size = 0;
-            if (dictionary == null)
-            {
-                return size;
-            }
+            if (dictionary == null) { return size; }
             foreach (var category in dictionary)
             {
                 size += category.Words.Count;

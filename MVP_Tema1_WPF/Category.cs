@@ -9,7 +9,7 @@ namespace MVP_Tema1_WPF
     public class Category
     {
         public string Title { get; set; }
-        public List<Word> Words { get; set; }
+        public List<Word> Words { get; }
 
         public Category()
         {

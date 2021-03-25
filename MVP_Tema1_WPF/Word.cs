@@ -8,12 +8,6 @@ namespace MVP_Tema1_WPF
 {
     public class Word
     {
-        /*private string wordText;
-        private string description;
-
-        public string WordText{ get { return wordText; } set { wordText = value; } }
-        public string Description{ get { return description; } set { description = value; } }*/
-
         public string WordText { get; set; }
         public string Description { get; set; }
 

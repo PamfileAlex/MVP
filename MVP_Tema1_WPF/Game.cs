@@ -39,18 +39,12 @@ namespace MVP_Tema1_WPF
 
         public void SetWord(TextBlock DescriptionTextBlock, Image WordImage)
         {
-            if (dictionary == null || IndexList.Count == 0)
-            {
-                return;
-            }
+            if (dictionary == null || IndexList.Count == 0) { return; }
             Random rand = new Random();
             if (rand.Next(2) == 0)
             {
                 WordImage.Source = Utils.GetWordPhoto(dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].WordText);
-                if (WordImage.Source != null)
-                {
-                    return;
-                }
+                if (WordImage.Source != null) { return; }
             }
             DescriptionTextBlock.Text = dictionary[IndexList[Index].CategoryIndex].Words[IndexList[Index].WordIndex].Description;
         }
@@ -89,7 +83,7 @@ namespace MVP_Tema1_WPF
                 do
                 {
                     randomCategoryIndex = rand.Next(dictionary.Count);
-                } while (dictionary[randomCategoryIndex].Words.Count > 0);
+                } while (dictionary[randomCategoryIndex].Words.Count <= 0);
                 int randomWordIndex = rand.Next(dictionary[randomCategoryIndex].Words.Count);
                 if (!IndexList.Exists(indexPair => indexPair.CategoryIndex == randomCategoryIndex && indexPair.WordIndex == randomWordIndex))
                 {
