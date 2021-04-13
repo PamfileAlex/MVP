@@ -1,0 +1,40 @@
+﻿<Page x:Class="MVP_Tema2_Checkers.Views.GamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MVP_Tema2_Checkers.Views"
+      xmlns:vm="clr-namespace:MVP_Tema2_Checkers.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="800"
+      Title="GamePage">
+
+    <Page.DataContext>
+        <vm:GameVM/>
+    </Page.DataContext>
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <!--<Image x:Name="BoardImage" Source="/MVP_Tema2_Checkers;component/Assets/Board_Checkers_x2.png" Stretch="Uniform"/>-->
+        <ItemsControl x:Name="BoardControl" ItemsSource="{Binding GameBoard}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ItemsControl ItemsSource="{Binding}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Background="{Binding TileColor}">
+                                    <!--<Image Source="{Binding BoardTileImage}"/>-->
+                                    <Image Source="{Binding PieceSet.PieceImage}" Width="60" Height="60" Margin="3"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Page>

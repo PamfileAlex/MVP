@@ -55,17 +55,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Models\Cell.cs" />
+    <Compile Include="Models\Piece.cs" />
+    <Compile Include="Utils\BoardGenerator.cs" />
+    <Compile Include="ViewModels\GameVM.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +103,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Black_King_Piece.png" />
+    <Resource Include="Assets\Black_Piece.png" />
+    <Resource Include="Assets\Board_Checkers.png" />
+    <Resource Include="Assets\White_King_Piece.png" />
+    <Resource Include="Assets\White_Piece.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
