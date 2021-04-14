@@ -11,12 +11,12 @@ namespace MVP_Tema2_Checkers.Utils
 {
     class GameLogic
     {
-        private ObservableCollection<ObservableCollection<Cell>> gameBoard;
+        private Game game;
         private Cell previousCell;
 
-        public GameLogic(ObservableCollection<ObservableCollection<Cell>> gameBoard)
+        public GameLogic(Game game)
         {
-            this.gameBoard = gameBoard;
+            this.game = game;
         }
 
         private bool CanExecute(Cell cell)
@@ -63,12 +63,12 @@ namespace MVP_Tema2_Checkers.Utils
             }
             if (cellDistance == 2)
             {
-                Cell cellInBetween = gameBoard[(previousCell.Row + cell.Row) / 2][(previousCell.Column + cell.Column) / 2];
+                Cell cellInBetween = game.GameBoard[(previousCell.Row + cell.Row) / 2][(previousCell.Column + cell.Column) / 2];
                 if (cellInBetween.PieceSet == null || previousCell.PieceSet.Color == cellInBetween.PieceSet.Color)
                 {
                     return false;
                 }
-                cellInBetween.PieceSet = null;
+                game.RemovePiece(cellInBetween);
             }
             return true;
         }

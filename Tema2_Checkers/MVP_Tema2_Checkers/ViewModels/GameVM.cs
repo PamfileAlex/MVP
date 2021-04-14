@@ -18,9 +18,9 @@ namespace MVP_Tema2_Checkers.ViewModels
 
         public GameVM()
         {
-            ObservableCollection<ObservableCollection<Cell>> gameBoard = BoardGenerator.NewGame();
-            gameLogic = new GameLogic(gameBoard);
-            GameBoard = CellBoardToCellVMBoard(gameBoard);
+            Game game = new Game(BoardGenerator.NewGame());
+            gameLogic = new GameLogic(game);
+            GameBoard = CellBoardToCellVMBoard(game.GameBoard);
         }
 
         private ObservableCollection<ObservableCollection<CellVM>> CellBoardToCellVMBoard(ObservableCollection<ObservableCollection<Cell>> gameBoard)
