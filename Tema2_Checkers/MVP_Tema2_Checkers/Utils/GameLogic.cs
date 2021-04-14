@@ -52,20 +52,32 @@ namespace MVP_Tema2_Checkers.Utils
 
         private bool CheckMove(Cell cell)
         {
-            if (cell.PieceSet != null)
+            int cellDistance = CheckCellPosition(cell);
+            if (cell.PieceSet != null || cellDistance == 0)
             {
                 return false;
             }
-            int color = previousCell.PieceSet.Color ? -1 : 1;
-            if (previousCell.Row + color != cell.Row)
+            if (previousCell.PieceSet.King ? false : (previousCell.PieceSet.Color ? previousCell.Row < cell.Row : previousCell.Row > cell.Row))
             {
                 return false;
             }
-            if (previousCell.Column - 1 == cell.Column || previousCell.Column + 1 == cell.Column)
+            if (cellDistance == 2)
             {
-                return true;
+                Cell cellInBetween = gameBoard[(previousCell.Row + cell.Row) / 2][(previousCell.Column + cell.Column) / 2];
+                if (cellInBetween.PieceSet == null || previousCell.PieceSet.Color == cellInBetween.PieceSet.Color)
+                {
+                    return false;
+                }
+                cellInBetween.PieceSet = null;
             }
-            return false;
+            return true;
+        }
+
+        private int CheckCellPosition(Cell cell)
+        {
+            int row = Math.Abs(previousCell.Row - cell.Row);
+            int column = Math.Abs(previousCell.Column - cell.Column);
+            return (row == column) && (row == 1 || row == 2) ? row : 0;
         }
     }
 }
