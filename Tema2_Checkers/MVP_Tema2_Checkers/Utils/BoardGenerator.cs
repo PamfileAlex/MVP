@@ -11,99 +11,31 @@ namespace MVP_Tema2_Checkers.Utils
 {
     static class BoardGenerator
     {
+        private static int SIZE = 8;
+        private static List<String> tiles = new List<string>() { Cell.LightTile, Cell.DarkTile };
         public static ObservableCollection<ObservableCollection<Cell>> NewGame()
         {
-            return new ObservableCollection<ObservableCollection<Cell>>()
+            ObservableCollection<ObservableCollection<Cell>> board = new ObservableCollection<ObservableCollection<Cell>>();
+            for (int row = 0; row < SIZE; ++row)
             {
-                new ObservableCollection<Cell>()
+                ObservableCollection<Cell> line = new ObservableCollection<Cell>();
+                for (int column = 0; column < SIZE; ++column)
                 {
-                    new Cell(0, 0, Cell.LightTile, null),
-                    new Cell(0, 1, Cell.DarkTile, new Piece(Piece.BlackPiece)),
-                    new Cell(0, 2, Cell.LightTile, null),
-                    new Cell(0, 3, Cell.DarkTile, new Piece(Piece.BlackPiece)),
-                    new Cell(0, 4, Cell.LightTile, null),
-                    new Cell(0, 5, Cell.DarkTile, new Piece(Piece.BlackPiece)),
-                    new Cell(0, 6, Cell.LightTile, null),
-                    new Cell(0, 7, Cell.DarkTile, new Piece(Piece.BlackPiece))
-                },
-                new ObservableCollection<Cell>()
-                {
-                    new Cell(1, 0, Cell.DarkTile, new Piece(Piece.BlackPiece)),
-                    new Cell(1, 1, Cell.LightTile, null),
-                    new Cell(1, 2, Cell.DarkTile, new Piece(Piece.BlackPiece)),
-                    new Cell(1, 3, Cell.LightTile, null),
-                    new Cell(1, 4, Cell.DarkTile, new Piece(Piece.BlackPiece)),
-                    new Cell(1, 5, Cell.LightTile, null),
-                    new Cell(1, 6, Cell.DarkTile, new Piece(Piece.BlackPiece)),
-                    new Cell(1, 7, Cell.LightTile, null)
-                },
-                new ObservableCollection<Cell>()
-                {
-                    new Cell(2, 0, Cell.LightTile, null),
-                    new Cell(2, 1, Cell.DarkTile, new Piece(Piece.BlackPiece)),
-                    new Cell(2, 2, Cell.LightTile, null),
-                    new Cell(2, 3, Cell.DarkTile, new Piece(Piece.BlackPiece)),
-                    new Cell(2, 4, Cell.LightTile, null),
-                    new Cell(2, 5, Cell.DarkTile, new Piece(Piece.BlackPiece)),
-                    new Cell(2, 6, Cell.LightTile, null),
-                    new Cell(2, 7, Cell.DarkTile, new Piece(Piece.BlackPiece))
-                },
-                new ObservableCollection<Cell>()
-                {
-                    new Cell(3, 0, Cell.DarkTile, null),
-                    new Cell(3, 1, Cell.LightTile, null),
-                    new Cell(3, 2, Cell.DarkTile, null),
-                    new Cell(3, 3, Cell.LightTile, null),
-                    new Cell(3, 4, Cell.DarkTile, null),
-                    new Cell(3, 5, Cell.LightTile, null),
-                    new Cell(3, 6, Cell.DarkTile, null),
-                    new Cell(3, 7, Cell.LightTile, null)
-                },
-                new ObservableCollection<Cell>()
-                {
-                    new Cell(4, 0, Cell.LightTile, null),
-                    new Cell(4, 1, Cell.DarkTile, null),
-                    new Cell(4, 2, Cell.LightTile, null),
-                    new Cell(4, 3, Cell.DarkTile, null),
-                    new Cell(4, 4, Cell.LightTile, null),
-                    new Cell(4, 5, Cell.DarkTile, null),
-                    new Cell(4, 6, Cell.LightTile, null),
-                    new Cell(4, 7, Cell.DarkTile, null)
-                },
-                new ObservableCollection<Cell>()
-                {
-                    new Cell(5, 0, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(5, 1, Cell.LightTile, null),
-                    new Cell(5, 2, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(5, 3, Cell.LightTile, null),
-                    new Cell(5, 4, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(5, 5, Cell.LightTile, null),
-                    new Cell(5, 6, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(5, 7, Cell.LightTile, null)
-                },
-                new ObservableCollection<Cell>()
-                {
-                    new Cell(6, 0, Cell.LightTile, null),
-                    new Cell(6, 1, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(6, 2, Cell.LightTile, null),
-                    new Cell(6, 3, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(6, 4, Cell.LightTile, null),
-                    new Cell(6, 5, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(6, 6, Cell.LightTile, null),
-                    new Cell(6, 7, Cell.DarkTile, new Piece(Piece.WhitePiece))
-                },
-                new ObservableCollection<Cell>()
-                {
-                    new Cell(7, 0, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(7, 1, Cell.LightTile, null),
-                    new Cell(7, 2, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(7, 3, Cell.LightTile, null),
-                    new Cell(7, 4, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(7, 5, Cell.LightTile, null),
-                    new Cell(7, 6, Cell.DarkTile, new Piece(Piece.WhitePiece)),
-                    new Cell(7, 7, Cell.LightTile, null)
-                },
-            };
+                    Piece piece = null;
+                    if (row < 3 && tiles[column % 2].Equals(Cell.DarkTile))
+                    {
+                        piece = new Piece(Piece.BlackPiece);
+                    }
+                    else if(row> 4 && tiles[column % 2].Equals(Cell.DarkTile))
+                    {
+                        piece = new Piece(Piece.WhitePiece);
+                    }
+                    line.Add(new Cell(row, column, tiles[column % 2], piece));
+                }
+                board.Add(line);
+                tiles.Reverse();
+            }
+            return board;
         }
     }
 }
