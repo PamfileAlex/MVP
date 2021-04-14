@@ -26,7 +26,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button Background="{Binding CellObj.TileColor}" Command="{Binding ClickCommand}" CommandParameter="{Binding CellObj}">
+                                <Button Background="{Binding CellObj.TileColor}" Command="{Binding MoveCommand}" CommandParameter="{Binding CellObj}">
                                     <Image Source="{Binding CellObj.PieceSet.PieceImage}" Width="60" Height="60" Margin="3"/>
                                 </Button>
                             </DataTemplate>

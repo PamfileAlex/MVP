@@ -22,5 +22,18 @@ namespace MVP_Tema2_Checkers.ViewModels
             this.CellObj = cell;
             this.gameLogic = gameLogic;
         }
+
+        private ICommand moveCommand;
+        public ICommand MoveCommand
+        {
+            get
+            {
+                if (moveCommand == null)
+                {
+                    moveCommand = new RelayCommand<Cell>(gameLogic.MovePiece);
+                }
+                return moveCommand;
+            }
+        }
     }
 }
