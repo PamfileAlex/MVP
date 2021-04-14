@@ -32,7 +32,12 @@ namespace MVP_Tema2_Checkers.Utils
             }
             if (previousCell == null || (cell.PieceSet != null ? (previousCell.PieceSet.Color == cell.PieceSet.Color) : false))
             {
+                if (previousCell != null)
+                {
+                    previousCell.Selected = false;
+                }
                 previousCell = cell;
+                previousCell.Selected = true;
                 return;
             }
             if (!CheckMove(cell))
@@ -41,6 +46,7 @@ namespace MVP_Tema2_Checkers.Utils
             }
             cell.PieceSet = previousCell.PieceSet;
             previousCell.PieceSet = null;
+            previousCell.Selected = false;
             previousCell = null;
         }
 

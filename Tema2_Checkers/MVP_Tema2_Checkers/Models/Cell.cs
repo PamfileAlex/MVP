@@ -53,12 +53,27 @@ namespace MVP_Tema2_Checkers.Models
             }
         }
 
+        private bool selected;
+        public bool Selected
+        {
+            get
+            {
+                return selected;
+            }
+            set
+            {
+                selected = value;
+                NotifyPropertyChanged("Selected");
+            }
+        }
+
         public Cell(int row, int column, TILE tileColor, Piece pieceSet)
         {
             this.Row = row;
             this.Column = column;
             this.tileColor = Convert.ToBoolean(tileColor);
             this.PieceSet = pieceSet;
+            this.Selected = false;
         }
     }
 }

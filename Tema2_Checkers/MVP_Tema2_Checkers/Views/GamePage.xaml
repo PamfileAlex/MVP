@@ -13,6 +13,10 @@
         <vm:GameVM/>
     </Page.DataContext>
 
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Page.Resources>
+
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <!--<Image x:Name="BoardImage" Source="/MVP_Tema2_Checkers;component/Assets/Board_Checkers_x2.png" Stretch="Uniform"/>-->
         <ItemsControl x:Name="BoardControl" ItemsSource="{Binding GameBoard}">
@@ -26,8 +30,11 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button Background="{Binding CellObj.TileColor}" Command="{Binding MoveCommand}" CommandParameter="{Binding CellObj}">
-                                    <Image Source="{Binding CellObj.PieceSet.PieceImage}" Width="60" Height="60" Margin="3"/>
+                                <Button Background="{Binding CellObj.TileColor}" Command="{Binding MoveCommand}" CommandParameter="{Binding CellObj}"  Width="70" Height="70">
+                                    <Grid>
+                                        <Image Source="{Binding CellObj.PieceSet.PieceImage}" Margin="3"/>
+                                        <Border BorderThickness="2" BorderBrush="#77ff00" Visibility="{Binding CellObj.Selected, Converter={StaticResource BoolToVis}}"/>
+                                    </Grid>
                                 </Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
