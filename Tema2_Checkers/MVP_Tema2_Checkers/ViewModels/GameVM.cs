@@ -12,12 +12,20 @@ namespace MVP_Tema2_Checkers.ViewModels
 {
     class GameVM
     {
-
+        private GameLogic gameLogic;
         public String Test { get; set; }
-        public ObservableCollection<ObservableCollection<Cell>> GameBoard { get; set; }
+        public ObservableCollection<ObservableCollection<CellVM>> GameBoard { get; set; }
+
         public GameVM()
         {
-            GameBoard = BoardGenerator.NewGame();
+            ObservableCollection<ObservableCollection<Cell>> gameBoard = BoardGenerator.NewGame();
+            gameLogic = new GameLogic(gameBoard);
+            GameBoard = CellBoardToCellVMBoard(gameBoard);
+        }
+
+        private ObservableCollection<ObservableCollection<CellVM>> CellBoardToCellVMBoard(ObservableCollection<ObservableCollection<Cell>> gameBoard)
+        {
+            return gameBoard.Select(row => row.Select(cell => new CellVM(cell, gameLogic)).ToObservableCollection()).ToObservableCollection();
         }
     }
 }

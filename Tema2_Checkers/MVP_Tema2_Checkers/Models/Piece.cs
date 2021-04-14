@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MVP_Tema2_Checkers.ViewModels;
+
 namespace MVP_Tema2_Checkers.Models
 {
-    class Piece
+    class Piece : BaseNotification
     {
         public static readonly String WhitePiece;
         public static readonly String BlackPiece;
         public static readonly String WhiteKingPiece;
         public static readonly String BlackKingPiece;
+
+        private String pieceImage;
 
         static Piece()
         {
@@ -21,7 +25,18 @@ namespace MVP_Tema2_Checkers.Models
             BlackKingPiece = "/MVP_Tema2_Checkers;component/Assets/Black_King_Piece.png";
         }
 
-        public String PieceImage { get; set; }
+        public String PieceImage
+        {
+            get
+            {
+                return pieceImage;
+            }
+            set
+            {
+                pieceImage = value;
+                NotifyPropertyChanged("PieceImage");
+            }
+        }
 
         public Piece(String pieceImage)
         {

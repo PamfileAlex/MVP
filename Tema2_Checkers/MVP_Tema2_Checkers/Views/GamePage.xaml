@@ -26,10 +26,9 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid Background="{Binding TileColor}">
-                                    <!--<Image Source="{Binding BoardTileImage}"/>-->
-                                    <Image Source="{Binding PieceSet.PieceImage}" Width="60" Height="60" Margin="3"/>
-                                </Grid>
+                                <Button Background="{Binding CellObj.TileColor}" Command="{Binding ClickCommand}" CommandParameter="{Binding CellObj}">
+                                    <Image Source="{Binding CellObj.PieceSet.PieceImage}" Width="60" Height="60" Margin="3"/>
+                                </Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
