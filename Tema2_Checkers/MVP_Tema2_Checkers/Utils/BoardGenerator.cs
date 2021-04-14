@@ -12,7 +12,7 @@ namespace MVP_Tema2_Checkers.Utils
     static class BoardGenerator
     {
         private static int SIZE = 8;
-        private static List<String> tiles = new List<string>() { Cell.LightTile, Cell.DarkTile };
+        private static List<Cell.TILE> tiles = new List<Cell.TILE>() { Cell.TILE.LIGHT, Cell.TILE.DARK };
         public static ObservableCollection<ObservableCollection<Cell>> NewGame()
         {
             ObservableCollection<ObservableCollection<Cell>> board = new ObservableCollection<ObservableCollection<Cell>>();
@@ -21,21 +21,29 @@ namespace MVP_Tema2_Checkers.Utils
                 ObservableCollection<Cell> line = new ObservableCollection<Cell>();
                 for (int column = 0; column < SIZE; ++column)
                 {
-                    Piece piece = null;
-                    if (row < 3 && tiles[column % 2].Equals(Cell.DarkTile))
-                    {
-                        piece = new Piece(Piece.BlackPiece);
-                    }
-                    else if(row> 4 && tiles[column % 2].Equals(Cell.DarkTile))
-                    {
-                        piece = new Piece(Piece.WhitePiece);
-                    }
-                    line.Add(new Cell(row, column, tiles[column % 2], piece));
+                    line.Add(new Cell(row, column, tiles[column % 2], GeneratePiece(row, column)));
                 }
                 board.Add(line);
                 tiles.Reverse();
             }
             return board;
+        }
+
+        private static Piece GeneratePiece(int row, int column)
+        {
+            if (tiles[column % 2] == Cell.TILE.LIGHT)
+            {
+                return null;
+            }
+            if (row < 3)
+            {
+                return new Piece(Piece.COLOR.BLACK);
+            }
+            else if (row > 4)
+            {
+                return new Piece(Piece.COLOR.WHITE);
+            }
+            return null;
         }
     }
 }

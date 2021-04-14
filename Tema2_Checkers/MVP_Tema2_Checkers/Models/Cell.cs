@@ -11,20 +11,35 @@ namespace MVP_Tema2_Checkers.Models
 {
     class Cell : BaseNotification
     {
-        public static readonly String LightTile;
-        public static readonly String DarkTile;
+        private static readonly String LIGHT_TILE;
+        private static readonly String DARK_TILE;
 
         static Cell()
         {
-            LightTile = "#ffce9e";
-            DarkTile = "#d18b47";
+            LIGHT_TILE = "#ffce9e";
+            DARK_TILE = "#d18b47";
         }
 
+        public enum TILE
+        {
+            DARK,
+            LIGHT
+        }
+
+        //true: LIGHT_TILE
+        //false: DARK_TILE
+        private bool tileColor;
         private Piece pieceSet;
 
         public int Row { get; }
         public int Column { get; }
-        public String TileColor { get; }
+        public String TileColor
+        {
+            get
+            {
+                return tileColor ? LIGHT_TILE : DARK_TILE;
+            }
+        }
         public Piece PieceSet
         {
             get
@@ -38,11 +53,11 @@ namespace MVP_Tema2_Checkers.Models
             }
         }
 
-        public Cell(int row, int column, String tileColor, Piece pieceSet)
+        public Cell(int row, int column, TILE tileColor, Piece pieceSet)
         {
             this.Row = row;
             this.Column = column;
-            this.TileColor = tileColor;
+            this.tileColor = Convert.ToBoolean(tileColor);
             this.PieceSet = pieceSet;
         }
     }

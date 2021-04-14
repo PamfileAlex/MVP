@@ -10,37 +10,53 @@ namespace MVP_Tema2_Checkers.Models
 {
     class Piece : BaseNotification
     {
-        public static readonly String WhitePiece;
-        public static readonly String BlackPiece;
-        public static readonly String WhiteKingPiece;
-        public static readonly String BlackKingPiece;
-
-        private String pieceImage;
+        private static readonly String WHITE_PIECE;
+        private static readonly String BLACK_PIECE;
+        private static readonly String WHITE_KING_PIECE;
+        private static readonly String BLACK_KING_PIECE;
 
         static Piece()
         {
-            WhitePiece = "/MVP_Tema2_Checkers;component/Assets/White_Piece.png";
-            BlackPiece = "/MVP_Tema2_Checkers;component/Assets/Black_Piece.png";
-            WhiteKingPiece = "/MVP_Tema2_Checkers;component/Assets/White_King_Piece.png";
-            BlackKingPiece = "/MVP_Tema2_Checkers;component/Assets/Black_King_Piece.png";
+            WHITE_PIECE = "/MVP_Tema2_Checkers;component/Assets/White_Piece.png";
+            BLACK_PIECE = "/MVP_Tema2_Checkers;component/Assets/Black_Piece.png";
+            WHITE_KING_PIECE = "/MVP_Tema2_Checkers;component/Assets/White_King_Piece.png";
+            BLACK_KING_PIECE = "/MVP_Tema2_Checkers;component/Assets/Black_King_Piece.png";
         }
 
+        public enum COLOR
+        {
+            BLACK,
+            WHITE
+        }
+
+        //true: WHITE
+        //false: BLACK
+        public bool Color { get; }
+        private bool king;
+        public bool King
+        {
+            get
+            {
+                return king;
+            }
+            set
+            {
+                king = value;
+                NotifyPropertyChanged("PieceImage");
+            }
+        }
         public String PieceImage
         {
             get
             {
-                return pieceImage;
-            }
-            set
-            {
-                pieceImage = value;
-                NotifyPropertyChanged("PieceImage");
+                return Color ? (King ? WHITE_KING_PIECE : WHITE_PIECE) : (King ? BLACK_KING_PIECE : BLACK_PIECE);
             }
         }
 
-        public Piece(String pieceImage)
+        public Piece(COLOR color)
         {
-            this.PieceImage = pieceImage;
+            this.Color = Convert.ToBoolean(color);
+            this.King = false;
         }
     }
 }
