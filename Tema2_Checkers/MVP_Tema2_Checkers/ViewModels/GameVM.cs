@@ -13,14 +13,14 @@ namespace MVP_Tema2_Checkers.ViewModels
     class GameVM
     {
         private GameLogic gameLogic;
-        public String Test { get; set; }
+        public Game GameInfo { get; set; }
         public ObservableCollection<ObservableCollection<CellVM>> GameBoard { get; set; }
 
         public GameVM()
         {
-            Game game = new Game(BoardGenerator.NewGame());
-            gameLogic = new GameLogic(game);
-            GameBoard = CellBoardToCellVMBoard(game.GameBoard);
+            this.GameInfo = new Game(BoardGenerator.NewGame());
+            this.gameLogic = new GameLogic(GameInfo);
+            this.GameBoard = CellBoardToCellVMBoard(GameInfo.GameBoard);
         }
 
         private ObservableCollection<ObservableCollection<CellVM>> CellBoardToCellVMBoard(ObservableCollection<ObservableCollection<Cell>> gameBoard)

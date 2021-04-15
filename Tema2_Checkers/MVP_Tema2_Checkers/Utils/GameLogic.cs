@@ -26,11 +26,11 @@ namespace MVP_Tema2_Checkers.Utils
 
         public void MovePiece(Cell cell)
         {
-            if (previousCell == cell || previousCell == null && cell.PieceSet == null)
+            if (previousCell == cell || (cell.PieceSet == null ? previousCell == null : cell.PieceSet.Color != game.Color))
             {
                 return;
             }
-            if (previousCell == null || (cell.PieceSet != null ? (previousCell.PieceSet.Color == cell.PieceSet.Color) : false))
+            if (previousCell == null)
             {
                 if (previousCell != null)
                 {
@@ -48,6 +48,7 @@ namespace MVP_Tema2_Checkers.Utils
             previousCell.PieceSet = null;
             previousCell.Selected = false;
             previousCell = null;
+            game.Color = !game.Color;
         }
 
         private bool CheckMove(Cell cell)

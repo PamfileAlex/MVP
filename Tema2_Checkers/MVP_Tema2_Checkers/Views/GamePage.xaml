@@ -16,31 +16,33 @@
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Page.Resources>
-
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <!--<Image x:Name="BoardImage" Source="/MVP_Tema2_Checkers;component/Assets/Board_Checkers_x2.png" Stretch="Uniform"/>-->
-        <ItemsControl x:Name="BoardControl" ItemsSource="{Binding GameBoard}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ItemsControl ItemsSource="{Binding}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Button Background="{Binding CellObj.TileColor}" Command="{Binding MoveCommand}" CommandParameter="{Binding CellObj}"  Width="70" Height="70">
-                                    <Grid>
-                                        <Image Source="{Binding CellObj.PieceSet.PieceImage}" Margin="3"/>
-                                        <Border BorderThickness="2" BorderBrush="#77ff00" Visibility="{Binding CellObj.Selected, Converter={StaticResource BoolToVis}}"/>
-                                    </Grid>
-                                </Button>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="{Binding GameInfo.Player}" Padding="0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold"/>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!--<Image x:Name="BoardImage" Source="/MVP_Tema2_Checkers;component/Assets/Board_Checkers_x2.png" Stretch="Uniform"/>-->
+            <ItemsControl x:Name="BoardControl" ItemsSource="{Binding GameBoard}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ItemsControl ItemsSource="{Binding}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Background="{Binding CellObj.TileColor}" Command="{Binding MoveCommand}" CommandParameter="{Binding CellObj}"  Width="70" Height="70">
+                                        <Grid>
+                                            <Image Source="{Binding CellObj.PieceSet.PieceImage}" Margin="3"/>
+                                            <Border BorderThickness="2" BorderBrush="#77ff00" Visibility="{Binding CellObj.Selected, Converter={StaticResource BoolToVis}}"/>
+                                        </Grid>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </StackPanel>
 </Page>
