@@ -29,6 +29,18 @@ namespace MVP_Tema2_Checkers.Utils
             return board;
         }
 
+        public static void ResetNewGame(ObservableCollection<ObservableCollection<Cell>> board)
+        {
+            for (int row = 0; row < SIZE; ++row)
+            {
+                for (int column = 0; column < SIZE; ++column)
+                {
+                    board[row][column].PieceSet = GeneratePiece(row, column);
+                }
+                tiles.Reverse();
+            }
+        }
+
         private static Piece GeneratePiece(int row, int column)
         {
             if (tiles[column % 2] == Cell.TILE.LIGHT)

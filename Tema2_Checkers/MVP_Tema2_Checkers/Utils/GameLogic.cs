@@ -30,7 +30,7 @@ namespace MVP_Tema2_Checkers.Utils
             {
                 return;
             }
-            if (previousCell == null)
+            if (previousCell == null || cell.PieceSet != null)
             {
                 if (previousCell != null)
                 {
@@ -49,6 +49,7 @@ namespace MVP_Tema2_Checkers.Utils
             previousCell.Selected = false;
             previousCell = null;
             game.Color = !game.Color;
+            game.CheckWin();
         }
 
         private bool CheckMove(Cell cell)

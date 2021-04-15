@@ -4,7 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
+using MVP_Tema2_Checkers.Utils;
 using MVP_Tema2_Checkers.ViewModels;
 
 namespace MVP_Tema2_Checkers.Models
@@ -48,6 +49,20 @@ namespace MVP_Tema2_Checkers.Models
         {
             _ = cell.PieceSet.Color ? --whitePieces : --blackPieces;
             cell.PieceSet = null;
+        }
+
+        public void CheckWin()
+        {
+            if (whitePieces == 0)
+            {
+                MessageBox.Show("A castigat jucatorul cu piese negre");
+                BoardGenerator.ResetNewGame(GameBoard);
+            }
+            else if (blackPieces == 0)
+            {
+                MessageBox.Show("A castigat jucatorul cu piese albe");
+                BoardGenerator.ResetNewGame(GameBoard);
+            }
         }
     }
 }
