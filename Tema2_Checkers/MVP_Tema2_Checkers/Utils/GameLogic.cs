@@ -14,11 +14,15 @@ namespace MVP_Tema2_Checkers.Utils
         private Game game;
         private Cell previousCell;
         private bool pieceTaken;
+        public bool MultipleJump { get; set; }
+        public bool IsRunning { get; set; }
 
         public GameLogic(Game game)
         {
             this.game = game;
             this.pieceTaken = false;
+            this.MultipleJump = false;
+            this.IsRunning = false;
         }
 
         private bool CanExecute(Cell cell)
@@ -38,6 +42,7 @@ namespace MVP_Tema2_Checkers.Utils
                 {
                     previousCell.Selected = false;
                 }
+                IsRunning = true;
                 previousCell = cell;
                 previousCell.Selected = true;
                 return;
@@ -52,7 +57,7 @@ namespace MVP_Tema2_Checkers.Utils
             previousCell = null;
             CheckAndTransformToKing(cell);
             game.CheckWin();
-            if (pieceTaken && CheckMultipleJump(cell))
+            if (MultipleJump && pieceTaken && CheckMultipleJump(cell))
             {
                 previousCell = cell;
                 previousCell.Selected = true;

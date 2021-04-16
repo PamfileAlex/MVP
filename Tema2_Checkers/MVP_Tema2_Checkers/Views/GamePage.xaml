@@ -24,7 +24,17 @@
         <StackPanel Grid.Column="0" HorizontalAlignment="Center">
             <TextBlock Text="{Binding GameVM.GameInfo.Player}" Padding="0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold" Foreground="LightGray"/>
             <Button Content="About" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding AboutPageCommand}"/>
+            <Button Content="Save" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding SaveCommand}"/>
+            <Button Content="Load" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding LoadCommand}"/>
             <Button Content="Exit" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding CloseWindowCommand}"/>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
+                <CheckBox Margin="0,5,10,5" Command="{Binding MultipleJumpCommand}">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="2" ScaleY="2" />
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+                <TextBlock Text="Multiple jump" FontSize="28" Foreground="LightGray"/>
+            </StackPanel>
         </StackPanel>
         <Grid Grid.Column="1" Margin="20" Background="#666262">
             <!--<TextBlock Text="{Binding GameInfo.Player}" Padding="0,0,0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold"/>-->

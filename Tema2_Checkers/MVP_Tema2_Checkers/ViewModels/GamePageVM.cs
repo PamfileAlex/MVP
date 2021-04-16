@@ -15,12 +15,26 @@ namespace MVP_Tema2_Checkers.ViewModels
         public GameVM GameVM { get; }
         public ICommand AboutPageCommand { get; }
         public ICommand CloseWindowCommand { get; }
+        public ICommand SaveCommand { get; }
+        public ICommand LoadCommand { get; }
+        public ICommand MultipleJumpCommand { get; }
 
         public GamePageVM()
         {
             GameVM = new GameVM();
             AboutPageCommand = new ButtonCommand(ViewNavigator.ChangeToAboutPage);
             CloseWindowCommand = new ButtonCommand(ViewNavigator.CloseWindow);
+            MultipleJumpCommand = new ButtonCommand(MultipleJumpAction, CanExecuteMJ);
+        }
+
+        private void MultipleJumpAction()
+        {
+            GameVM.MultipleJump = !GameVM.MultipleJump;
+        }
+
+        private bool CanExecuteMJ()
+        {
+            return !GameVM.IsRunning;
         }
     }
 }
