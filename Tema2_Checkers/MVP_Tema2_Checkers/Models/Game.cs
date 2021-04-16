@@ -34,7 +34,7 @@ namespace MVP_Tema2_Checkers.Models
         {
             get
             {
-                return Color ? "Jucatorul cu piese albe" : "Jucatorul cu piese negre";
+                return Color ? "Piese albe" : "Piese negre";
             }
         }
 

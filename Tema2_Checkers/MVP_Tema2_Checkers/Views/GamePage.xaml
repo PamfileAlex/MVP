@@ -6,43 +6,54 @@
       xmlns:local="clr-namespace:MVP_Tema2_Checkers.Views"
       xmlns:vm="clr-namespace:MVP_Tema2_Checkers.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="800"
-      Title="GamePage">
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="GamePage" Background="#4a4a4a">
 
     <Page.DataContext>
-        <vm:GameVM/>
+        <vm:GamePageVM/>
     </Page.DataContext>
 
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Page.Resources>
-    <StackPanel>
-        <TextBlock Text="{Binding GameInfo.Player}" Padding="0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold"/>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding GameVM.GameInfo.Player}" Padding="0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold" Foreground="LightGray"/>
+            <Button Content="About" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding AboutPageCommand}"/>
+            <Button Content="Exit" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding CloseWindowCommand}"/>
+        </StackPanel>
+        <Grid Grid.Column="1" Margin="20" Background="#666262">
+            <!--<TextBlock Text="{Binding GameInfo.Player}" Padding="0,0,0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold"/>-->
             <!--<Image x:Name="BoardImage" Source="/MVP_Tema2_Checkers;component/Assets/Board_Checkers_x2.png" Stretch="Uniform"/>-->
-            <ItemsControl x:Name="BoardControl" ItemsSource="{Binding GameBoard}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ItemsControl ItemsSource="{Binding}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Button Background="{Binding CellObj.TileColor}" Command="{Binding MoveCommand}" CommandParameter="{Binding CellObj}"  Width="70" Height="70">
-                                        <Grid>
-                                            <Image Source="{Binding CellObj.PieceSet.PieceImage}" Margin="3"/>
-                                            <Border BorderThickness="2" BorderBrush="#77ff00" Visibility="{Binding CellObj.Selected, Converter={StaticResource BoolToVis}}"/>
-                                        </Grid>
-                                    </Button>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <Border BorderThickness="10" BorderBrush="#775e3b" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ItemsControl x:Name="BoardControl" ItemsSource="{Binding GameVM.GameBoard}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Background="{Binding CellObj.TileColor}" Command="{Binding MoveCommand}" CommandParameter="{Binding CellObj}"  Width="80" Height="80">
+                                            <Grid>
+                                                <Image Source="{Binding CellObj.PieceSet.PieceImage}" Margin="3"/>
+                                                <Border BorderThickness="2" BorderBrush="#77ff00" Visibility="{Binding CellObj.Selected, Converter={StaticResource BoolToVis}}"/>
+                                            </Grid>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Border>
         </Grid>
-    </StackPanel>
+    </Grid>
 </Page>
