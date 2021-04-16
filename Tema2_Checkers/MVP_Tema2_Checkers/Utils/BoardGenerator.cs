@@ -11,7 +11,7 @@ namespace MVP_Tema2_Checkers.Utils
 {
     static class BoardGenerator
     {
-        private static int SIZE = 8;
+        public static int SIZE = 8;
         private static List<Cell.TILE> tiles = new List<Cell.TILE>() { Cell.TILE.LIGHT, Cell.TILE.DARK };
         public static ObservableCollection<ObservableCollection<Cell>> NewGame()
         {
