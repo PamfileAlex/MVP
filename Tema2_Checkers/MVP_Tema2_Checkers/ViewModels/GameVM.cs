@@ -15,7 +15,6 @@ namespace MVP_Tema2_Checkers.ViewModels
         private GameLogic gameLogic;
         public Game GameInfo { get; set; }
         public ObservableCollection<ObservableCollection<CellVM>> GameBoard { get; set; }
-        public bool IsRunning => gameLogic.IsRunning;
         public bool MultipleJump
         {
             get

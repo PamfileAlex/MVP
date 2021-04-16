@@ -17,6 +17,7 @@ namespace MVP_Tema2_Checkers.Models
         private int whitePieces;
         private int blackPieces;
         public ObservableCollection<ObservableCollection<Cell>> GameBoard { get; }
+        public bool IsRunning { get; set; }
         private bool color;
         public bool Color
         {
@@ -43,6 +44,7 @@ namespace MVP_Tema2_Checkers.Models
             this.GameBoard = gameBoard;
             this.whitePieces = this.blackPieces = PIECES;
             this.Color = true;
+            this.IsRunning = false;
         }
 
         public void RemovePiece(Cell cell)
@@ -56,12 +58,12 @@ namespace MVP_Tema2_Checkers.Models
             if (whitePieces == 0)
             {
                 MessageBox.Show("A castigat jucatorul cu piese negre");
-                BoardGenerator.ResetNewGame(GameBoard);
+                BoardGenerator.ResetNewGame(this);
             }
             else if (blackPieces == 0)
             {
                 MessageBox.Show("A castigat jucatorul cu piese albe");
-                BoardGenerator.ResetNewGame(GameBoard);
+                BoardGenerator.ResetNewGame(this);
             }
         }
     }

@@ -29,13 +29,16 @@ namespace MVP_Tema2_Checkers.Utils
             return board;
         }
 
-        public static void ResetNewGame(ObservableCollection<ObservableCollection<Cell>> board)
+        public static void ResetNewGame(Game game)
         {
+            game.IsRunning = false;
+            game.Color = true;
             for (int row = 0; row < SIZE; ++row)
             {
                 for (int column = 0; column < SIZE; ++column)
                 {
-                    board[row][column].PieceSet = GeneratePiece(row, column);
+                    game.GameBoard[row][column].PieceSet = GeneratePiece(row, column);
+                    game.GameBoard[row][column].Selected = false;
                 }
                 tiles.Reverse();
             }

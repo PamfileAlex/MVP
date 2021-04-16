@@ -56,7 +56,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\ButtonCommand.cs" />
-    <Compile Include="Utils\Serialization.cs" />
     <Compile Include="Utils\ViewNavigator.cs" />
     <Compile Include="ViewModels\AboutPageVM.cs" />
     <Compile Include="ViewModels\GamePageVM.cs" />

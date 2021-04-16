@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 using MVP_Tema2_Checkers.Commands;
+using MVP_Tema2_Checkers.Models;
 using MVP_Tema2_Checkers.Utils;
 
 namespace MVP_Tema2_Checkers.ViewModels
@@ -15,6 +17,7 @@ namespace MVP_Tema2_Checkers.ViewModels
         public GameVM GameVM { get; }
         public ICommand AboutPageCommand { get; }
         public ICommand CloseWindowCommand { get; }
+        public ICommand NewGameCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand LoadCommand { get; }
         public ICommand MultipleJumpCommand { get; }
@@ -25,6 +28,7 @@ namespace MVP_Tema2_Checkers.ViewModels
             AboutPageCommand = new ButtonCommand(ViewNavigator.ChangeToAboutPage);
             CloseWindowCommand = new ButtonCommand(ViewNavigator.CloseWindow);
             MultipleJumpCommand = new ButtonCommand(MultipleJumpAction, CanExecuteMJ);
+            NewGameCommand = new RelayCommand<Game>(BoardGenerator.ResetNewGame);
         }
 
         private void MultipleJumpAction()
@@ -34,7 +38,7 @@ namespace MVP_Tema2_Checkers.ViewModels
 
         private bool CanExecuteMJ()
         {
-            return !GameVM.IsRunning;
+            return !GameVM.GameInfo.IsRunning;
         }
     }
 }

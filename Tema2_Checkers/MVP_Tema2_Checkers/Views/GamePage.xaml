@@ -24,6 +24,7 @@
         <StackPanel Grid.Column="0" HorizontalAlignment="Center">
             <TextBlock Text="{Binding GameVM.GameInfo.Player}" Padding="0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold" Foreground="LightGray"/>
             <Button Content="About" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding AboutPageCommand}"/>
+            <Button Content="New Game" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding NewGameCommand}" CommandParameter="{Binding GameVM.GameInfo}"/>
             <Button Content="Save" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding SaveCommand}"/>
             <Button Content="Load" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding LoadCommand}"/>
             <Button Content="Exit" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding CloseWindowCommand}"/>

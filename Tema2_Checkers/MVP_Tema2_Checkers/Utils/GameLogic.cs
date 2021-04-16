@@ -15,14 +15,12 @@ namespace MVP_Tema2_Checkers.Utils
         private Cell previousCell;
         private bool pieceTaken;
         public bool MultipleJump { get; set; }
-        public bool IsRunning { get; set; }
 
         public GameLogic(Game game)
         {
             this.game = game;
             this.pieceTaken = false;
             this.MultipleJump = false;
-            this.IsRunning = false;
         }
 
         private bool CanExecute(Cell cell)
@@ -32,7 +30,7 @@ namespace MVP_Tema2_Checkers.Utils
 
         public void MovePiece(Cell cell)
         {
-            if (previousCell == cell || (cell.PieceSet == null ? previousCell == null : cell.PieceSet.Color != game.Color))
+            if (previousCell == cell || (cell.PieceSet == null ? previousCell == null : cell.PieceSet.Color != game.Color) || pieceTaken && !PossibleMultipleJumpCells().Contains(cell))
             {
                 return;
             }
@@ -42,7 +40,7 @@ namespace MVP_Tema2_Checkers.Utils
                 {
                     previousCell.Selected = false;
                 }
-                IsRunning = true;
+                game.IsRunning = true;
                 previousCell = cell;
                 previousCell.Selected = true;
                 return;
@@ -63,6 +61,7 @@ namespace MVP_Tema2_Checkers.Utils
                 previousCell.Selected = true;
                 return;
             }
+            pieceTaken = false;
             game.Color = !game.Color;
         }
 
@@ -140,6 +139,34 @@ namespace MVP_Tema2_Checkers.Utils
             Piece piece = game.GameBoard[(cell.Row + row) / 2][(cell.Column + column) / 2].PieceSet;
             //return game.GameBoard[row][column].PieceSet == null && piece != null ? cell.PieceSet.Color != piece.Color : false;
             return game.GameBoard[row][column].PieceSet == null && piece != null && cell.PieceSet.Color != piece.Color;
+        }
+
+        private List<Cell> PossibleMultipleJumpCells()
+        {
+            List<Cell> cellList = new List<Cell>();
+            if (previousCell.PieceSet.King || previousCell.PieceSet.Color)
+            {
+                if (CheckJump(previousCell, previousCell.Row - 2, previousCell.Column - 2))
+                {
+                    cellList.Add(game.GameBoard[previousCell.Row - 2][previousCell.Column - 2]);
+                }
+                if (CheckJump(previousCell, previousCell.Row - 2, previousCell.Column + 2))
+                {
+                    cellList.Add(game.GameBoard[previousCell.Row - 2][previousCell.Column + 2]);
+                }
+            }
+            if (previousCell.PieceSet.King || !previousCell.PieceSet.Color)
+            {
+                if (CheckJump(previousCell, previousCell.Row + 2, previousCell.Column - 2))
+                {
+                    cellList.Add(game.GameBoard[previousCell.Row + 2][previousCell.Column - 2]);
+                }
+                if (CheckJump(previousCell, previousCell.Row + 2, previousCell.Column + 2))
+                {
+                    cellList.Add(game.GameBoard[previousCell.Row + 2][previousCell.Column + 2]);
+                }
+            }
+            return cellList;
         }
     }
 }
