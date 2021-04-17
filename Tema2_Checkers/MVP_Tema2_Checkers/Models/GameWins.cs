@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,14 +35,36 @@ namespace MVP_Tema2_Checkers.Models
 
         private GameWins()
         {
-            this.WhiteWins = 0;
-            this.BlackWins = 0;
-            //Serialize
+            try
+            {
+                using (TextReader reader = File.OpenText("../../../gameWins.txt"))
+                {
+                    string line = reader.ReadLine();
+                    string[] separated = line.Split(' ');
+                    this.WhiteWins = int.Parse(separated[0]);
+                    this.BlackWins = int.Parse(separated[1]);
+                }
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("Error reading GameWins from file");
+                Console.WriteLine(exc.Message);
+                this.WhiteWins = 0;
+                this.BlackWins = 0;
+            }
         }
 
         ~GameWins()
         {
-            //Desirialize
+            try
+            {
+                File.WriteAllText("../../../gameWins.txt", WhiteWins + " " + BlackWins);
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("Error writing GameWins to file");
+                Console.WriteLine(exc.Message);
+            }
         }
 
         public void AddWin(bool color)
