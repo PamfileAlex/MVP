@@ -54,7 +54,7 @@ namespace MVP_Tema2_Checkers.Utils
             previousCell.Selected = false;
             previousCell = null;
             CheckAndTransformToKing(cell);
-            game.CheckWin();
+            if (game.CheckWin()) { return; }
             if (MultipleJump && pieceTaken && CheckMultipleJump(cell))
             {
                 previousCell = cell;

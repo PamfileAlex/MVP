@@ -22,6 +22,8 @@
             <TextBlock Text="About Page" Padding="0,30,0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold" Foreground="LightGray"/>
             <Button Content="Game" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding GamePageCommand}"/>
             <Button Content="Exit" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding CloseWindowCommand}"/>
+            <TextBlock HorizontalAlignment="Center" Text="{Binding GameWins.WhiteWins, StringFormat=White wins: {0}}" FontSize="32" Foreground="{Binding Color}"/>
+            <TextBlock HorizontalAlignment="Center" Text="{Binding GameWins.BlackWins, StringFormat=Black wins: {0}}" FontSize="32" Foreground="{Binding Color}"/>
         </StackPanel>
         <Grid Grid.Column="1" Margin="20" Background="#666262">
             <StackPanel Margin="30">

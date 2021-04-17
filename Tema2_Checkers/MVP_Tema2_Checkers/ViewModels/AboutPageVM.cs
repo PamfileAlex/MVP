@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using MVP_Tema2_Checkers.Commands;
+using MVP_Tema2_Checkers.Models;
 using MVP_Tema2_Checkers.Utils;
 
 namespace MVP_Tema2_Checkers.ViewModels
@@ -14,6 +15,7 @@ namespace MVP_Tema2_Checkers.ViewModels
     {
         public ICommand GamePageCommand { get; }
         public ICommand CloseWindowCommand { get; }
+        public GameWins GameWins => GameWins.Instance;
 
         public AboutPageVM()
         {

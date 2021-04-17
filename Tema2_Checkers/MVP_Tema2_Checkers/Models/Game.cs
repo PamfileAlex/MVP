@@ -53,18 +53,23 @@ namespace MVP_Tema2_Checkers.Models
             cell.PieceSet = null;
         }
 
-        public void CheckWin()
+        public bool CheckWin()
         {
             if (whitePieces == 0)
             {
+                GameWins.Instance.AddWin(false);
                 MessageBox.Show("A castigat jucatorul cu piese negre");
                 BoardGenerator.ResetNewGame(this);
+                return true;
             }
             else if (blackPieces == 0)
             {
+                GameWins.Instance.AddWin(true);
                 MessageBox.Show("A castigat jucatorul cu piese albe");
                 BoardGenerator.ResetNewGame(this);
+                return true;
             }
+            return false;
         }
     }
 }
