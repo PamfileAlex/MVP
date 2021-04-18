@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+
 using MVP_Tema2_Checkers.Utils;
 using MVP_Tema2_Checkers.ViewModels;
 
 namespace MVP_Tema2_Checkers.Models
 {
-    class Game : BaseNotification
+    public class Game : BaseNotification
     {
         private static readonly int PIECES = 12;
 
@@ -18,6 +19,7 @@ namespace MVP_Tema2_Checkers.Models
         private int blackPieces;
         public ObservableCollection<ObservableCollection<Cell>> GameBoard { get; }
         public bool IsRunning { get; set; }
+        public bool MultipleJump { get; set; }
         private bool color;
         public bool Color
         {
@@ -38,13 +40,14 @@ namespace MVP_Tema2_Checkers.Models
                 return Color ? "Piese albe" : "Piese negre";
             }
         }
-
+        public Game() { }
         public Game(ObservableCollection<ObservableCollection<Cell>> gameBoard)
         {
             this.GameBoard = gameBoard;
             this.whitePieces = this.blackPieces = PIECES;
             this.Color = true;
             this.IsRunning = false;
+            this.MultipleJump = false;
         }
 
         public void RemovePiece(Cell cell)
@@ -53,7 +56,7 @@ namespace MVP_Tema2_Checkers.Models
             cell.PieceSet = null;
         }
 
-        public bool CheckWin()
+        public bool CheckForWin()
         {
             if (whitePieces == 0)
             {

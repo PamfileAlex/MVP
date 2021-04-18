@@ -11,7 +11,7 @@ using MVP_Tema2_Checkers.Commands;
 
 namespace MVP_Tema2_Checkers.ViewModels
 {
-    class CellVM : BaseNotification
+    class CellVM
     {
         private GameLogic gameLogic;
 

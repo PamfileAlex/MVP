@@ -8,7 +8,7 @@ using MVP_Tema2_Checkers.ViewModels;
 
 namespace MVP_Tema2_Checkers.Models
 {
-    class Piece : BaseNotification
+    public class Piece : BaseNotification
     {
         private static readonly String WHITE_PIECE;
         private static readonly String BLACK_PIECE;
@@ -53,6 +53,7 @@ namespace MVP_Tema2_Checkers.Models
             }
         }
 
+        public Piece() { }
         public Piece(COLOR color)
         {
             this.Color = Convert.ToBoolean(color);

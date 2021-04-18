@@ -7,18 +7,18 @@ using System.Windows.Input;
 
 namespace MVP_Tema2_Checkers.Commands
 {
-    class ButtonCommand : ICommand
+    class ActionCommand : ICommand
     {
-        private Action commandTask;
-        private Func<bool> canExecuteTask;
+        private readonly Action commandTask;
+        private readonly Func<bool> canExecuteTask;
 
-        public ButtonCommand(Action workToDo, Func<bool> canExecute)
+        public ActionCommand(Action workToDo, Func<bool> canExecute)
         {
             commandTask = workToDo;
             canExecuteTask = canExecute;
         }
 
-        public ButtonCommand(Action workToDo)
+        public ActionCommand(Action workToDo)
             : this(workToDo, DefaultCanExecute)
         {
             commandTask = workToDo;

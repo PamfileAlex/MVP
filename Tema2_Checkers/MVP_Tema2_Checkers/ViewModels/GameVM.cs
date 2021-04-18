@@ -15,17 +15,6 @@ namespace MVP_Tema2_Checkers.ViewModels
         private GameLogic gameLogic;
         public Game GameInfo { get; set; }
         public ObservableCollection<ObservableCollection<CellVM>> GameBoard { get; set; }
-        public bool MultipleJump
-        {
-            get
-            {
-                return gameLogic.MultipleJump;
-            }
-            set
-            {
-                gameLogic.MultipleJump = value;
-            }
-        }
 
         public GameVM()
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MVP_Tema2_Checkers.ViewModels
 {
-    class BaseNotification : INotifyPropertyChanged
+    public class BaseNotification : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propertyName)

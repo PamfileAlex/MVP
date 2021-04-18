@@ -9,7 +9,7 @@ using MVP_Tema2_Checkers.ViewModels;
 
 namespace MVP_Tema2_Checkers.Models
 {
-    class Cell : BaseNotification
+    public class Cell : BaseNotification
     {
         private static readonly String LIGHT_TILE;
         private static readonly String DARK_TILE;
@@ -28,7 +28,7 @@ namespace MVP_Tema2_Checkers.Models
 
         //true: LIGHT_TILE
         //false: DARK_TILE
-        private bool tileColor;
+        private readonly bool tileColor;
         private Piece pieceSet;
 
         public int Row { get; }
@@ -67,6 +67,7 @@ namespace MVP_Tema2_Checkers.Models
             }
         }
 
+        public Cell() { }
         public Cell(int row, int column, TILE tileColor, Piece pieceSet)
         {
             this.Row = row;

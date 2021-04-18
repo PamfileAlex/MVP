@@ -20,28 +20,29 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" HorizontalAlignment="Center">
             <TextBlock Text="About Page" Padding="0,30,0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold" Foreground="LightGray"/>
-            <Button Content="Game" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding GamePageCommand}"/>
-            <Button Content="Exit" Width="200" Height="60" Margin="10" FontSize="35" FontWeight="DemiBold" Style="{DynamicResource RoundButton}" Command="{Binding CloseWindowCommand}"/>
-            <TextBlock HorizontalAlignment="Center" Text="{Binding GameWins.WhiteWins, StringFormat=White wins: {0}}" FontSize="32" Foreground="{Binding Color}"/>
-            <TextBlock HorizontalAlignment="Center" Text="{Binding GameWins.BlackWins, StringFormat=Black wins: {0}}" FontSize="32" Foreground="{Binding Color}"/>
+            <Button Content="Game" Style="{DynamicResource MenuButton}" Command="{Binding GamePageCommand}"/>
+            <Button Content="Exit" Style="{DynamicResource MenuButton}" Command="{Binding CloseWindowCommand}"/>
+            <TextBlock HorizontalAlignment="Center" Text="{Binding GameWins.WhiteWins, StringFormat=White wins: {0}}" FontSize="32" Foreground="{Binding Foreground}"/>
+            <TextBlock HorizontalAlignment="Center" Text="{Binding GameWins.BlackWins, StringFormat=Black wins: {0}}" FontSize="32" Foreground="{Binding Foreground}"/>
         </StackPanel>
         <Grid Grid.Column="1" Margin="20" Background="#666262">
             <StackPanel Margin="30">
-                <StackPanel Orientation="Horizontal" Margin="0,10">
-                    <TextBlock Text="Programmer: " FontSize="{Binding Font}" Foreground="{Binding Color}"/>
-                    <TextBlock Text="{Binding Programmer}" FontSize="{Binding Font}" Foreground="{Binding Color}"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="Programmer: " FontSize="{Binding FontSize}" Foreground="{Binding Foreground}"/>
+                    <TextBlock Text="{Binding Programmer}" FontSize="{Binding FontSize}" Foreground="{Binding Foreground}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10">
-                    <TextBlock Text="Email: " FontSize="{Binding Font}" Foreground="{Binding Color}"/>
-                    <TextBlock Text="{Binding Email}" FontSize="{Binding Font}" Foreground="{Binding Color}"/>
+                    <TextBlock Text="Email: " FontSize="{Binding FontSize}" Foreground="{Binding Foreground}"/>
+                    <TextBlock Text="{Binding Email}" FontSize="{Binding FontSize}" Foreground="{Binding Foreground}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10">
-                    <TextBlock Text="Group: " FontSize="{Binding Font}" Foreground="{Binding Color}"/>
-                    <TextBlock Text="{Binding Group}" FontSize="{Binding Font}" Foreground="{Binding Color}"/>
+                    <TextBlock Text="Group: " FontSize="{Binding FontSize}" Foreground="{Binding Foreground}"/>
+                    <TextBlock Text="{Binding Group}" FontSize="{Binding FontSize}" Foreground="{Binding Foreground}"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10">
-                    <TextBlock Text="Description: " FontSize="{Binding Font}" Foreground="{Binding Color}"/>
-                    <TextBlock Text="{Binding Description}" FontSize="30" Width="560" TextWrapping="Wrap" Foreground="{Binding Color}"/>
+                <StackPanel HorizontalAlignment="Stretch" Margin="0,20">
+                    <TextBlock Text="Description" HorizontalAlignment="Center" FontSize="{Binding FontSize}" Foreground="{Binding Foreground}"/>
+                    <Border BorderThickness="2" BorderBrush="{Binding Foreground}" Margin="5"/>
+                    <TextBlock Text="{Binding Description}" FontSize="25" TextWrapping="Wrap" Foreground="{Binding Foreground}"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
