@@ -11,7 +11,7 @@ namespace MVP_Tema2_Checkers.Utils
 {
     class GameLogic
     {
-        private Game game;
+        private readonly Game game;
         private Cell previousCell;
         private bool pieceTaken;
 
@@ -21,14 +21,14 @@ namespace MVP_Tema2_Checkers.Utils
             this.pieceTaken = false;
         }
 
-        private bool CanExecute(Cell cell)
-        {
-            return cell != null;
-        }
-
         public void MovePiece(Cell cell)
         {
-            if (previousCell == cell || (cell.PieceSet == null ? previousCell == null : cell.PieceSet.Color != game.Color) || pieceTaken && !PossibleMultipleJumpCells().Contains(cell))
+            if (previousCell == cell)
+            {
+                previousCell.Selected = true;
+                return;
+            }
+            if ((cell.PieceSet == null ? previousCell == null : cell.PieceSet.Color != game.Color) || pieceTaken && !PossibleMultipleJumpCells().Contains(cell))
             {
                 return;
             }

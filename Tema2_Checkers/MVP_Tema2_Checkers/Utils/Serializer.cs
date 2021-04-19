@@ -23,16 +23,7 @@ namespace MVP_Tema2_Checkers.Utils
             }
         }
 
-        public static void Desirialize(Game game)
-        {
-            using (var stream = System.IO.File.OpenRead("..\\..\\..\\game.xml"))
-            {
-                var serializer = new XmlSerializer(typeof(Game));
-                game.Copy(serializer.Deserialize(stream) as Game);
-            }
-        }
-
-        public static Game Desirializer()
+        public static Game Desirialize()
         {
             String file = OpenFile();
             if (String.IsNullOrEmpty(file)) { return null; }

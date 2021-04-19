@@ -49,6 +49,7 @@ namespace MVP_Tema2_Checkers.Models
                 return Color ? "Piese albe" : "Piese negre";
             }
         }
+
         public Game()
         {
             GameBoard = BoardGenerator.NewGame(true);
@@ -100,7 +101,7 @@ namespace MVP_Tema2_Checkers.Models
             IsRunning = bool.Parse(reader.GetAttribute("IsRunning"));
             MultipleJump = bool.Parse(reader.GetAttribute("MultipleJump"));
             Color = bool.Parse(reader.GetAttribute("Color"));
-            while (reader.ReadToFollowing("CellPiece"))
+            while (reader.ReadToFollowing("Piece"))
             {
                 int row = int.Parse(reader.GetAttribute("Row"));
                 int column = int.Parse(reader.GetAttribute("Column"));
@@ -123,7 +124,7 @@ namespace MVP_Tema2_Checkers.Models
                 foreach (var cell in line)
                 {
                     if (cell.PieceSet == null) { continue; }
-                    writer.WriteStartElement("CellPiece");
+                    writer.WriteStartElement("Piece");
                     writer.WriteAttributeString("Row", cell.Row.ToString());
                     writer.WriteAttributeString("Column", cell.Column.ToString());
                     writer.WriteAttributeString("Color", cell.PieceSet.Color.ToString());
@@ -132,20 +133,6 @@ namespace MVP_Tema2_Checkers.Models
                 }
             }
             writer.WriteEndElement();
-        }
-
-        public void Copy(Game game)
-        {
-            this.IsRunning = game.IsRunning;
-            this.MultipleJump = game.MultipleJump;
-            this.Color = game.Color;
-            for (int row = 0; row < BoardGenerator.SIZE; ++row)
-            {
-                for (int column = 0; column < BoardGenerator.SIZE; ++column)
-                {
-                    this.GameBoard[row][column].PieceSet = game.GameBoard[row][column].PieceSet;
-                }
-            }
         }
     }
 }

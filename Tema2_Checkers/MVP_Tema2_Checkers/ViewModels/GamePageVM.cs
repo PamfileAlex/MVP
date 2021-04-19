@@ -30,7 +30,6 @@ namespace MVP_Tema2_Checkers.ViewModels
             MultipleJumpCommand = new ActionCommand(MultipleJumpAction, CanExecuteMJ);
             NewGameCommand = new RelayCommand<Game>(BoardGenerator.ResetNewGameAction);
             SaveCommand = new RelayCommand<Game>(Serializer.Serialize);
-            LoadCommand = new RelayCommand<Game>(Serializer.Desirialize);
             LoadCommand = new ActionCommand(LoadAction);
         }
 
@@ -46,7 +45,7 @@ namespace MVP_Tema2_Checkers.ViewModels
 
         private void LoadAction()
         {
-            GameVM.Init(Serializer.Desirializer());
+            GameVM.Init(Serializer.Desirialize());
         }
     }
 }
