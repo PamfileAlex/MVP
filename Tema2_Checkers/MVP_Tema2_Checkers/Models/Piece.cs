@@ -53,7 +53,6 @@ namespace MVP_Tema2_Checkers.Models
             }
         }
 
-        public Piece() { }
         public Piece(COLOR color)
         {
             this.Color = Convert.ToBoolean(color);

@@ -67,7 +67,6 @@ namespace MVP_Tema2_Checkers.Models
             }
         }
 
-        public Cell() { }
         public Cell(int row, int column, TILE tileColor, Piece pieceSet)
         {
             this.Row = row;

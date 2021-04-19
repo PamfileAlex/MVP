@@ -23,14 +23,14 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-            <TextBlock Text="{Binding GameVM.GameInfo.Player}" Padding="0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold" Foreground="LightGray"/>
+            <TextBlock Text="{Binding GameVM.Game.Player}" Padding="0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold" Foreground="LightGray"/>
             <Button Content="About" Style="{DynamicResource MenuButton}" Command="{Binding AboutPageCommand}"/>
-            <Button Content="New Game" Style="{DynamicResource MenuButton}" Command="{Binding NewGameCommand}" CommandParameter="{Binding GameVM.GameInfo}"/>
-            <Button Content="Save" Style="{DynamicResource MenuButton}" Command="{Binding SaveCommand}" CommandParameter="{Binding GameVM.GameInfo}"/>
-            <Button Content="Load" Style="{DynamicResource MenuButton}" Command="{Binding LoadCommand}"/>
+            <Button Content="New Game" Style="{DynamicResource MenuButton}" Command="{Binding NewGameCommand}" CommandParameter="{Binding GameVM.Game}"/>
+            <Button Content="Save" Style="{DynamicResource MenuButton}" Command="{Binding SaveCommand}" CommandParameter="{Binding GameVM.Game}"/>
+            <Button Content="Load" Style="{DynamicResource MenuButton}" Command="{Binding LoadCommand}" CommandParameter="{Binding GameVM.Game}"/>
             <Button Content="Exit" Style="{DynamicResource MenuButton}" Command="{Binding CloseWindowCommand}"/>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
-                <CheckBox Margin="0,5,10,5" Command="{Binding MultipleJumpCommand}">
+                <CheckBox Margin="0,5,10,5" IsChecked="{Binding GameVM.Game.MultipleJump}" Command="{Binding MultipleJumpCommand}">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="2" ScaleY="2" />
                     </CheckBox.LayoutTransform>

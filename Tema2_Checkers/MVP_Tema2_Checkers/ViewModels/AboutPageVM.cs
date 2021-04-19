@@ -15,7 +15,7 @@ namespace MVP_Tema2_Checkers.ViewModels
     {
         public ICommand GamePageCommand { get; }
         public ICommand CloseWindowCommand { get; }
-        public GameWins GameWins => GameWins.Instance;
+        public GameInfo GameWins => GameInfo.Instance;
 
         public AboutPageVM()
         {

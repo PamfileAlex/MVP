@@ -28,17 +28,25 @@ namespace MVP_Tema2_Checkers.ViewModels
             AboutPageCommand = new ActionCommand(ViewNavigator.ChangeToAboutPage);
             CloseWindowCommand = new ActionCommand(ViewNavigator.CloseWindow);
             MultipleJumpCommand = new ActionCommand(MultipleJumpAction, CanExecuteMJ);
-            NewGameCommand = new RelayCommand<Game>(BoardGenerator.ResetNewGame);
+            NewGameCommand = new RelayCommand<Game>(BoardGenerator.ResetNewGameAction);
+            SaveCommand = new RelayCommand<Game>(Serializer.Serialize);
+            LoadCommand = new RelayCommand<Game>(Serializer.Desirialize);
+            LoadCommand = new ActionCommand(LoadAction);
         }
 
         private void MultipleJumpAction()
         {
-            GameVM.GameInfo.MultipleJump = !GameVM.GameInfo.MultipleJump;
+            //GameVM.GameInfo.MultipleJump = !GameVM.GameInfo.MultipleJump;
         }
 
         private bool CanExecuteMJ()
         {
-            return !GameVM.GameInfo.IsRunning;
+            return !GameVM.Game.IsRunning;
+        }
+
+        private void LoadAction()
+        {
+            GameVM.Init(Serializer.Desirializer());
         }
     }
 }

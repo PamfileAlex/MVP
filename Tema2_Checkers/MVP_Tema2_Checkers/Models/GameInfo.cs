@@ -9,7 +9,7 @@ using MVP_Tema2_Checkers.ViewModels;
 
 namespace MVP_Tema2_Checkers.Models
 {
-    sealed class GameWins : BaseNotification
+    sealed class GameInfo : BaseNotification
     {
         private int whiteWins;
         private int blackWins;
@@ -31,38 +31,41 @@ namespace MVP_Tema2_Checkers.Models
                 NotifyPropertyChanged("BlackWins");
             }
         }
-        public static GameWins Instance { get; } = new GameWins();
+        public int Games { get; set; }
+        public static GameInfo Instance { get; } = new GameInfo();
 
-        private GameWins()
+        private GameInfo()
         {
             try
             {
-                using (TextReader reader = File.OpenText("../../../gameWins.txt"))
+                using (TextReader reader = File.OpenText("../../../gameInfo.txt"))
                 {
                     string line = reader.ReadLine();
                     string[] separated = line.Split(' ');
                     this.WhiteWins = int.Parse(separated[0]);
                     this.BlackWins = int.Parse(separated[1]);
+                    this.Games = int.Parse(separated[2]);
                 }
             }
             catch (Exception exc)
             {
-                Console.WriteLine("Error reading GameWins from file");
+                Console.WriteLine("Error reading GameInfo from file");
                 Console.WriteLine(exc.Message);
                 this.WhiteWins = 0;
                 this.BlackWins = 0;
+                this.Games = 0;
             }
         }
 
-        ~GameWins()
+        ~GameInfo()
         {
             try
             {
-                File.WriteAllText("../../../gameWins.txt", WhiteWins + " " + BlackWins);
+                File.WriteAllText("../../../gameInfo.txt", WhiteWins + " " + BlackWins + " " + Games);
             }
             catch (Exception exc)
             {
-                Console.WriteLine("Error writing GameWins to file");
+                Console.WriteLine("Error writing GameInfo to file");
                 Console.WriteLine(exc.Message);
             }
         }

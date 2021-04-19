@@ -56,7 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\ActionCommand.cs" />
-    <Compile Include="Models\GameWins.cs" />
+    <Compile Include="Models\GameInfo.cs" />
     <Compile Include="Utils\Serializer.cs" />
     <Compile Include="Utils\ViewNavigator.cs" />
     <Compile Include="ViewModels\AboutPageVM.cs" />

@@ -10,22 +10,46 @@ using MVP_Tema2_Checkers.Utils;
 
 namespace MVP_Tema2_Checkers.ViewModels
 {
-    class GameVM
+    class GameVM : BaseNotification
     {
         private GameLogic gameLogic;
-        public Game GameInfo { get; set; }
-        public ObservableCollection<ObservableCollection<CellVM>> GameBoard { get; set; }
+        private Game game;
+        public Game Game
+        {
+            get { return game; }
+            set
+            {
+                game = value;
+                NotifyPropertyChanged("GameInfo");
+            }
+        }
+        private ObservableCollection<ObservableCollection<CellVM>> gameBoard;
+        public ObservableCollection<ObservableCollection<CellVM>> GameBoard
+        {
+            get { return gameBoard; }
+            set
+            {
+                gameBoard = value;
+                NotifyPropertyChanged("GameBoard");
+            }
+        }
 
         public GameVM()
         {
-            this.GameInfo = new Game(BoardGenerator.NewGame());
-            this.gameLogic = new GameLogic(GameInfo);
-            this.GameBoard = CellBoardToCellVMBoard(GameInfo.GameBoard);
+            Init(new Game(BoardGenerator.NewGame()));
         }
 
         private ObservableCollection<ObservableCollection<CellVM>> CellBoardToCellVMBoard(ObservableCollection<ObservableCollection<Cell>> gameBoard)
         {
             return gameBoard.Select(row => row.Select(cell => new CellVM(cell, gameLogic)).ToObservableCollection()).ToObservableCollection();
+        }
+
+        public void Init(Game game)
+        {
+            if (game == null) { return; }
+            this.Game = game;
+            this.gameLogic = new GameLogic(Game);
+            this.GameBoard = CellBoardToCellVMBoard(Game.GameBoard);
         }
     }
 }
