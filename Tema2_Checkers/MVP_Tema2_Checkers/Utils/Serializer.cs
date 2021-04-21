@@ -17,10 +17,8 @@ namespace MVP_Tema2_Checkers.Utils
         {
             String file = SaveFile();
             if (String.IsNullOrEmpty(file)) { return; }
-            //using (StreamWriter myWriter = new StreamWriter("..\\..\\..\\Saves\\game_" + GameInfo.Instance.Games + ".xml", false))
             using (StreamWriter myWriter = new StreamWriter(file, false))
             {
-                ++GameInfo.Instance.Games;
                 XmlSerializer mySerializer = new XmlSerializer(typeof(Game));
                 mySerializer.Serialize(myWriter, game);
             }

@@ -41,7 +41,6 @@
             <TextBlock HorizontalAlignment="Center" Text="{Binding GameVM.Game.BlackPieces, StringFormat=Black pieces: {0}}" FontSize="28" Foreground="LightGray"/>
         </StackPanel>
         <Grid Grid.Column="1" Margin="20" Background="#666262">
-            <!--<TextBlock Text="{Binding GameInfo.Player}" Padding="0,0,0,20" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold"/>-->
             <!--<Image x:Name="BoardImage" Source="/MVP_Tema2_Checkers;component/Assets/Board_Checkers_x2.png" Stretch="Uniform"/>-->
             <Border BorderThickness="10" BorderBrush="#775e3b" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <ItemsControl x:Name="BoardControl" ItemsSource="{Binding GameVM.GameBoard}">

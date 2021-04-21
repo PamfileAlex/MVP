@@ -11,19 +11,21 @@ namespace MVP_Tema2_Checkers.Utils
     static class ViewNavigator
     {
         private static MainWindow mainWindow;
-        private static GamePage gamePage;
-        private static AboutPage aboutPage;
+        private static readonly GamePage gamePage;
+        private static readonly AboutPage aboutPage;
 
         static ViewNavigator()
         {
             gamePage = new GamePage();
             aboutPage = new AboutPage();
+            mainWindow = null;
         }
 
         public static MainWindow MainWindow
         {
             set
             {
+                //if (mainWindow != null) { return; }
                 mainWindow = value;
             }
         }

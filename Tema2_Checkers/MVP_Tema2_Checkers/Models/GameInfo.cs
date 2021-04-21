@@ -31,7 +31,6 @@ namespace MVP_Tema2_Checkers.Models
                 NotifyPropertyChanged("BlackWins");
             }
         }
-        public int Games { get; set; }
         public static GameInfo Instance { get; } = new GameInfo();
 
         static GameInfo() { }
@@ -45,7 +44,6 @@ namespace MVP_Tema2_Checkers.Models
                     string[] separated = line.Split(' ');
                     this.WhiteWins = int.Parse(separated[0]);
                     this.BlackWins = int.Parse(separated[1]);
-                    this.Games = int.Parse(separated[2]);
                 }
             }
             catch (Exception exc)
@@ -54,7 +52,6 @@ namespace MVP_Tema2_Checkers.Models
                 Console.WriteLine(exc.Message);
                 this.WhiteWins = 0;
                 this.BlackWins = 0;
-                this.Games = 0;
             }
         }
 
@@ -62,7 +59,7 @@ namespace MVP_Tema2_Checkers.Models
         {
             try
             {
-                File.WriteAllText("../../../gameInfo.txt", WhiteWins + " " + BlackWins + " " + Games);
+                File.WriteAllText("../../../gameInfo.txt", WhiteWins + " " + BlackWins);
             }
             catch (Exception exc)
             {

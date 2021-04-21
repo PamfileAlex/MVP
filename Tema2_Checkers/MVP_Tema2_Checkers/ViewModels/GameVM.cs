@@ -54,7 +54,7 @@ namespace MVP_Tema2_Checkers.ViewModels
             this.GameBoard = CellBoardToCellVMBoard(Game.GameBoard);
         }
 
-        public void Reset()
+        public void ResetGame()
         {
             BoardGenerator.ResetNewGame(game);
             game.Reset();

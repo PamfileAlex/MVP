@@ -29,12 +29,6 @@ namespace MVP_Tema2_Checkers.Utils
             return board;
         }
 
-        public static void ResetNewGameAction(Game game)
-        {
-            ResetNewGame(game);
-            game.Reset();
-        }
-
         public static void ResetNewGame(Game game, bool blank = false)
         {
             game.IsRunning = false;
