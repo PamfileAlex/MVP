@@ -48,7 +48,7 @@ namespace MVP_Tema2_Checkers.ViewModels
         {
             if (game == null) { return; }
             this.Game = game;
-            this.Game.Reset();
+            //this.Game.Reset();
             this.gameLogic = new GameLogic(Game);
             this.gameLogic.ResetPreviousCell();
             this.GameBoard = CellBoardToCellVMBoard(Game.GameBoard);

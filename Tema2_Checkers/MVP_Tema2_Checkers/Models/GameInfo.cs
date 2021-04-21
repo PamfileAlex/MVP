@@ -34,6 +34,7 @@ namespace MVP_Tema2_Checkers.Models
         public int Games { get; set; }
         public static GameInfo Instance { get; } = new GameInfo();
 
+        static GameInfo() { }
         private GameInfo()
         {
             try
@@ -72,14 +73,7 @@ namespace MVP_Tema2_Checkers.Models
 
         public void AddWin(bool color)
         {
-            if (color)
-            {
-                ++WhiteWins;
-            }
-            else
-            {
-                ++BlackWins;
-            }
+            _ = color ? ++WhiteWins : ++BlackWins;
         }
     }
 }

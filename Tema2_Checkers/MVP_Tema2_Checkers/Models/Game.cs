@@ -99,6 +99,7 @@ namespace MVP_Tema2_Checkers.Models
                 GameInfo.Instance.AddWin(false);
                 MessageBox.Show("A castigat jucatorul cu piese negre");
                 BoardGenerator.ResetNewGame(this);
+                this.Reset();
                 return true;
             }
             else if (BlackPieces == 0)
@@ -106,6 +107,7 @@ namespace MVP_Tema2_Checkers.Models
                 GameInfo.Instance.AddWin(true);
                 MessageBox.Show("A castigat jucatorul cu piese albe");
                 BoardGenerator.ResetNewGame(this);
+                this.Reset();
                 return true;
             }
             return false;
