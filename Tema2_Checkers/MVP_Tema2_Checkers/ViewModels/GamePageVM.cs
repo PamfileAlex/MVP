@@ -28,7 +28,8 @@ namespace MVP_Tema2_Checkers.ViewModels
             AboutPageCommand = new ActionCommand(ViewNavigator.ChangeToAboutPage);
             CloseWindowCommand = new ActionCommand(ViewNavigator.CloseWindow);
             MultipleJumpCommand = new ActionCommand(MultipleJumpAction, CanExecuteMJ);
-            NewGameCommand = new RelayCommand<Game>(BoardGenerator.ResetNewGameAction);
+            //NewGameCommand = new RelayCommand<Game>(BoardGenerator.ResetNewGameAction);
+            NewGameCommand = new ActionCommand(GameVM.Reset);
             SaveCommand = new RelayCommand<Game>(Serializer.Serialize);
             LoadCommand = new ActionCommand(LoadAction);
         }

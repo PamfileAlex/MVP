@@ -30,7 +30,7 @@ namespace MVP_Tema2_Checkers.ViewModels
             {
                 if (moveCommand == null)
                 {
-                    moveCommand = new RelayCommand<Cell>(gameLogic.MovePiece);
+                    moveCommand = new RelayCommand<Cell>(gameLogic.Move);
                 }
                 return moveCommand;
             }

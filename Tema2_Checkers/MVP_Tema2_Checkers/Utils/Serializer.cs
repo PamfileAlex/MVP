@@ -15,7 +15,10 @@ namespace MVP_Tema2_Checkers.Utils
     {
         public static void Serialize(Game game)
         {
-            using (StreamWriter myWriter = new StreamWriter("..\\..\\..\\Saves\\game_" + GameInfo.Instance.Games + ".xml", false))
+            String file = SaveFile();
+            if (String.IsNullOrEmpty(file)) { return; }
+            //using (StreamWriter myWriter = new StreamWriter("..\\..\\..\\Saves\\game_" + GameInfo.Instance.Games + ".xml", false))
+            using (StreamWriter myWriter = new StreamWriter(file, false))
             {
                 ++GameInfo.Instance.Games;
                 XmlSerializer mySerializer = new XmlSerializer(typeof(Game));
@@ -34,10 +37,22 @@ namespace MVP_Tema2_Checkers.Utils
             }
         }
 
+        private static String SaveFile()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Save game";
+            saveFileDialog.Filter = "XML Files (*.xml)|*.xml";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                return saveFileDialog.FileName;
+            }
+            return null;
+        }
+
         private static String OpenFile()
         {
             OpenFileDialog op = new OpenFileDialog();
-            //op.InitialDirectory = "..\\..\\..\\Saves\\";
+            //op.InitialDirectory = Environment.CurrentDirectory + "\\..\\..\\..\\Saves\\";
             op.Title = "Select save file";
             op.Filter = "XML Files (*.xml)|*.xml";
             if (op.ShowDialog() == true)

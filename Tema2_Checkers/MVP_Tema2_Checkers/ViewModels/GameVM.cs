@@ -20,7 +20,7 @@ namespace MVP_Tema2_Checkers.ViewModels
             set
             {
                 game = value;
-                NotifyPropertyChanged("GameInfo");
+                NotifyPropertyChanged("Game");
             }
         }
         private ObservableCollection<ObservableCollection<CellVM>> gameBoard;
@@ -48,8 +48,17 @@ namespace MVP_Tema2_Checkers.ViewModels
         {
             if (game == null) { return; }
             this.Game = game;
+            this.Game.Reset();
             this.gameLogic = new GameLogic(Game);
+            this.gameLogic.ResetPreviousCell();
             this.GameBoard = CellBoardToCellVMBoard(Game.GameBoard);
+        }
+
+        public void Reset()
+        {
+            BoardGenerator.ResetNewGame(game);
+            game.Reset();
+            gameLogic.ResetPreviousCell();
         }
     }
 }

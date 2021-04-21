@@ -19,7 +19,25 @@ namespace MVP_Tema2_Checkers.Models
         private static readonly int PIECES = 12;
 
         private int whitePieces;
+        public int WhitePieces
+        {
+            get { return whitePieces; }
+            private set
+            {
+                whitePieces = value;
+                NotifyPropertyChanged("WhitePieces");
+            }
+        }
         private int blackPieces;
+        public int BlackPieces
+        {
+            get { return blackPieces; }
+            private set
+            {
+                blackPieces = value;
+                NotifyPropertyChanged("BlackPieces");
+            }
+        }
         public ObservableCollection<ObservableCollection<Cell>> GameBoard { get; }
         public bool IsRunning { get; set; }
         private bool multipleJump;
@@ -57,7 +75,12 @@ namespace MVP_Tema2_Checkers.Models
         public Game(ObservableCollection<ObservableCollection<Cell>> gameBoard)
         {
             this.GameBoard = gameBoard;
-            this.whitePieces = this.blackPieces = PIECES;
+            Reset();
+        }
+
+        public void Reset()
+        {
+            this.WhitePieces = this.BlackPieces = PIECES;
             this.Color = true;
             this.IsRunning = false;
             this.MultipleJump = false;
@@ -65,20 +88,20 @@ namespace MVP_Tema2_Checkers.Models
 
         public void RemovePiece(Cell cell)
         {
-            _ = cell.PieceSet.Color ? --whitePieces : --blackPieces;
+            _ = cell.PieceSet.Color ? --WhitePieces : --BlackPieces;
             cell.PieceSet = null;
         }
 
         public bool CheckForWin()
         {
-            if (whitePieces == 0)
+            if (WhitePieces == 0)
             {
                 GameInfo.Instance.AddWin(false);
                 MessageBox.Show("A castigat jucatorul cu piese negre");
                 BoardGenerator.ResetNewGame(this);
                 return true;
             }
-            else if (blackPieces == 0)
+            else if (BlackPieces == 0)
             {
                 GameInfo.Instance.AddWin(true);
                 MessageBox.Show("A castigat jucatorul cu piese albe");
@@ -96,8 +119,8 @@ namespace MVP_Tema2_Checkers.Models
         public void ReadXml(XmlReader reader)
         {
             BoardGenerator.ResetNewGame(this, true);
-            whitePieces = int.Parse(reader.GetAttribute("whitePieces"));
-            blackPieces = int.Parse(reader.GetAttribute("blackPieces"));
+            WhitePieces = int.Parse(reader.GetAttribute("whitePieces"));
+            BlackPieces = int.Parse(reader.GetAttribute("blackPieces"));
             IsRunning = bool.Parse(reader.GetAttribute("IsRunning"));
             MultipleJump = bool.Parse(reader.GetAttribute("MultipleJump"));
             Color = bool.Parse(reader.GetAttribute("Color"));
@@ -113,8 +136,8 @@ namespace MVP_Tema2_Checkers.Models
 
         public void WriteXml(XmlWriter writer)
         {
-            writer.WriteAttributeString("whitePieces", whitePieces.ToString());
-            writer.WriteAttributeString("blackPieces", blackPieces.ToString());
+            writer.WriteAttributeString("whitePieces", WhitePieces.ToString());
+            writer.WriteAttributeString("blackPieces", BlackPieces.ToString());
             writer.WriteAttributeString("IsRunning", IsRunning.ToString());
             writer.WriteAttributeString("MultipleJump", MultipleJump.ToString());
             writer.WriteAttributeString("Color", Color.ToString());
