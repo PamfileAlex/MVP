@@ -14,12 +14,14 @@ namespace MVP_Tema2_Checkers.Utils
         private readonly Game game;
         private Cell previousCell;
         private bool pieceTaken;
+        private bool multipleJumpPossible;
         private List<Cell> cells = new List<Cell>();
 
         public GameLogic(Game game)
         {
             this.game = game;
             this.pieceTaken = false;
+            this.multipleJumpPossible = false;
             this.cells = new List<Cell>();
         }
 
@@ -31,7 +33,7 @@ namespace MVP_Tema2_Checkers.Utils
         public void Move(Cell cell)
         {
             if (previousCell == cell || previousCell == null && cell.PieceSet == null) { return; }
-            if (cell.PieceSet != null && cell.PieceSet.Color == game.Color && !CheckMultipleJump(previousCell))
+            if (cell.PieceSet != null && cell.PieceSet.Color == game.Color && !multipleJumpPossible)
             {
                 if (previousCell != null)
                 {
@@ -56,12 +58,14 @@ namespace MVP_Tema2_Checkers.Utils
             if (game.CheckForWin()) { return; }
             if (game.MultipleJump && pieceTaken && CheckMultipleJump(cell))
             {
+                multipleJumpPossible = true;
                 previousCell = cell;
                 previousCell.Selected = true;
                 PossibleMoves();
                 SetSelectedForCells(true);
                 return;
             }
+            multipleJumpPossible = false;
             pieceTaken = false;
             game.Color = !game.Color;
         }
