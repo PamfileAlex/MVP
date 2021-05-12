@@ -32,7 +32,7 @@ namespace MVP_Tema2_Checkers.Utils
 
         public void Move(Cell cell)
         {
-            if (previousCell == cell || previousCell == null && cell.PieceSet == null) { return; }
+            if (previousCell == cell || cell.PieceSet == null ? previousCell == null : cell.PieceSet.Color != game.Color) { return; }
             if (cell.PieceSet != null && cell.PieceSet.Color == game.Color && !multipleJumpPossible)
             {
                 if (previousCell != null)
