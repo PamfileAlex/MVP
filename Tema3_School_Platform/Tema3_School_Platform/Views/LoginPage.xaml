@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Tema3_School_Platform.Views"
       xmlns:vm="clr-namespace:Tema3_School_Platform.ViewModels"
+      xmlns:convert="clr-namespace:Tema3_School_Platform.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="860" d:DesignWidth="1440"
       Background="{StaticResource Background}"
@@ -13,12 +14,23 @@
     <Page.DataContext>
         <vm:LoginPageVM/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <convert:LoginConverter x:Key="LoginConverter"/>
+    </Page.Resources>
+
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Surface}">
         <TextBlock Text="Login" FontSize="90" FontWeight="Bold" Foreground="{StaticResource Text}" HorizontalAlignment="Center" Margin="0,0,0,30"/>
-        <TextBox Style="{StaticResource RoundedCorners}" Width="500" Height="60" FontSize="40" Margin="20,10" Text="{Binding Username}"/>
-        <PasswordBox Style="{StaticResource RoundedCorners}" Width="500" Height="60" FontSize="40" Margin="20,10"/>
-        <Button Style="{StaticResource RoundedCorners}" Width="200" Height="60" Content="Login" FontSize="35" FontWeight="Bold" Margin="20"
-                    Command="{Binding LoginCommand}"/>
+        <TextBox Name="Username" Style="{StaticResource RoundedCorners}" Width="500" Height="60" FontSize="40" Margin="20,10"/>
+        <TextBox Name="Password" Style="{StaticResource RoundedCorners}" Width="500" Height="60" FontSize="40" Margin="20,10"/>
+        <Button Style="{StaticResource RoundedCorners}" Width="200" Height="60" Content="Login" FontSize="35" FontWeight="Bold" Margin="20" Command="{Binding LoginCommand}">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource LoginConverter}">
+                    <Binding ElementName="Username" Path="Text"/>
+                    <Binding ElementName="Password" Path="Text"/>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
         <TextBlock Text="{Binding ErrorMessage}" FontSize="50" Foreground="Red"/>
     </StackPanel>
 </Page>

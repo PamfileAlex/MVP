@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Tema3_School_Platform.Commands;
+using Tema3_School_Platform.Models.BusinessLogicLayer;
 using Tema3_School_Platform.Utils;
 
 namespace Tema3_School_Platform.ViewModels
 {
     class LoginPageVM : BasePropertyChanged
     {
+        private UserBLL userBLL;
         private String errorMessage;
         public String ErrorMessage
         {
@@ -34,11 +36,24 @@ namespace Tema3_School_Platform.ViewModels
             }
         }
 
+        private String password;
+        public String Password
+        {
+            get { return password; }
+            set
+            {
+                password = value;
+                NotifyPropertyChanged("Password");
+            }
+        }
+
         public ICommand LoginCommand { get; }
 
         public LoginPageVM()
         {
-            LoginCommand = new ActionCommand(Login, CanLogin);
+            //LoginCommand = new ActionCommand(Login, CanLogin);
+            userBLL = new UserBLL();
+            LoginCommand = new RelayCommand<String[]>(userBLL.UserLogin);
         }
 
         private void Login()
