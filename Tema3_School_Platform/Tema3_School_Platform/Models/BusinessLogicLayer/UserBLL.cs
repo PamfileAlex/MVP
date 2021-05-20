@@ -58,5 +58,18 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             }
             Users.Add(userFromDB);
         }
+
+        public void ModifyUser(User user, int selectedIndex)
+        {
+            Users[selectedIndex] = user;
+            UserDAL.ModifyUser(user);
+        }
+
+        public void RemoveUser(User user)
+        {
+            if (!Users.Contains(user)) { return; }
+            Users.Remove(user);
+            UserDAL.RemoveUser(user);
+        }
     }
 }

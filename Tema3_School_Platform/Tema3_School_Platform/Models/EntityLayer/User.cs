@@ -10,7 +10,13 @@ namespace Tema3_School_Platform.Models.EntityLayer
 {
     class User : BasePropertyChanged
     {
+        public enum UserRole
+        {
+            None, Admin, Professor, Student
+        }
+
         public int ID { get; }
+
         private String firstName;
         public String FirstName
         {
@@ -21,6 +27,7 @@ namespace Tema3_School_Platform.Models.EntityLayer
                 NotifyPropertyChanged("FirstName");
             }
         }
+
         private String lastName;
         public String LastName
         {
@@ -31,6 +38,7 @@ namespace Tema3_School_Platform.Models.EntityLayer
                 NotifyPropertyChanged("LastName");
             }
         }
+
         private String email;
         public String Email
         {
@@ -41,6 +49,7 @@ namespace Tema3_School_Platform.Models.EntityLayer
                 NotifyPropertyChanged("Email");
             }
         }
+
         private String password;
         public String Password
         {
@@ -49,6 +58,17 @@ namespace Tema3_School_Platform.Models.EntityLayer
             {
                 password = value;
                 NotifyPropertyChanged("Password");
+            }
+        }
+
+        private UserRole role;
+        public UserRole Role
+        {
+            get { return role; }
+            set
+            {
+                role = value;
+                NotifyPropertyChanged("Role");
             }
         }
 

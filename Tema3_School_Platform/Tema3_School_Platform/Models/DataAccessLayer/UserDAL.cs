@@ -99,7 +99,16 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
             {
                 SqlCommand command = new SqlCommand("ModifyUser", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                //TO DO
+                command.Parameters.AddRange(new SqlParameter[]
+                {
+                    new SqlParameter("@id",user.ID),
+                    new SqlParameter("@firstName", user.FirstName),
+                    new SqlParameter("@lastName", user.LastName),
+                    new SqlParameter("@email", user.Email),
+                    new SqlParameter("@password", user.Password)
+                });
+                connection.Open();
+                command.ExecuteNonQuery();
             }
         }
 
