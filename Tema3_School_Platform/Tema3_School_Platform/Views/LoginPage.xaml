@@ -21,12 +21,12 @@
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Surface}">
         <TextBlock Text="Login" FontSize="90" FontWeight="Bold" Foreground="{StaticResource Text}" HorizontalAlignment="Center" Margin="0,0,0,30"/>
-        <TextBox Name="Username" Style="{StaticResource RoundedCorners}" Width="500" Height="60" FontSize="40" Margin="20,10"/>
+        <TextBox Name="Email" Style="{StaticResource RoundedCorners}" Width="500" Height="60" FontSize="40" Margin="20,10"/>
         <TextBox Name="Password" Style="{StaticResource RoundedCorners}" Width="500" Height="60" FontSize="40" Margin="20,10"/>
         <Button Style="{StaticResource RoundedCorners}" Width="200" Height="60" Content="Login" FontSize="35" FontWeight="Bold" Margin="20" Command="{Binding LoginCommand}">
             <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource LoginConverter}">
-                    <Binding ElementName="Username" Path="Text"/>
+                    <Binding ElementName="Email" Path="Text"/>
                     <Binding ElementName="Password" Path="Text"/>
                 </MultiBinding>
             </Button.CommandParameter>

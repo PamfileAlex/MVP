@@ -11,24 +11,24 @@ namespace Tema3_School_Platform.Models.EntityLayer
     class User : BasePropertyChanged
     {
         public int ID { get; }
-        private String name;
-        public String Name
+        private String firstName;
+        public String FirstName
         {
-            get { return name; }
+            get { return firstName; }
             set
             {
-                name = value;
-                NotifyPropertyChanged("Name");
+                firstName = value;
+                NotifyPropertyChanged("FirstName");
             }
         }
-        private String surname;
-        public String Surname
+        private String lastName;
+        public String LastName
         {
-            get { return surname; }
+            get { return lastName; }
             set
             {
-                surname = value;
-                NotifyPropertyChanged("Surname");
+                lastName = value;
+                NotifyPropertyChanged("LastName");
             }
         }
         private String email;
@@ -52,7 +52,23 @@ namespace Tema3_School_Platform.Models.EntityLayer
             }
         }
 
+        public static User CurrentUser { get; set; } = null;
+        public static User NullUser { get; } = new User(0);
         public User(int id)
+        {
+            this.ID = id;
+        }
+
+        public User(User other)
+        {
+            this.ID = other.ID;
+            this.FirstName = other.FirstName == null ? String.Empty : String.Copy(other.FirstName);
+            this.LastName = other.LastName == null ? String.Empty : String.Copy(other.LastName);
+            this.Email = other.Email == null ? String.Empty : String.Copy(other.Email);
+            this.Password = other.Password == null ? String.Empty : String.Copy(other.Password);
+        }
+
+        public User(int id, User other) : this(other)
         {
             this.ID = id;
         }

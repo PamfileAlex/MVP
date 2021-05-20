@@ -13,7 +13,6 @@ namespace Tema3_School_Platform.ViewModels
 {
     class LoginPageVM : BasePropertyChanged
     {
-        private UserBLL userBLL;
         private String errorMessage;
         public String ErrorMessage
         {
@@ -21,29 +20,7 @@ namespace Tema3_School_Platform.ViewModels
             set
             {
                 errorMessage = value;
-                NotifyPropertyChanged("Error");
-            }
-        }
-
-        private String username;
-        public String Username
-        {
-            get { return username; }
-            set
-            {
-                username = value;
-                NotifyPropertyChanged("Username");
-            }
-        }
-
-        private String password;
-        public String Password
-        {
-            get { return password; }
-            set
-            {
-                password = value;
-                NotifyPropertyChanged("Password");
+                NotifyPropertyChanged("ErrorMessage");
             }
         }
 
@@ -51,19 +28,7 @@ namespace Tema3_School_Platform.ViewModels
 
         public LoginPageVM()
         {
-            //LoginCommand = new ActionCommand(Login, CanLogin);
-            userBLL = new UserBLL();
-            LoginCommand = new RelayCommand<String[]>(userBLL.UserLogin);
-        }
-
-        private void Login()
-        {
-
-        }
-
-        private bool CanLogin()
-        {
-            return !String.IsNullOrEmpty(Username);
+            LoginCommand = new RelayCommand<String[]>(UserBLL.Instance.UserLogin);
         }
     }
 }
