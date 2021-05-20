@@ -40,55 +40,17 @@ namespace Tema3_School_Platform.ViewModels
             }
         }
 
-        private bool studentVisibility;
-        public bool StudentVisibility
-        {
-            get { return studentVisibility; }
-            set
-            {
-                studentVisibility = value;
-                NotifyPropertyChanged("StudentVisibility");
-            }
-        }
+        public List<User.UserRole> UserRoles { get; }
 
-        private bool teacherVisibility;
-        public bool TeacherVisibility
+        private User.UserRole userRole;
+        public User.UserRole UserRole
         {
-            get { return teacherVisibility; }
+            get { return userRole; }
             set
             {
-                teacherVisibility = value;
-                NotifyPropertyChanged("TeacherVisibility");
+                userRole = value;
+                NotifyPropertyChanged("UserRole");
             }
-        }
-
-        private int userType;
-        public int UserType
-        {
-            get { return userType; }
-            set
-            {
-                userType = value;
-                NotifyPropertyChanged("UserType");
-                switch (UserType)
-                {
-                    case 0:
-                        StudentVisibility = false;
-                        TeacherVisibility = true;
-                        break;
-                    case 1:
-                        StudentVisibility = true;
-                        TeacherVisibility = false;
-                        break;
-                    default:
-                        StudentVisibility = false;
-                        TeacherVisibility = false;
-                        break;
-                }
-            }
-            //BIND from Enum to ComboBox for role using something like this:
-            //Enum.GetValues(typeof(SomeEnum)).Cast<SomeEnum>();
-            //AND then bind SelectedItem to User
         }
 
         public ICommand AddCommand { get; }
@@ -100,6 +62,8 @@ namespace Tema3_School_Platform.ViewModels
         {
             this.User = User.NullUser;
             Clear();
+            UserRoles = Enum.GetValues(typeof(User.UserRole)).Cast<User.UserRole>().ToList();
+            UserRoles.Remove(User.UserRole.Admin);
             //this.AddCommand = new RelayCommand<User>(UserBLL.Instance.AddUser);
             this.AddCommand = new RelayCommand<User>(user => { UserBLL.Instance.AddUser(user); Clear(); });
             this.ModifyCommand = new RelayCommand<User>(user => { UserBLL.Instance.ModifyUser(user, DataGridSelectedIndex); Clear(); });
@@ -110,7 +74,7 @@ namespace Tema3_School_Platform.ViewModels
         public void Clear()
         {
             DataGridSelectedIndex = -1;
-            UserType = -1;
+            UserRole = User.UserRole.None;
         }
     }
 }

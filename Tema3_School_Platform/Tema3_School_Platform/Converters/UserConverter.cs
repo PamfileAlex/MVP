@@ -10,7 +10,7 @@ using Tema3_School_Platform.Models.EntityLayer;
 
 namespace Tema3_School_Platform.Converters
 {
-    class UserConverter : IMultiValueConverter
+    sealed class UserConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

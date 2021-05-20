@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace Tema3_School_Platform.Converters
 {
-    class LoginConverter : IMultiValueConverter
+    sealed class LoginConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

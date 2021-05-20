@@ -64,7 +64,9 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\LoginConverter.cs" />
     <Compile Include="Converters\SelectedIndexToBoolConverter.cs" />
+    <Compile Include="Converters\StudentUserRoleToVisibilityConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
+    <Compile Include="Converters\ProfessorUserRoleToVisibilityConverter.cs" />
     <Compile Include="Models\BusinessLogicLayer\UserBLL.cs" />
     <Compile Include="Models\DataAccessLayer\DALHelper.cs" />
     <Compile Include="Models\DataAccessLayer\UserDAL.cs" />
