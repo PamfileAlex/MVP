@@ -31,7 +31,8 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                         FirstName = reader.GetString(1),
                         LastName = reader.GetString(2),
                         Email = reader.GetString(3),
-                        Password = reader.GetString(4)
+                        Password = reader.GetString(4),
+                        Role = (User.UserRole)reader.GetInt32(5)
                     };
                 }
                 reader.Close();
@@ -55,7 +56,8 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                         FirstName = reader.GetString(1),
                         LastName = reader.GetString(2),
                         Email = reader.GetString(3),
-                        Password = reader.GetString(4)
+                        Password = reader.GetString(4),
+                        Role = (User.UserRole)reader.GetInt32(5)
                     });
                 }
                 reader.Close();
@@ -74,7 +76,8 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                     new SqlParameter("@firstName", user.FirstName),
                     new SqlParameter("@lastName", user.LastName),
                     new SqlParameter("@email", user.Email),
-                    new SqlParameter("@password", user.Password)
+                    new SqlParameter("@password", user.Password),
+                    new SqlParameter("@role", (int)user.Role)
                 });
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -105,7 +108,8 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                     new SqlParameter("@firstName", user.FirstName),
                     new SqlParameter("@lastName", user.LastName),
                     new SqlParameter("@email", user.Email),
-                    new SqlParameter("@password", user.Password)
+                    new SqlParameter("@password", user.Password),
+                    new SqlParameter("@role", (int)user.Role)
                 });
                 connection.Open();
                 command.ExecuteNonQuery();

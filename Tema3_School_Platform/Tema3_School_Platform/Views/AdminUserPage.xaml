@@ -18,8 +18,8 @@
     <Page.Resources>
         <convert:SelectedIndexToBoolConverter x:Key="SelectedIndexToBoolConverter"/>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
-        <convert:ProfessorUserRoleToVisibilityConverter x:Key="ProfessorVisibility"/>
-        <convert:StudentUserRoleToVisibilityConverter x:Key="StudentVisibility"/>
+        <convert:ProfessorVisibilityConverter x:Key="ProfessorVisibility"/>
+        <convert:StudentVisibilityConverter x:Key="StudentVisibility"/>
     </Page.Resources>
 
     <Grid Margin="30" Background="{StaticResource Surface}">
@@ -27,12 +27,13 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0" Name="DataGrid" ItemsSource="{Binding Users}" AutoGenerateColumns="False" SelectedIndex="{Binding DataGridSelectedIndex}">
+        <DataGrid Grid.Column="0" Name="DataGrid" ItemsSource="{Binding Users}" AutoGenerateColumns="False" SelectedIndex="{Binding DataGridSelectedIndex}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                 <DataGridTextColumn Header="First name" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn Header="Last name" Binding="{Binding LastName}"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Role" Binding="{Binding Role}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -57,7 +58,7 @@
                 <TextBox Grid.Row="2" Grid.Column="1" Name="Email" Text="{Binding User.Email}" Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Password:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Name="Password" Text="{Binding User.Password}" Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
-                <ComboBox Grid.Row="4" Grid.Column="0" Name="UserRoleComboBox" FontSize="20" SelectedIndex="{Binding UserType}" ItemsSource="{Binding UserRoles}" SelectedItem="{Binding UserRole}"/>
+                <ComboBox Grid.Row="4" Grid.Column="0" Name="UserRoleComboBox" FontSize="20" ItemsSource="{Binding UserRoles}" SelectedItem="{Binding User.Role}"/>
                 <ComboBox Grid.Row="4" Grid.Column="1" FontSize="20" Width="600" HorizontalAlignment="Center" Visibility="{Binding ElementName=UserRoleComboBox, Path=SelectedItem, Converter={StaticResource StudentVisibility}}"/>
                 <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="30,0" Visibility="{Binding ElementName=UserRoleComboBox, Path=SelectedItem, Converter={StaticResource ProfessorVisibility}}">
                     <TextBlock Text="Head teacher:" FontSize="24" Foreground="{StaticResource Text}"/>
@@ -80,7 +81,7 @@
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20"
                         Command="{Binding ClearCommand}"/>
             </StackPanel>
-            <TextBlock FontSize="50" Foreground="Red" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding ErrorMessage}" FontSize="50" Foreground="Red" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>

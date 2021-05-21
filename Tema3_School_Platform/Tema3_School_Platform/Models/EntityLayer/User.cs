@@ -10,7 +10,7 @@ namespace Tema3_School_Platform.Models.EntityLayer
 {
     class User : BasePropertyChanged
     {
-        public enum UserRole
+        public enum UserRole : int
         {
             None, Admin, Professor, Student
         }
@@ -82,15 +82,21 @@ namespace Tema3_School_Platform.Models.EntityLayer
         public User(User other)
         {
             this.ID = other.ID;
-            this.FirstName = other.FirstName == null ? String.Empty : String.Copy(other.FirstName);
-            this.LastName = other.LastName == null ? String.Empty : String.Copy(other.LastName);
-            this.Email = other.Email == null ? String.Empty : String.Copy(other.Email);
-            this.Password = other.Password == null ? String.Empty : String.Copy(other.Password);
+            Copy(other);
         }
 
         public User(int id, User other) : this(other)
         {
             this.ID = id;
+        }
+
+        public void Copy(User other)
+        {
+            this.FirstName = other.FirstName == null ? String.Empty : String.Copy(other.FirstName);
+            this.LastName = other.LastName == null ? String.Empty : String.Copy(other.LastName);
+            this.Email = other.Email == null ? String.Empty : String.Copy(other.Email);
+            this.Password = other.Password == null ? String.Empty : String.Copy(other.Password);
+            this.Role = other.Role;
         }
     }
 }

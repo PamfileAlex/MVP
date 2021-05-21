@@ -10,11 +10,11 @@ using Tema3_School_Platform.Models.EntityLayer;
 
 namespace Tema3_School_Platform.Converters
 {
-    sealed class ProfessorUserRoleToVisibilityConverter : IValueConverter
+    sealed class StudentVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((User.UserRole)value == User.UserRole.Professor)
+            if ((User.UserRole)value == User.UserRole.Student)
             {
                 return Visibility.Visible;
             }

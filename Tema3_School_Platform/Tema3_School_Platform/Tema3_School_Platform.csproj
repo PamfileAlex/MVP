@@ -64,9 +64,10 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\LoginConverter.cs" />
     <Compile Include="Converters\SelectedIndexToBoolConverter.cs" />
-    <Compile Include="Converters\StudentUserRoleToVisibilityConverter.cs" />
+    <Compile Include="Converters\StudentVisibilityConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
-    <Compile Include="Converters\ProfessorUserRoleToVisibilityConverter.cs" />
+    <Compile Include="Converters\ProfessorVisibilityConverter.cs" />
+    <Compile Include="Exceptions\SchoolPlatformException.cs" />
     <Compile Include="Models\BusinessLogicLayer\UserBLL.cs" />
     <Compile Include="Models\DataAccessLayer\DALHelper.cs" />
     <Compile Include="Models\DataAccessLayer\UserDAL.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Utils\ViewNavigator.cs" />
     <Compile Include="ViewModels\AdminPageVM.cs" />
     <Compile Include="ViewModels\AdminUserPageVM.cs" />
+    <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\LoginPageVM.cs" />
     <Compile Include="ViewModels\ProfessorPageVM.cs" />
     <Compile Include="ViewModels\StudentPageVM.cs" />
