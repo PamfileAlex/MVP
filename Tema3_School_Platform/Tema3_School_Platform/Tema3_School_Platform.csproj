@@ -68,9 +68,12 @@
     <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Converters\ProfessorVisibilityConverter.cs" />
     <Compile Include="Exceptions\SchoolPlatformException.cs" />
+    <Compile Include="Models\BusinessLogicLayer\SpecializationBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\UserBLL.cs" />
     <Compile Include="Models\DataAccessLayer\DALHelper.cs" />
+    <Compile Include="Models\DataAccessLayer\SpecializationDAL.cs" />
     <Compile Include="Models\DataAccessLayer\UserDAL.cs" />
+    <Compile Include="Models\EntityLayer\Specialization.cs" />
     <Compile Include="Models\EntityLayer\User.cs" />
     <Compile Include="Utils\BasePropertyChanged.cs" />
     <Compile Include="Utils\ViewNavigator.cs" />

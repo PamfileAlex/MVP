@@ -55,6 +55,15 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             Users.Add(userFromDB);
         }
 
+        public void RemoveUser(User user)
+        {
+            AdminCheck(user);
+            //if (!Users.Contains(user)) { return; }
+            if (!Users.Remove(user))
+                throw new SchoolPlatformException("Remove User failed");
+            UserDAL.RemoveUser(user);
+        }
+
         public void ModifyUser(User user, int selectedIndex)
         {
             if (Users[selectedIndex].Role == User.UserRole.Admin)
@@ -65,15 +74,6 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
                 CheckForEmailExistence(user);
             Users[selectedIndex] = user;
             UserDAL.ModifyUser(user);
-        }
-
-        public void RemoveUser(User user)
-        {
-            AdminCheck(user);
-            //if (!Users.Contains(user)) { return; }
-            if (!Users.Remove(user))
-                throw new SchoolPlatformException("Remove User failed");
-            UserDAL.RemoveUser(user);
         }
 
         private void AdminCheck(User user)

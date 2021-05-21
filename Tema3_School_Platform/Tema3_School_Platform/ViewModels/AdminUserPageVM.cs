@@ -35,7 +35,7 @@ namespace Tema3_School_Platform.ViewModels
                 dataGridSelectedIndex = value;
                 NotifyPropertyChanged("SelectedIndex");
                 ErrorMessage = String.Empty;
-                if (DataGridSelectedIndex == -1) { User = new User(User.NullUser); ; return; }
+                if (DataGridSelectedIndex == -1) { User = new User(0); ; return; }
                 User = new User(UserBLL.Instance.Users[DataGridSelectedIndex]);
             }
         }
@@ -49,7 +49,7 @@ namespace Tema3_School_Platform.ViewModels
 
         public AdminUserPageVM()
         {
-            this.User = new User(User.NullUser);
+            this.User = new User(0);
             Clear();
             UserRoles = Enum.GetValues(typeof(User.UserRole)).Cast<User.UserRole>().ToList();
             //UserRoles.Remove(User.UserRole.Admin);
