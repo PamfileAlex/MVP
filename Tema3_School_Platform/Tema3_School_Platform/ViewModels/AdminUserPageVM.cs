@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Tema3_School_Platform.Commands;
-using Tema3_School_Platform.Exceptions;
 using Tema3_School_Platform.Models.BusinessLogicLayer;
 using Tema3_School_Platform.Models.EntityLayer;
-using Tema3_School_Platform.Utils;
 
 namespace Tema3_School_Platform.ViewModels
 {
@@ -51,7 +49,6 @@ namespace Tema3_School_Platform.ViewModels
 
         public AdminUserPageVM()
         {
-            this.User = new User(0);
             this.User = new User(User.NullUser);
             Clear();
             UserRoles = Enum.GetValues(typeof(User.UserRole)).Cast<User.UserRole>().ToList();

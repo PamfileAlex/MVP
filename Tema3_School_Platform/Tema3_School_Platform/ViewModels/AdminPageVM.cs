@@ -33,17 +33,10 @@ namespace Tema3_School_Platform.ViewModels
 
         private void MenuAction(String option)
         {
-            switch (Convert.ToInt32(option))
-            {
-                case 0:
-                    ViewNavigator.ChangePage(ViewNavigator.Page.Login);
-                    break;
-                case 1:
-                    CurrentPage = new AdminUserPage();
-                    break;
-                default:
-                    break;
-            }
+            int control = Convert.ToInt32(option);
+            if (control == 0)
+                ViewNavigator.ChangePage(ViewNavigator.MainPage.Login);
+            CurrentPage = ViewNavigator.AdminPageControl(control);
         }
     }
 }

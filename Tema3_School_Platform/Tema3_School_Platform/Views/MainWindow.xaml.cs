@@ -24,7 +24,7 @@ namespace Tema3_School_Platform.Views
         {
             InitializeComponent();
             ViewNavigator.MainWindow = this;
-            ViewNavigator.ChangePage(ViewNavigator.Page.Login);
+            ViewNavigator.ChangePage(ViewNavigator.MainPage.Login);
         }
     }
 }

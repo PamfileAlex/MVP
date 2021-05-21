@@ -30,13 +30,13 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             switch (User.CurrentUser.Role)
             {
                 case User.UserRole.Admin:
-                    ViewNavigator.ChangePage(ViewNavigator.Page.Admin);
+                    ViewNavigator.ChangePage(ViewNavigator.MainPage.Admin);
                     break;
                 case User.UserRole.Professor:
-                    ViewNavigator.ChangePage(ViewNavigator.Page.Professor);
+                    ViewNavigator.ChangePage(ViewNavigator.MainPage.Professor);
                     break;
                 case User.UserRole.Student:
-                    ViewNavigator.ChangePage(ViewNavigator.Page.Student);
+                    ViewNavigator.ChangePage(ViewNavigator.MainPage.Student);
                     break;
                 default:
                     break;

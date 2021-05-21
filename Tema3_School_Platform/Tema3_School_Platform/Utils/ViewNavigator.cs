@@ -3,23 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Controls;
 using Tema3_School_Platform.Views;
 
 namespace Tema3_School_Platform.Utils
 {
     static class ViewNavigator
     {
-
-        public enum Page
+        public enum MainPage
         {
             None, Login, Admin, Professor, Student
         }
-
-        private static readonly LoginPage loginPage;
-        private static readonly AdminPage adminPage;
-        private static readonly ProfessorPage professorPage;
-        private static readonly StudentPage studentPage;
         private static MainWindow mainWindow;
         public static MainWindow MainWindow
         {
@@ -30,33 +24,36 @@ namespace Tema3_School_Platform.Utils
             }
         }
 
-        static ViewNavigator()
-        {
-            loginPage = new LoginPage();
-            adminPage = new AdminPage();
-            professorPage = new ProfessorPage();
-            studentPage = new StudentPage();
-        }
-
-        public static void ChangePage(Page page)
+        public static void ChangePage(MainPage page)
         {
             if (mainWindow == null) { return; }
             switch (page)
             {
-                case Page.None:
+                case MainPage.None:
                     return;
-                case Page.Login:
+                case MainPage.Login:
                     mainWindow.Content = new LoginPage();
                     break;
-                case Page.Admin:
-                    mainWindow.Content = adminPage;
+                case MainPage.Admin:
+                    mainWindow.Content = new AdminPage();
                     break;
-                case Page.Professor:
-                    mainWindow.Content = professorPage;
+                case MainPage.Professor:
+                    mainWindow.Content = new ProfessorPage();
                     break;
-                case Page.Student:
-                    mainWindow.Content = studentPage;
+                case MainPage.Student:
+                    mainWindow.Content = new StudentPage();
                     break;
+            }
+        }
+
+        public static Page AdminPageControl(int option)
+        {
+            switch (option)
+            {
+                case 1:
+                    return new AdminUserPage();
+                default:
+                    return null;
             }
         }
     }
