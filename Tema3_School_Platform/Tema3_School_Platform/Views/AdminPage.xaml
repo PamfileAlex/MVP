@@ -23,7 +23,7 @@
             <WrapPanel Orientation="Horizontal">
                 <Button Content="Log out" FontSize="31" Padding="5" Command="{Binding MenuCommand}" CommandParameter="0"/>
                 <Button Content="Users" FontSize="31" Padding="5" Command="{Binding MenuCommand}" CommandParameter="1"/>
-                <Button Content="Other" FontSize="31" Padding="5"/>
+                <Button Content="Specialization" FontSize="31" Padding="5" Command="{Binding MenuCommand}" CommandParameter="2"/>
             </WrapPanel>
         </Border>
         <Frame Grid.Row="1" Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden">

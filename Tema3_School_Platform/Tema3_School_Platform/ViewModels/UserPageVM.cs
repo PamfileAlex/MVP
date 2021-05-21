@@ -12,7 +12,7 @@ using Tema3_School_Platform.Models.EntityLayer;
 
 namespace Tema3_School_Platform.ViewModels
 {
-    class AdminUserPageVM : BaseVM
+    class UserPageVM : BaseVM
     {
         public ObservableCollection<User> Users { get { return UserBLL.Instance.Users; } }
         private User user;
@@ -47,7 +47,7 @@ namespace Tema3_School_Platform.ViewModels
         public ICommand RemoveCommand { get; }
         public ICommand ClearCommand { get; }
 
-        public AdminUserPageVM()
+        public UserPageVM()
         {
             this.User = new User(0);
             Clear();

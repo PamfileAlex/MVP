@@ -26,5 +26,16 @@ namespace Tema3_School_Platform.Models.EntityLayer
         {
             this.ID = id;
         }
+
+        public Specialization(Specialization other)
+        {
+            this.ID = other.ID;
+            this.Name = other.Name == null ? String.Empty : String.Copy(other.Name);
+        }
+
+        public Specialization(int id, Specialization other) : this(other)
+        {
+            this.ID = id;
+        }
     }
 }

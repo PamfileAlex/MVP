@@ -18,9 +18,9 @@ namespace Tema3_School_Platform.Views
     /// <summary>
     /// Interaction logic for AdminUserPage.xaml
     /// </summary>
-    public partial class AdminUserPage : Page
+    public partial class UserPage : Page
     {
-        public AdminUserPage()
+        public UserPage()
         {
             InitializeComponent();
         }

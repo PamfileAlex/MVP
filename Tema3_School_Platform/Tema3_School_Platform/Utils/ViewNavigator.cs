@@ -51,7 +51,9 @@ namespace Tema3_School_Platform.Utils
             switch (option)
             {
                 case 1:
-                    return new AdminUserPage();
+                    return new UserPage();
+                case 2:
+                    return new SpecializationPage();
                 default:
                     return null;
             }

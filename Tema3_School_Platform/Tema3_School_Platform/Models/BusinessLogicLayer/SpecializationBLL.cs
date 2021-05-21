@@ -41,7 +41,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         public void ModifySpecialization(Specialization specialization, int selectedIndex)
         {
             if (!specialization.Name.Equals(Specializations[selectedIndex].Name))
-                CheckForSpecializationExistence(Specializations[selectedIndex]);
+                CheckForSpecializationExistence(specialization);
             Specializations[selectedIndex] = specialization;
             SpecializationDAL.ModifySpecialization(specialization);
         }

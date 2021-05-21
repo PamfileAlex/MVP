@@ -39,8 +39,10 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
         {
             using (SqlConnection connection = DALHelper.Connection)
             {
-                SqlCommand command = new SqlCommand("GetSpecialization", connection);
-                command.CommandType = CommandType.StoredProcedure;
+                SqlCommand command = new SqlCommand("GetSpecialization", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 command.Parameters.Add(new SqlParameter("@name", name));
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -89,7 +91,7 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
         {
             using (SqlConnection connection = DALHelper.Connection)
             {
-                SqlCommand command = new SqlCommand("ModifyUser", connection)
+                SqlCommand command = new SqlCommand("ModifySpecialization", connection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };

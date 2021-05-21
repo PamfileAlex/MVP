@@ -78,7 +78,8 @@
     <Compile Include="Utils\BasePropertyChanged.cs" />
     <Compile Include="Utils\ViewNavigator.cs" />
     <Compile Include="ViewModels\AdminPageVM.cs" />
-    <Compile Include="ViewModels\AdminUserPageVM.cs" />
+    <Compile Include="ViewModels\SpecializationPageVM.cs" />
+    <Compile Include="ViewModels\UserPageVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\LoginPageVM.cs" />
     <Compile Include="ViewModels\ProfessorPageVM.cs" />
@@ -86,8 +87,8 @@
     <Compile Include="Views\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AdminUserPage.xaml.cs">
-      <DependentUpon>AdminUserPage.xaml</DependentUpon>
+    <Compile Include="Views\UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -97,6 +98,9 @@
     </Compile>
     <Compile Include="Views\ProfessorPage.xaml.cs">
       <DependentUpon>ProfessorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpecializationPage.xaml.cs">
+      <DependentUpon>SpecializationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StudentPage.xaml.cs">
       <DependentUpon>StudentPage.xaml</DependentUpon>
@@ -133,7 +137,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AdminUserPage.xaml">
+    <Page Include="Views\UserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProfessorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpecializationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

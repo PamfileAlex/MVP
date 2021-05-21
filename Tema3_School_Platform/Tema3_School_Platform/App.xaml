@@ -9,6 +9,7 @@
         <system:String x:Key="Test">#121212</system:String>
         <SolidColorBrush x:Key="Background" Color="#201c1c"/>
         <SolidColorBrush x:Key="Surface" Color="#313131"/>
+        <SolidColorBrush x:Key="SurfaceDarker" Color="#292727"/>
         <SolidColorBrush x:Key="Primary" Color="#201c1c"/>
         <SolidColorBrush x:Key="Secondary" Color="#201c1c"/>
         <SolidColorBrush x:Key="Text" Color="#FFFFFF"/>
