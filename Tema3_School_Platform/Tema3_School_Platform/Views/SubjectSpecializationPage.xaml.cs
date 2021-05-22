@@ -18,9 +18,9 @@ namespace Tema3_School_Platform.Views
     /// <summary>
     /// Interaction logic for SpecializationPage.xaml
     /// </summary>
-    public partial class SpecializationSubjectPage : Page
+    public partial class SubjectSpecializationPage : Page
     {
-        public SpecializationSubjectPage()
+        public SubjectSpecializationPage()
         {
             InitializeComponent();
         }

@@ -64,26 +64,31 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\LoginConverter.cs" />
     <Compile Include="Converters\SelectedIndexToBoolConverter.cs" />
+    <Compile Include="Converters\SelectedIndexToVisibilityConverter.cs" />
     <Compile Include="Converters\StudentVisibilityConverter.cs" />
+    <Compile Include="Converters\SubjectSpecializationConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Converters\ProfessorVisibilityConverter.cs" />
     <Compile Include="Exceptions\SchoolPlatformException.cs" />
     <Compile Include="Models\BusinessLogicLayer\SpecializationBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SubjectBLL.cs" />
+    <Compile Include="Models\BusinessLogicLayer\SubjectSpecializationBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\UserBLL.cs" />
     <Compile Include="Models\DataAccessLayer\DALHelper.cs" />
     <Compile Include="Models\DataAccessLayer\SpecializationDAL.cs" />
     <Compile Include="Models\DataAccessLayer\SubjectDAL.cs" />
+    <Compile Include="Models\DataAccessLayer\SubjectSpecializationDAL.cs" />
     <Compile Include="Models\DataAccessLayer\UserDAL.cs" />
     <Compile Include="Models\EntityLayer\Class.cs" />
     <Compile Include="Models\EntityLayer\Specialization.cs" />
     <Compile Include="Models\EntityLayer\Subject.cs" />
+    <Compile Include="Models\EntityLayer\SubjectSpecialization.cs" />
     <Compile Include="Models\EntityLayer\User.cs" />
     <Compile Include="Utils\BasePropertyChanged.cs" />
     <Compile Include="Utils\ViewNavigator.cs" />
     <Compile Include="ViewModels\AdminPageVM.cs" />
     <Compile Include="ViewModels\ClassPageVM.cs" />
-    <Compile Include="ViewModels\SpecializationSubjectPageVM.cs" />
+    <Compile Include="ViewModels\SubjectSpecializationPageVM.cs" />
     <Compile Include="ViewModels\UserPageVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\LoginPageVM.cs" />
@@ -107,8 +112,8 @@
     <Compile Include="Views\ProfessorPage.xaml.cs">
       <DependentUpon>ProfessorPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SpecializationSubjectPage.xaml.cs">
-      <DependentUpon>SpecializationSubjectPage.xaml</DependentUpon>
+    <Compile Include="Views\SubjectSpecializationPage.xaml.cs">
+      <DependentUpon>SubjectSpecializationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StudentPage.xaml.cs">
       <DependentUpon>StudentPage.xaml</DependentUpon>
@@ -165,7 +170,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SpecializationSubjectPage.xaml">
+    <Page Include="Views\SubjectSpecializationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

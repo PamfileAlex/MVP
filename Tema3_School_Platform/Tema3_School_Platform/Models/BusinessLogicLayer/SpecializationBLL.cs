@@ -21,6 +21,11 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             Specializations = SpecializationDAL.GetSpecializations();
         }
 
+        public Specialization GetSpecialization(int id)
+        {
+            return Specializations.First(specialization => specialization.ID == id);
+        }
+
         public void AddSpecialization(Specialization specialization)
         {
             CheckForSpecializationExistence(specialization);

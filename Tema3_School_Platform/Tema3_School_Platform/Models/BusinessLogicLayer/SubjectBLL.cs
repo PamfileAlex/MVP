@@ -20,6 +20,11 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             Subjects = SubjectDAL.GetSubjects();
         }
 
+        public Subject GetSubject(int id)
+        {
+            return Subjects.First(subject => subject.ID == id);
+        }
+
         public void AddSubject(Subject subject)
         {
             CheckForSubjectExistence(subject);
@@ -45,7 +50,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             SubjectDAL.ModifySubject(subject);
         }
 
-        public void CheckForSubjectExistence(Subject subject)
+        private void CheckForSubjectExistence(Subject subject)
         {
             if (SubjectDAL.CheckForSubjectExistence(subject))
                 throw new SchoolPlatformException("Name is taken");
