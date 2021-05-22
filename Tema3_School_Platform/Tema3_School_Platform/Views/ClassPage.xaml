@@ -15,6 +15,11 @@
         <vm:ClassPageVM/>
     </Page.DataContext>
 
+    <Page.Resources>
+        <convert:SelectedIndexToBoolConverter x:Key="SelectedIndexToBoolConverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </Page.Resources>
+
     <Grid Margin="30" Background="{StaticResource Surface}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
