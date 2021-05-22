@@ -73,11 +73,13 @@
     <Compile Include="Models\DataAccessLayer\DALHelper.cs" />
     <Compile Include="Models\DataAccessLayer\SpecializationDAL.cs" />
     <Compile Include="Models\DataAccessLayer\UserDAL.cs" />
+    <Compile Include="Models\EntityLayer\Class.cs" />
     <Compile Include="Models\EntityLayer\Specialization.cs" />
     <Compile Include="Models\EntityLayer\User.cs" />
     <Compile Include="Utils\BasePropertyChanged.cs" />
     <Compile Include="Utils\ViewNavigator.cs" />
     <Compile Include="ViewModels\AdminPageVM.cs" />
+    <Compile Include="ViewModels\ClassPageVM.cs" />
     <Compile Include="ViewModels\SpecializationPageVM.cs" />
     <Compile Include="ViewModels\UserPageVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
@@ -86,6 +88,9 @@
     <Compile Include="ViewModels\StudentPageVM.cs" />
     <Compile Include="Views\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClassPage.xaml.cs">
+      <DependentUpon>ClassPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
@@ -134,6 +139,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClassPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
