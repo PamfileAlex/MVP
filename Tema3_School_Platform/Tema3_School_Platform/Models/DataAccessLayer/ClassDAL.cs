@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tema3_School_Platform.Models.BusinessLogicLayer;
+
 using Tema3_School_Platform.Models.EntityLayer;
 
 namespace Tema3_School_Platform.Models.DataAccessLayer
@@ -28,7 +28,7 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                 {
                     classes.Add(new Class(reader.GetInt32(0))
                     {
-                        Specialization = SpecializationBLL.Instance.GetSpecialization(reader.GetInt32(1)),
+                        Specialization = DALHelper.GetSpecialization(reader.GetInt32(1)),
                         Name = reader.GetString(2),
                         Year = reader.GetString(3)
                     });
@@ -54,7 +54,7 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                 {
                     classObj = new Class(reader.GetInt32(0))
                     {
-                        Specialization = SpecializationBLL.Instance.GetSpecialization(reader.GetInt32(1)),
+                        Specialization = DALHelper.GetSpecialization(reader.GetInt32(1)),
                         Name = reader.GetString(2),
                         Year = reader.GetString(3)
                     };

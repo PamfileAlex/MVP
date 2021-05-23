@@ -22,9 +22,17 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             StudentSubjectList = StudentSubjectDAL.GetStudentSubjectList();
         }
 
+        public void Init() { }
+
         public void UpdateStudentSubjectList()
         {
             StudentSubjectList = StudentSubjectDAL.GetStudentSubjectList();
+            GradeBLL.Instance.UpdateGrades();
+        }
+
+        public StudentSubject GetStudentSubject(int id)
+        {
+            return StudentSubjectList.First(ss => ss.ID == id);
         }
 
         public void AddStudentSubject(StudentSubject studentSubject)

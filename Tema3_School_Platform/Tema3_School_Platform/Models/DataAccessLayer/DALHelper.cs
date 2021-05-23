@@ -41,5 +41,10 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
         {
             return UserBLL.Instance.GetUser(id);
         }
+
+        public static StudentSubject GetStudentSubject(int id)
+        {
+            return StudentSubjectBLL.Instance.GetStudentSubject(id);
+        }
     }
 }
