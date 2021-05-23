@@ -19,6 +19,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         static UserBLL() { }
         private UserBLL()
         {
+            ClassBLL.Instance.Init();
             Users = UserDAL.GetAllUsers();
         }
 
@@ -89,6 +90,8 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
                 throw new SchoolPlatformException("Please fill all inputs");
             if (user.Role == User.UserRole.None)
                 throw new SchoolPlatformException("Please select a role");
+            if (user.Role == User.UserRole.Student && user.Class == null)
+                throw new SchoolPlatformException("Please select a class");
         }
 
         private void CheckForEmailExistence(User user)

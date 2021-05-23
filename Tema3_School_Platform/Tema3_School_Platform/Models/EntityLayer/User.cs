@@ -72,6 +72,17 @@ namespace Tema3_School_Platform.Models.EntityLayer
             }
         }
 
+        private Class classObj;
+        public Class Class
+        {
+            get { return classObj; }
+            set
+            {
+                classObj = value;
+                NotifyPropertyChanged("Class");
+            }
+        }
+
         public static User CurrentUser { get; set; } = null;
         public static User NullUser { get; } = new User(0);
         public User(int id)
@@ -97,6 +108,7 @@ namespace Tema3_School_Platform.Models.EntityLayer
             this.Email = other.Email == null ? String.Empty : String.Copy(other.Email);
             this.Password = other.Password == null ? String.Empty : String.Copy(other.Password);
             this.Role = other.Role;
+            this.Class = other.Class;
         }
     }
 }

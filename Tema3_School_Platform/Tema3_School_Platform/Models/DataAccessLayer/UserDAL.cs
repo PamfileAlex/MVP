@@ -32,7 +32,8 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                         LastName = reader.GetString(2),
                         Email = reader.GetString(3),
                         Password = reader.GetString(4),
-                        Role = (User.UserRole)reader.GetInt32(5)
+                        Role = (User.UserRole)reader.GetInt32(5),
+                        Class = reader.IsDBNull(6) ? null : DALHelper.GetClass(reader.GetInt32(6))
                     };
                 }
                 reader.Close();
@@ -57,7 +58,8 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                         LastName = reader.GetString(2),
                         Email = reader.GetString(3),
                         Password = reader.GetString(4),
-                        Role = (User.UserRole)reader.GetInt32(5)
+                        Role = (User.UserRole)reader.GetInt32(5),
+                        Class = reader.IsDBNull(6) ? null : DALHelper.GetClass(reader.GetInt32(6))
                     });
                 }
                 reader.Close();
@@ -77,8 +79,12 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                     new SqlParameter("@lastName", user.LastName),
                     new SqlParameter("@email", user.Email),
                     new SqlParameter("@password", user.Password),
-                    new SqlParameter("@role", (int)user.Role)
+                    new SqlParameter("@role", (int)user.Role),
                 });
+                if (user.Class == null)
+                    command.Parameters.Add(new SqlParameter("@classID", DBNull.Value));
+                else
+                    command.Parameters.Add(new SqlParameter("@classID", user.Class.ID));
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -111,6 +117,10 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                     new SqlParameter("@password", user.Password),
                     new SqlParameter("@role", (int)user.Role)
                 });
+                if (user.Class == null)
+                    command.Parameters.Add(new SqlParameter("@classID", DBNull.Value));
+                else
+                    command.Parameters.Add(new SqlParameter("@classID", user.Class.ID));
                 connection.Open();
                 command.ExecuteNonQuery();
             }

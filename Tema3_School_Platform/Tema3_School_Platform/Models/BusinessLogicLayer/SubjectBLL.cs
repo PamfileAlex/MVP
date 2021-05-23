@@ -20,6 +20,8 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             Subjects = SubjectDAL.GetSubjects();
         }
 
+        public void Init() { }
+
         public Subject GetSubject(int id)
         {
             return Subjects.First(subject => subject.ID == id);

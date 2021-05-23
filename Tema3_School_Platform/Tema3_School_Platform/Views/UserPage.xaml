@@ -58,15 +58,11 @@
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Password:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Name="Password" Text="{Binding User.Password}" Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
                 <ComboBox Grid.Row="4" Grid.Column="0" Name="UserRoleComboBox" FontSize="20" ItemsSource="{Binding UserRoles}" SelectedItem="{Binding User.Role}" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="4" Grid.Column="1" FontSize="20" Width="600" Margin="0,10" HorizontalAlignment="Center" Visibility="{Binding ElementName=UserRoleComboBox, Path=SelectedItem, Converter={StaticResource StudentVisibility}}"/>
+                <ComboBox Grid.Row="4" Grid.Column="1" FontSize="20" Width="600" Margin="0,10" HorizontalAlignment="Center" Visibility="{Binding ElementName=UserRoleComboBox, Path=SelectedItem, Converter={StaticResource StudentVisibility}}"
+                          ItemsSource="{Binding Classes}" SelectedItem="{Binding User.Class}" DisplayMemberPath="Name"/>
                 <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="30,10" Visibility="{Binding ElementName=UserRoleComboBox, Path=SelectedItem, Converter={StaticResource ProfessorVisibility}}">
-                    <TextBlock Text="Head teacher:" FontSize="24" Foreground="{StaticResource Text}"/>
-                    <CheckBox Name="HeadTeacherCheckBox" VerticalAlignment="Center" Margin="10,0">
-                        <CheckBox.LayoutTransform>
-                            <ScaleTransform ScaleX="2" ScaleY="2" />
-                        </CheckBox.LayoutTransform>
-                    </CheckBox>
-                    <ComboBox FontSize="20" Margin="10,0" Width="360" Visibility="{Binding ElementName=HeadTeacherCheckBox, Path=IsChecked, Converter={StaticResource BoolToVisibility}}"/>
+                    <ComboBox FontSize="20" Width="460" ItemsSource="{Binding NoHeadTeacherClasses}" SelectedItem="{Binding User.Class}" DisplayMemberPath="Name"/>
+                    <Button Content="Clear Class" Margin="20,0,0,0" Height="33" FontSize="20" Command="{Binding ClearClassCommand}"/>
                 </StackPanel>
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="150">

@@ -15,6 +15,22 @@ namespace Tema3_School_Platform.ViewModels
     class UserPageVM : BaseVM
     {
         public ObservableCollection<User> Users { get { return UserBLL.Instance.Users; } }
+        public ObservableCollection<Class> Classes { get { return ClassBLL.Instance.Classes; } }
+        public ObservableCollection<Class> NoHeadTeacherClasses
+        {
+            get
+            {
+                ObservableCollection<Class> noHeadTeacherClasses = new ObservableCollection<Class>();
+                if (User.Class != null)
+                    noHeadTeacherClasses.Add(User.Class);
+                foreach (var classObj in ClassBLL.Instance.Classes)
+                {
+                    if (Users.Where(user => user.Role == User.UserRole.Professor && user.Class != null && user.Class.ID == classObj.ID).Count() == 0)
+                        noHeadTeacherClasses.Add(classObj);
+                }
+                return noHeadTeacherClasses;
+            }
+        }
         private User user;
         public User User
         {
@@ -37,6 +53,7 @@ namespace Tema3_School_Platform.ViewModels
                 ErrorMessage = String.Empty;
                 if (DataGridSelectedIndex == -1) { User = new User(0); return; }
                 User = new User(UserBLL.Instance.Users[DataGridSelectedIndex]);
+                NotifyPropertyChanged("NoHeadTeacherClasses");
             }
         }
 
@@ -46,26 +63,27 @@ namespace Tema3_School_Platform.ViewModels
         public ICommand ModifyCommand { get; }
         public ICommand RemoveCommand { get; }
         public ICommand ClearCommand { get; }
+        public ICommand ClearClassCommand { get; }
 
         public UserPageVM()
         {
-            this.User = new User(0);
             Clear();
             UserRoles = Enum.GetValues(typeof(User.UserRole)).Cast<User.UserRole>().ToList();
-            //UserRoles.Remove(User.UserRole.Admin);
-            //this.AddCommand = new RelayCommand<User>(user => { UserBLL.Instance.AddUser(user); Clear(); });
             this.AddCommand = new RelayCommand<User>(user => ErrorWrapper(() => { UserBLL.Instance.AddUser(user); Clear(); }));
-            //this.ModifyCommand = new RelayCommand<User>(user => { UserBLL.Instance.ModifyUser(user, DataGridSelectedIndex); Clear(); });
             this.ModifyCommand = new RelayCommand<User>(user => ErrorWrapper(() => { UserBLL.Instance.ModifyUser(user, DataGridSelectedIndex); Clear(); }));
-            //this.RemoveCommand = new RelayCommand<User>(user => { UserBLL.Instance.RemoveUser(UserBLL.Instance.Users[DataGridSelectedIndex]); Clear(); });
             this.RemoveCommand = new RelayCommand<User>(user => ErrorWrapper(() => { UserBLL.Instance.RemoveUser(UserBLL.Instance.Users[DataGridSelectedIndex]); Clear(); }));
             this.ClearCommand = new ActionCommand(Clear);
+            this.ClearClassCommand = new ActionCommand(ClearClass);
         }
 
-        public void Clear()
+        private void Clear()
         {
             DataGridSelectedIndex = -1;
-            ErrorMessage = String.Empty;
+        }
+
+        private void ClearClass()
+        {
+            User.Class = null;
         }
     }
 }

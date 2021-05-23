@@ -21,6 +21,13 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             Classes = ClassDAL.GetClasses();
         }
 
+        public void Init() { }
+
+        public Class GetClass(int id)
+        {
+            return Classes.First(classObj => classObj.ID == id);
+        }
+
         public void AddClass(Class classObj)
         {
             CheckClassFields(classObj);
