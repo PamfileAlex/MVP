@@ -42,6 +42,10 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             if (!Subjects.Remove(subject))
                 throw new SchoolPlatformException("Remove Subject failed");
             SubjectDAL.RemoveSubject(subject);
+
+            SubjectSpecializationBLL.Instance.UpdateSubjectSpecializations();
+            StudentSubjectBLL.Instance.UpdateStudentSubjectList();
+            TeacherSubjectClassBLL.Instance.UpdateTeacherSubjectClassList();
         }
 
         public void ModifySubject(Subject subject, int selectedIndex)

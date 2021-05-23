@@ -48,12 +48,13 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Teacher:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
                 <ComboBox Grid.Row="0" Grid.Column="1" Name="Teacher" ItemsSource="{Binding Teachers}" DisplayMemberPath="Name" SelectedIndex="{Binding TeacherIndex}"
                           Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Subject:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" Name="Subject" ItemsSource="{Binding Subjects}" DisplayMemberPath="Name" SelectedIndex="{Binding SubjectIndex}"
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Class:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" Name="Class" ItemsSource="{Binding Classes}" DisplayMemberPath="Name" SelectedIndex="{Binding ClassIndex}"
                           Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Class:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="2" Grid.Column="1" Name="Class" ItemsSource="{Binding Classes}" DisplayMemberPath="Name" SelectedIndex="{Binding ClassIndex}"
-                          Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Subject:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" Name="Subject" ItemsSource="{Binding Subjects}" DisplayMemberPath="Name" SelectedIndex="{Binding SubjectIndex}"
+                          Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"
+                          IsEnabled="{Binding ElementName=Class, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"/>
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="150">
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Add" FontSize="30" FontWeight="Bold" Margin="20"

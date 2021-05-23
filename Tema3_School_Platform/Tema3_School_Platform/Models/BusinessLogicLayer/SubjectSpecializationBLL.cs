@@ -13,12 +13,17 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
     class SubjectSpecializationBLL
     {
         public static SubjectSpecializationBLL Instance { get; } = new SubjectSpecializationBLL();
-        public ObservableCollection<SubjectSpecialization> SubjectSpecializations { get; }
+        public ObservableCollection<SubjectSpecialization> SubjectSpecializations { get; set; }
         static SubjectSpecializationBLL() { }
         private SubjectSpecializationBLL()
         {
             SubjectBLL.Instance.Init();
             SpecializationBLL.Instance.Init();
+            SubjectSpecializations = SubjectSpecializationDAL.GetSubjectSpecializations();
+        }
+
+        public void UpdateSubjectSpecializations()
+        {
             SubjectSpecializations = SubjectSpecializationDAL.GetSubjectSpecializations();
         }
 

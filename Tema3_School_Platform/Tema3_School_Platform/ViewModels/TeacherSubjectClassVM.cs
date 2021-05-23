@@ -16,8 +16,17 @@ namespace Tema3_School_Platform.ViewModels
     {
         public ObservableCollection<TeacherSubjectClass> TeacherSubjectClassList { get { return TeacherSubjectClassBLL.Instance.TeacherSubjectClassList; } }
         public ObservableCollection<User> Teachers { get { return UserBLL.Instance.Users.Where(user => user.Role == User.UserRole.Professor).ToObservableCollection(); } }
-        public ObservableCollection<Subject> Subjects { get { return SubjectBLL.Instance.Subjects; } }
         public ObservableCollection<Class> Classes { get { return ClassBLL.Instance.Classes; } }
+        public ObservableCollection<Subject> Subjects
+        {
+            get
+            {
+                if (ClassIndex == -1) { return null; }
+                //return SubjectBLL.Instance.Subjects.Where(subject => TeacherSubjectClassList.Where(tsc => tsc.Subject.ID == subject.ID && tsc.Class.ID == Classes[ClassIndex].ID).Count() != 0).ToObservableCollection();
+                return SubjectBLL.Instance.Subjects.Where(subject => SubjectSpecializationBLL.Instance.SubjectSpecializations.Where(ss => ss.Subject.ID == subject.ID && ss.Specialization.ID == Classes[ClassIndex].Specialization.ID).Count() != 0).ToObservableCollection();
+
+            }
+        }
 
         private int dataGridIndex;
         public int DataGridIndex
@@ -68,6 +77,7 @@ namespace Tema3_School_Platform.ViewModels
             {
                 classIndex = value;
                 NotifyPropertyChanged("ClassIndex");
+                NotifyPropertyChanged("Subjects");
                 if (ClassIndex != -1)
                     DataGridIndex = -1;
             }

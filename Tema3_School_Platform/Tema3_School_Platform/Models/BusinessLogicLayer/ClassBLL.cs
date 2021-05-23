@@ -44,6 +44,8 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             if (!Classes.Remove(classObj))
                 throw new SchoolPlatformException("Remove Class failed");
             ClassDAL.RemoveClass(classObj);
+
+            TeacherSubjectClassBLL.Instance.UpdateTeacherSubjectClassList();
         }
 
         public void ModifyClass(Class classObj, int selectedIndex)

@@ -13,13 +13,18 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
     class TeacherSubjectClassBLL
     {
         public static TeacherSubjectClassBLL Instance { get; } = new TeacherSubjectClassBLL();
-        public ObservableCollection<TeacherSubjectClass> TeacherSubjectClassList { get; }
+        public ObservableCollection<TeacherSubjectClass> TeacherSubjectClassList { get; set; }
         static TeacherSubjectClassBLL() { }
         private TeacherSubjectClassBLL()
         {
             UserBLL.Instance.Init();
             SubjectBLL.Instance.Init();
             ClassBLL.Instance.Init();
+            TeacherSubjectClassList = TeacherSubjectClassDAL.GetTeacherSubjectClassList();
+        }
+
+        public void UpdateTeacherSubjectClassList()
+        {
             TeacherSubjectClassList = TeacherSubjectClassDAL.GetTeacherSubjectClassList();
         }
 
@@ -32,6 +37,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             if (fromDB == null)
                 throw new SchoolPlatformException("Add TeacherSubjectClass failed");
             TeacherSubjectClassList.Add(fromDB);
+            StudentSubject(fromDB);
         }
 
         public void RemoveTeacherSubjectClass(TeacherSubjectClass teacherSubjectClass)
@@ -51,6 +57,25 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         {
             if (TeacherSubjectClassList.Where(tsc => tsc.Teacher.ID == tscParam.Teacher.ID && tsc.Subject.ID == tscParam.Subject.ID && tsc.Class.ID == tscParam.Class.ID).Count() != 0)
                 throw new SchoolPlatformException("Relation already exists");
+        }
+
+        private void StudentSubject(TeacherSubjectClass teacherSubjectClass)
+        {
+            foreach (var user in UserBLL.Instance.Users)
+            {
+                if (user.Role != User.UserRole.Student) { continue; }
+                if (user.Class.ID != teacherSubjectClass.Class.ID) { continue; }
+                try
+                {
+                    StudentSubjectBLL.Instance.AddStudentSubject(new StudentSubject()
+                    {
+                        ID = 0,
+                        Student = user,
+                        Subject = teacherSubjectClass.Subject
+                    });
+                }
+                catch { }
+            }
         }
     }
 }

@@ -61,15 +61,22 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             if (userFromDB == null)
                 throw new SchoolPlatformException("Add User failed");
             Users.Add(userFromDB);
+            StudentSubject(userFromDB);
         }
 
         public void RemoveUser(User user)
         {
             AdminCheck(user);
             //if (!Users.Contains(user)) { return; }
+            User.UserRole userRole = user.Role;
             if (!Users.Remove(user))
                 throw new SchoolPlatformException("Remove User failed");
             UserDAL.RemoveUser(user);
+
+            if (userRole == User.UserRole.Student)
+                StudentSubjectBLL.Instance.UpdateStudentSubjectList();
+            else if (userRole == User.UserRole.Professor)
+                TeacherSubjectClassBLL.Instance.UpdateTeacherSubjectClassList();
         }
 
         public void ModifyUser(User user, int selectedIndex)
@@ -80,6 +87,8 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             CheckUserFields(user);
             if (!user.Email.Equals(Users[selectedIndex].Email))
                 CheckForEmailExistence(user);
+            if (user.Class.ID != Users[selectedIndex].Class.ID)
+                StudentSubject(user);
             Users[selectedIndex] = user;
             UserDAL.ModifyUser(user);
         }
@@ -105,6 +114,24 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         {
             if (UserDAL.CheckForEmailExistence(user))
                 throw new SchoolPlatformException("Email address is taken");
+        }
+
+        private void StudentSubject(User user)
+        {
+            foreach (var tsc in TeacherSubjectClassBLL.Instance.TeacherSubjectClassList)
+            {
+                if (user.Class.ID != tsc.Class.ID) { continue; }
+                try
+                {
+                    StudentSubjectBLL.Instance.AddStudentSubject(new StudentSubject()
+                    {
+                        ID = 0,
+                        Student = user,
+                        Subject = tsc.Subject
+                    });
+                }
+                catch { }
+            }
         }
     }
 }

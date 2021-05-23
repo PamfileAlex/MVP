@@ -43,6 +43,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             if (!Specializations.Remove(specialization))
                 throw new SchoolPlatformException("Remove Specialization failed");
             SpecializationDAL.RemoveSpecialization(specialization);
+            SubjectSpecializationBLL.Instance.UpdateSubjectSpecializations();
         }
 
         public void ModifySpecialization(Specialization specialization, int selectedIndex)
