@@ -9,15 +9,16 @@ using Tema3_School_Platform.Models.EntityLayer;
 
 namespace Tema3_School_Platform.Converters
 {
-    sealed class SubjectSpecializationConverter : IMultiValueConverter
+    sealed class TeacherSubjectClassConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values[0] == null || values[1] == null) { return null; }
-            return new SubjectSpecialization()
+            return new TeacherSubjectClass()
             {
-                Subject = values[0] as Subject,
-                Specialization = values[1] as Specialization
+                ID = 0,
+                Teacher = values[0] as User,
+                Subject = values[1] as Subject,
+                Class = values[2] as Class
             };
         }
 

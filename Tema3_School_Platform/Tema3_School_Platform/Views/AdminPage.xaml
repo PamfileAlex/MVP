@@ -25,6 +25,7 @@
                 <Button Content="Users" FontSize="31" Padding="5" Command="{Binding MenuCommand}" CommandParameter="1"/>
                 <Button Content="Specialization-Subject" FontSize="31" Padding="5" Command="{Binding MenuCommand}" CommandParameter="2"/>
                 <Button Content="Classes" FontSize="31" Padding="5" Command="{Binding MenuCommand}" CommandParameter="3"/>
+                <Button Content="Teacher" FontSize="31" Padding="5" Command="{Binding MenuCommand}" CommandParameter="4"/>
             </WrapPanel>
         </Border>
         <Frame Grid.Row="1" Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden">

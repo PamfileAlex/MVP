@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace Tema3_School_Platform.Converters
 {
-    class SelectedIndexToVisibilityConverter : IValueConverter
+    sealed class SelectedIndexToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

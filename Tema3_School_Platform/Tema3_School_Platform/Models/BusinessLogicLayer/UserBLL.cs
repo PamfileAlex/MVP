@@ -23,6 +23,13 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             Users = UserDAL.GetAllUsers();
         }
 
+        public void Init() { }
+
+        public User GetUser(int id)
+        {
+            return Users.First(user => user.ID == id);
+        }
+
         public void UserLogin(String[] loginInfo)
         {
             User.CurrentUser = UserDAL.UserLogin(loginInfo[0], loginInfo[1]);

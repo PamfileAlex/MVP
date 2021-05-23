@@ -56,6 +56,8 @@ namespace Tema3_School_Platform.Utils
                     return new SubjectSpecializationPage();
                 case 3:
                     return new ClassPage();
+                case 4:
+                    return new TeacherSubjectClassPage();
                 default:
                     return null;
             }
