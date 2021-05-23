@@ -35,7 +35,7 @@ namespace Tema3_School_Platform.ViewModels
                 dataGridSelectedIndex = value;
                 NotifyPropertyChanged("SelectedIndex");
                 ErrorMessage = String.Empty;
-                if (DataGridSelectedIndex == -1) { User = new User(0); ; return; }
+                if (DataGridSelectedIndex == -1) { User = new User(0); return; }
                 User = new User(UserBLL.Instance.Users[DataGridSelectedIndex]);
             }
         }

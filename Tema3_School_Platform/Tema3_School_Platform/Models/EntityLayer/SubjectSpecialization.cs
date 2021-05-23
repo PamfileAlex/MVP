@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tema3_School_Platform.Models.BusinessLogicLayer;
+
 using Tema3_School_Platform.Utils;
 
 namespace Tema3_School_Platform.Models.EntityLayer
@@ -21,7 +21,6 @@ namespace Tema3_School_Platform.Models.EntityLayer
             {
                 thesis = value;
                 NotifyPropertyChanged("Thesis");
-                //SubjectSpecializationBLL.Instance.ModifySubjectSpecialization(this);
             }
         }
 

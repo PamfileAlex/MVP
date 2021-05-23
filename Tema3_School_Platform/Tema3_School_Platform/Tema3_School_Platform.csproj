@@ -70,10 +70,12 @@
     <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Converters\ProfessorVisibilityConverter.cs" />
     <Compile Include="Exceptions\SchoolPlatformException.cs" />
+    <Compile Include="Models\BusinessLogicLayer\ClassBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SpecializationBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SubjectBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SubjectSpecializationBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\UserBLL.cs" />
+    <Compile Include="Models\DataAccessLayer\ClassDAL.cs" />
     <Compile Include="Models\DataAccessLayer\DALHelper.cs" />
     <Compile Include="Models\DataAccessLayer\SpecializationDAL.cs" />
     <Compile Include="Models\DataAccessLayer\SubjectDAL.cs" />

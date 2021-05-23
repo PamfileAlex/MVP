@@ -21,13 +21,14 @@
         <convert:SelectedIndexToVisibilityConverter x:Key="SelectedIndexToVisibilityConverter"/>
     </Page.Resources>
 
-    <Grid Margin="30" Background="{StaticResource Surface}">
+    <Grid Margin="30,0,30,30" Background="{StaticResource Surface}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Background="{StaticResource SurfaceDarker}">
+            <TextBlock Text="Specialization" Height="30" FontSize="22" Foreground="{StaticResource Text}" HorizontalAlignment="Center"/>
             <ListBox Name="SpecializationList" ItemsSource="{Binding Specializations}" DisplayMemberPath="Name" SelectedIndex="{Binding SpecializationSelectedIndex}" Background="{StaticResource SurfaceDarker}" FontSize="30" Foreground="{StaticResource Text}" Height="530"/>
             <TextBox Name="SpecializationName" Text="{Binding Specialization.Name}" Style="{StaticResource RoundedCorners}" Width="400" Height="40" FontSize="28" Margin="20,10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -42,12 +43,13 @@
                         IsEnabled="{Binding ElementName=SpecializationList, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"
                         Command="{Binding SpecializationRemoveCommand}" CommandParameter="{Binding Specialization}"/>
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="50" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20,10"
-                        Command="{Binding SpecializationClearCommand}"/>
+                        Command="{Binding ClearCommand}"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="1">
+            <TextBlock Text="Specialization-Subject" Height="30" FontSize="22" Foreground="{StaticResource Text}" HorizontalAlignment="Center"/>
             <ListBox Name="SubjectSpecializationList" ItemsSource="{Binding SubjectSpecializations}" DisplayMemberPath="Format" SelectedIndex="{Binding SubjectSpecializationSelectedIndex}"
-                     Background="{StaticResource Surface}" FontSize="30" Foreground="{StaticResource Text}" Height="530"/>
+                     Background="{StaticResource Surface}" FontSize="25" Foreground="{StaticResource Text}" Height="530"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Visibility="{Binding SubjectSpecializationSelectedIndex, Converter={StaticResource SelectedIndexToVisibilityConverter}}">
                 <CheckBox VerticalAlignment="Center" Margin="10,0" IsChecked="{Binding Thesis}">
                     <CheckBox.LayoutTransform>
@@ -70,8 +72,10 @@
                         IsEnabled="{Binding ElementName=SubjectSpecializationList, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"
                         Command="{Binding SubjectSpecializationRemoveCommand}" CommandParameter="{Binding ElementName=SubjectSpecializationList, Path=SelectedItem}"/>
             </StackPanel>
+            <TextBlock Text="{Binding ErrorMessage}" FontSize="30" Foreground="Red" HorizontalAlignment="Center"/>
         </StackPanel>
         <StackPanel Grid.Column="2" Background="{StaticResource SurfaceDarker}">
+            <TextBlock Text="Subject" Height="30" FontSize="22" Foreground="{StaticResource Text}" HorizontalAlignment="Center"/>
             <ListBox Name="SubjectList" ItemsSource="{Binding Subjects}" DisplayMemberPath="Name" SelectedIndex="{Binding SubjectSelectedIndex}" Background="{StaticResource SurfaceDarker}" FontSize="30" Foreground="{StaticResource Text}" Height="530"/>
             <TextBox Name="SubjectName" Text="{Binding Subject.Name}" Style="{StaticResource RoundedCorners}" Width="400" Height="40" FontSize="28" Margin="20,10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -86,7 +90,7 @@
                         IsEnabled="{Binding ElementName=SubjectList, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"
                         Command="{Binding SubjectRemoveCommand}" CommandParameter="{Binding Subject}"/>
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="50" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20,10"
-                        Command="{Binding SubjectClearCommand}"/>
+                        Command="{Binding ClearCommand}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

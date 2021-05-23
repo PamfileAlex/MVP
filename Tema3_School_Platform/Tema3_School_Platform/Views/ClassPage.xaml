@@ -25,11 +25,11 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0" Name="DataGrid" ItemsSource="{Binding Classes}" AutoGenerateColumns="False" SelectedIndex="{Binding DataGridSelectedIndex}" IsReadOnly="True">
+        <DataGrid Grid.Column="0" Name="DataGrid" ItemsSource="{Binding Classes}" AutoGenerateColumns="False" SelectedIndex="{Binding SelectedIndex}" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding }" Width="110"/>
-                <DataGridTextColumn Header="Specialization" Binding="{Binding }" Width="110"/>
-                <DataGridTextColumn Header="Head Teacher" Binding="{Binding }" Width="160"/>
+                <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="110"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="110"/>
+                <DataGridTextColumn Header="Specialization" Binding="{Binding Specialization.Name}" Width="160"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -46,22 +46,22 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Name="Name" Text="{Binding User.FirstName}"  Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Specialization:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" Name="Specialization" Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Head Teacher:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="2" Grid.Column="1" Name="HeadTeacher" Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Year:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="Year" Text="{Binding Class.Year}"  Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="Name" Text="{Binding Class.Name}" Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Specialization:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" Name="Specialization" ItemsSource="{Binding Specializations}" DisplayMemberPath="Name" SelectedItem="{Binding Class.Specialization}" Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="150">
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Add" FontSize="30" FontWeight="Bold" Margin="20"
-                        Command="{Binding AddCommand}" CommandParameter="{Binding User}"/>
+                        Command="{Binding AddCommand}" CommandParameter="{Binding Class}"/>
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Modify" FontSize="30" FontWeight="Bold" Margin="20"
                         IsEnabled="{Binding ElementName=DataGrid, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"
-                        Command="{Binding ModifyCommand}" CommandParameter="{Binding User}"/>
+                        Command="{Binding ModifyCommand}" CommandParameter="{Binding Class}"/>
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Remove" FontSize="30" FontWeight="Bold" Margin="20"
                         IsEnabled="{Binding ElementName=DataGrid, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"
-                        Command="{Binding RemoveCommand}" CommandParameter="{Binding User}"/>
+                        Command="{Binding RemoveCommand}" CommandParameter="{Binding Class}"/>
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20"
                         Command="{Binding ClearCommand}"/>
             </StackPanel>

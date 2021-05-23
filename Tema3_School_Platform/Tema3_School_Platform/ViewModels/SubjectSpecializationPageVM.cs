@@ -112,24 +112,24 @@ namespace Tema3_School_Platform.ViewModels
             {
                 if (SubjectSelectedIndex == -1 || SpecializationSelectedIndex == -1) { return false; }
                 int index = SubjectSpecializationBLL.Instance.IndexOfSubjectSpecialization(Subjects[SubjectSelectedIndex].ID, Specializations[SpecializationSelectedIndex].ID);
-                if (index == -1) { return false; }
+                if (index == -1) { return true; }
                 SubjectSpecializationSelectedIndex = index;
-                return true;
+                return false;
             }
         }
 
         public ICommand SpecializationAddCommand { get; }
         public ICommand SpecializationModifyCommand { get; }
         public ICommand SpecializationRemoveCommand { get; }
-        public ICommand SpecializationClearCommand { get; }
 
         public ICommand SubjectAddCommand { get; }
         public ICommand SubjectModifyCommand { get; }
         public ICommand SubjectRemoveCommand { get; }
-        public ICommand SubjectClearCommand { get; }
 
         public ICommand SubjectSpecializationAddCommand { get; }
         public ICommand SubjectSpecializationRemoveCommand { get; }
+
+        public ICommand ClearCommand { get; }
 
         public SubjectSpecializationPageVM()
         {
@@ -138,13 +138,12 @@ namespace Tema3_School_Platform.ViewModels
             this.SpecializationAddCommand = new RelayCommand<Specialization>(specialization => ErrorWrapper(() => { SpecializationBLL.Instance.AddSpecialization(specialization); Clear(); }));
             this.SpecializationModifyCommand = new RelayCommand<Specialization>(specialization => ErrorWrapper(() => { SpecializationBLL.Instance.ModifySpecialization(specialization, SpecializationSelectedIndex); Clear(); }));
             this.SpecializationRemoveCommand = new RelayCommand<Specialization>(specialization => ErrorWrapper(() => { SpecializationBLL.Instance.RemoveSpecialization(SpecializationBLL.Instance.Specializations[SpecializationSelectedIndex]); Clear(); }));
-            this.SpecializationClearCommand = new ActionCommand(Clear);
             this.SubjectAddCommand = new RelayCommand<Subject>(subject => ErrorWrapper(() => { SubjectBLL.Instance.AddSubject(subject); Clear(); }));
             this.SubjectModifyCommand = new RelayCommand<Subject>(subject => ErrorWrapper(() => { SubjectBLL.Instance.ModifySubject(subject, SubjectSelectedIndex); Clear(); }));
             this.SubjectRemoveCommand = new RelayCommand<Subject>(subject => ErrorWrapper(() => { SubjectBLL.Instance.RemoveSubject(SubjectBLL.Instance.Subjects[SubjectSelectedIndex]); Clear(); }));
-            this.SubjectClearCommand = new ActionCommand(Clear);
             this.SubjectSpecializationAddCommand = new RelayCommand<SubjectSpecialization>(SubjectSpecializationBLL.Instance.AddSubjectSpecialization);
             this.SubjectSpecializationRemoveCommand = new RelayCommand<SubjectSpecialization>(SubjectSpecializationBLL.Instance.RemoveSubjectSpecialization);
+            this.ClearCommand = new ActionCommand(Clear);
         }
 
         private void Clear()
