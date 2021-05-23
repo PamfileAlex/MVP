@@ -62,5 +62,14 @@ namespace Tema3_School_Platform.Utils
                     return null;
             }
         }
+
+        public static Page ProfessorPageControl(int option)
+        {
+            switch (option)
+            {
+                default:
+                    return null;
+            }
+        }
     }
 }

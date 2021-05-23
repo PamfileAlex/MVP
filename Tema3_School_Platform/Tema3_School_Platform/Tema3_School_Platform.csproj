@@ -73,6 +73,7 @@
     <Compile Include="Exceptions\SchoolPlatformException.cs" />
     <Compile Include="Models\BusinessLogicLayer\ClassBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SpecializationBLL.cs" />
+    <Compile Include="Models\BusinessLogicLayer\StudentSubjectBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SubjectBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SubjectSpecializationBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\TeacherSubjectClassBLL.cs" />
@@ -80,12 +81,14 @@
     <Compile Include="Models\DataAccessLayer\ClassDAL.cs" />
     <Compile Include="Models\DataAccessLayer\DALHelper.cs" />
     <Compile Include="Models\DataAccessLayer\SpecializationDAL.cs" />
+    <Compile Include="Models\DataAccessLayer\StudentSubjectDAL.cs" />
     <Compile Include="Models\DataAccessLayer\SubjectDAL.cs" />
     <Compile Include="Models\DataAccessLayer\SubjectSpecializationDAL.cs" />
     <Compile Include="Models\DataAccessLayer\TeacherSubjectClassDAL.cs" />
     <Compile Include="Models\DataAccessLayer\UserDAL.cs" />
     <Compile Include="Models\EntityLayer\Class.cs" />
     <Compile Include="Models\EntityLayer\Specialization.cs" />
+    <Compile Include="Models\EntityLayer\StudentSubject.cs" />
     <Compile Include="Models\EntityLayer\Subject.cs" />
     <Compile Include="Models\EntityLayer\SubjectSpecialization.cs" />
     <Compile Include="Models\EntityLayer\TeacherSubjectClass.cs" />

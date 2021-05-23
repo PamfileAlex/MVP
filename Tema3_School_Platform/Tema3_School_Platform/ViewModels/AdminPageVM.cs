@@ -14,7 +14,6 @@ namespace Tema3_School_Platform.ViewModels
 {
     class AdminPageVM : BasePropertyChanged
     {
-        public ICommand MenuCommand { get; }
         private Page currentPage;
         public Page CurrentPage
         {
@@ -25,6 +24,8 @@ namespace Tema3_School_Platform.ViewModels
                 NotifyPropertyChanged("CurrentPage");
             }
         }
+
+        public ICommand MenuCommand { get; }
 
         public AdminPageVM()
         {

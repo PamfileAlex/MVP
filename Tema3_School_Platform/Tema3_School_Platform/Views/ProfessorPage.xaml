@@ -15,6 +15,17 @@
     </Page.DataContext>
 
     <Grid>
-        <TextBlock Text="PROFESSOR" FontSize="100" Foreground="{StaticResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal" Background="#dddddd">
+            <Button Content="Log out" FontSize="34" Padding="25,5" Command="{Binding MenuCommand}" CommandParameter="0"/>
+            <Button Content="HeadTeacher" FontSize="34" Padding="25,5" Command="{Binding MenuCommand}" CommandParameter="1"/>
+            <Button Content="Users" FontSize="34" Padding="25,5" Command="{Binding MenuCommand}" CommandParameter="1"/>
+        </WrapPanel>
+        <Frame Grid.Row="1" Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden">
+
+        </Frame>
     </Grid>
 </Page>
