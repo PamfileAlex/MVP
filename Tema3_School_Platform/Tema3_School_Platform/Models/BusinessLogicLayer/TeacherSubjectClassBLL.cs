@@ -13,7 +13,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
     class TeacherSubjectClassBLL
     {
         public static TeacherSubjectClassBLL Instance { get; } = new TeacherSubjectClassBLL();
-        public ObservableCollection<TeacherSubjectClass> TeacherSubjectClassList { get; set; }
+        public ObservableCollection<TeacherSubjectClass> TeacherSubjectClassList { get; private set; }
         static TeacherSubjectClassBLL() { }
         private TeacherSubjectClassBLL()
         {
@@ -28,6 +28,26 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             TeacherSubjectClassList = TeacherSubjectClassDAL.GetTeacherSubjectClassList();
         }
 
+        public void RemovedSubjectSpecialization(int subjectID, int specializationID)
+        {
+            List<int> classIDs = new List<int>();
+            foreach (var classObj in ClassBLL.Instance.Classes)
+            {
+                if (classObj.Specialization.ID != specializationID) { continue; }
+                classIDs.Add(classObj.ID);
+            }
+            List<TeacherSubjectClass> toBeRemoved = new List<TeacherSubjectClass>();
+            foreach (var tsc in TeacherSubjectClassList)
+            {
+                if (tsc.Subject.ID != subjectID || !classIDs.Contains(tsc.Class.ID)) { continue; }
+                toBeRemoved.Add(tsc);
+            }
+            foreach (var tsc in toBeRemoved)
+            {
+                RemoveTeacherSubjectClass(tsc);
+            }
+        }
+
         public void AddTeacherSubjectClass(TeacherSubjectClass teacherSubjectClass)
         {
             CheckFields(teacherSubjectClass);
@@ -37,7 +57,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             if (fromDB == null)
                 throw new SchoolPlatformException("Add TeacherSubjectClass failed");
             TeacherSubjectClassList.Add(fromDB);
-            StudentSubject(fromDB);
+            //StudentSubject(fromDB);
         }
 
         public void RemoveTeacherSubjectClass(TeacherSubjectClass teacherSubjectClass)
@@ -71,7 +91,9 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
                     {
                         ID = 0,
                         Student = user,
-                        Subject = teacherSubjectClass.Subject
+                        Subject = teacherSubjectClass.Subject,
+                        FirstSemester = false,
+                        SecondSemester = false
                     });
                 }
                 catch { }

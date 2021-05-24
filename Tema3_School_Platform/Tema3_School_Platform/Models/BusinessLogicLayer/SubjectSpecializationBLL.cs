@@ -13,7 +13,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
     class SubjectSpecializationBLL
     {
         public static SubjectSpecializationBLL Instance { get; } = new SubjectSpecializationBLL();
-        public ObservableCollection<SubjectSpecialization> SubjectSpecializations { get; set; }
+        public ObservableCollection<SubjectSpecialization> SubjectSpecializations { get; private set; }
         static SubjectSpecializationBLL() { }
         private SubjectSpecializationBLL()
         {
@@ -34,6 +34,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             if (fromDB == null)
                 throw new SchoolPlatformException("Add SubjectSpecialization failed");
             SubjectSpecializations.Add(fromDB);
+            StudentSubject(fromDB);
         }
 
         public void RemoveSubjectSpecialization(SubjectSpecialization subjectSpecialization)
@@ -41,6 +42,9 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             if (!SubjectSpecializations.Remove(subjectSpecialization))
                 throw new SchoolPlatformException("Remove SubjectSpecialization failed");
             SubjectSpecializationDAL.RemoveSubjectSpecialization(subjectSpecialization);
+
+            TeacherSubjectClassBLL.Instance.RemovedSubjectSpecialization(subjectSpecialization.Subject.ID, subjectSpecialization.Specialization.ID);
+            StudentSubjectBLL.Instance.RemovedSubjectSpecialization(subjectSpecialization.Subject.ID, subjectSpecialization.Specialization.ID);
         }
 
         public void ModifySubjectSpecialization(SubjectSpecialization subjectSpecialization)
@@ -58,6 +62,33 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             catch
             {
                 return -1;
+            }
+        }
+
+        private void StudentSubject(SubjectSpecialization subjectSpecialization)
+        {
+            List<int> classIDs = new List<int>();
+            foreach (var classObj in ClassBLL.Instance.Classes)
+            {
+                if (classObj.Specialization.ID != subjectSpecialization.Specialization.ID) { continue; }
+                classIDs.Add(classObj.ID);
+            }
+            foreach (var user in UserBLL.Instance.Users)
+            {
+                if (user.Role != User.UserRole.Student) { continue; }
+                if (!classIDs.Contains(user.Class.ID)) { continue; }
+                try
+                {
+                    StudentSubjectBLL.Instance.AddStudentSubject(new StudentSubject()
+                    {
+                        ID = 0,
+                        Student = user,
+                        Subject = subjectSpecialization.Subject,
+                        FirstSemester = false,
+                        SecondSemester = false
+                    });
+                }
+                catch { }
             }
         }
     }

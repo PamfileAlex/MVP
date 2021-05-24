@@ -119,20 +119,38 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
 
         private void StudentSubject(User user)
         {
-            foreach (var tsc in TeacherSubjectClassBLL.Instance.TeacherSubjectClassList)
+            foreach (var ss in SubjectSpecializationBLL.Instance.SubjectSpecializations)
             {
-                if (user.Class.ID != tsc.Class.ID) { continue; }
+                if (user.Class.Specialization.ID != ss.Specialization.ID) { continue; }
                 try
                 {
                     StudentSubjectBLL.Instance.AddStudentSubject(new StudentSubject()
                     {
                         ID = 0,
                         Student = user,
-                        Subject = tsc.Subject
+                        Subject = ss.Subject,
+                        FirstSemester = false,
+                        SecondSemester = false
                     });
                 }
                 catch { }
             }
+            //foreach (var tsc in TeacherSubjectClassBLL.Instance.TeacherSubjectClassList)
+            //{
+            //    if (user.Class.ID != tsc.Class.ID) { continue; }
+            //    try
+            //    {
+            //        StudentSubjectBLL.Instance.AddStudentSubject(new StudentSubject()
+            //        {
+            //            ID = 0,
+            //            Student = user,
+            //            Subject = tsc.Subject,
+            //            FirstSemester = false,
+            //            SecondSemester = false
+            //        });
+            //    }
+            //    catch { }
+            //}
         }
     }
 }

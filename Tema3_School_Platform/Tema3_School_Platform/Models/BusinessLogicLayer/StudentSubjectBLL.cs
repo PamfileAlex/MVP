@@ -13,7 +13,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
     class StudentSubjectBLL
     {
         public static StudentSubjectBLL Instance { get; } = new StudentSubjectBLL();
-        public ObservableCollection<StudentSubject> StudentSubjectList { get; set; }
+        public ObservableCollection<StudentSubject> StudentSubjectList { get; private set; }
         static StudentSubjectBLL() { }
         private StudentSubjectBLL()
         {
@@ -39,6 +39,31 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         public StudentSubject GetStudentSubject(int studentID, int subjectID)
         {
             return StudentSubjectList.First(ss => ss.Student.ID == studentID && ss.Subject.ID == subjectID);
+        }
+
+        public void RemovedSubjectSpecialization(int subjectID, int specializationID)
+        {
+            List<int> classIDs = new List<int>();
+            foreach (var classObj in ClassBLL.Instance.Classes)
+            {
+                if (classObj.Specialization.ID != specializationID) { continue; }
+                classIDs.Add(classObj.ID);
+            }
+            foreach (var user in UserBLL.Instance.Users)
+            {
+                if (user.Role != User.UserRole.Student || !classIDs.Contains(user.Class.ID)) { continue; }
+                StudentSubject studentSubject;
+                try
+                {
+                    studentSubject = GetStudentSubject(user.ID, subjectID);
+                }
+                catch { continue; }
+                try
+                {
+                    RemoveStudentSubject(studentSubject);
+                }
+                catch { }
+            }
         }
 
         public void AddStudentSubject(StudentSubject studentSubject)
