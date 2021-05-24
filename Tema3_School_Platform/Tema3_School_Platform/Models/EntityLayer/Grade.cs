@@ -12,6 +12,7 @@ namespace Tema3_School_Platform.Models.EntityLayer
         public StudentSubject StudentSubject { get; set; }
         public bool Semester { get; set; }
         public float Value { get; set; }
+        public bool Thesis { get; set; }
 
         public String SemesterFormated { get { return Semester ? "Sem II" : "Sem I"; } }
 
@@ -22,6 +23,7 @@ namespace Tema3_School_Platform.Models.EntityLayer
             this.StudentSubject = other.StudentSubject;
             this.Semester = other.Semester;
             this.Value = other.Value;
+            this.Thesis = other.Thesis;
         }
     }
 }

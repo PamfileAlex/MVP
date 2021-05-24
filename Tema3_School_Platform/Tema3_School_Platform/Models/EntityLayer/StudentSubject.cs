@@ -19,6 +19,8 @@ namespace Tema3_School_Platform.Models.EntityLayer
             this.ID = other.ID;
             this.Student = other.Student;
             this.Subject = other.Subject;
+            this.FirstSemester = other.FirstSemester;
+            this.SecondSemester = other.SecondSemester;
         }
     }
 }

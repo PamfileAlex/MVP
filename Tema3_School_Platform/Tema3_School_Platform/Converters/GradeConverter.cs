@@ -34,7 +34,8 @@ namespace Tema3_School_Platform.Converters
                 ID = 0,
                 StudentSubject = studentSubject,
                 Semester = (bool)values[2],
-                Value = value
+                Value = value,
+                Thesis = (bool)values[4]
             };
         }
 

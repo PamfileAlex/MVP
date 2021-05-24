@@ -30,7 +30,8 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                         ID = reader.GetInt32(0),
                         StudentSubject = DALHelper.GetStudentSubject(reader.GetInt32(1)),
                         Semester = reader.GetBoolean(2),
-                        Value = reader.GetFloat(3)
+                        Value = reader.GetFloat(3),
+                        Thesis = reader.GetBoolean(4)
                     });
                 }
                 reader.Close();
@@ -62,7 +63,8 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                         ID = reader.GetInt32(0),
                         StudentSubject = DALHelper.GetStudentSubject(reader.GetInt32(1)),
                         Semester = reader.GetBoolean(2),
-                        Value = reader.GetFloat(3)
+                        Value = reader.GetFloat(3),
+                        Thesis = reader.GetBoolean(4)
                     };
                 }
                 reader.Close();
@@ -82,7 +84,8 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                 {
                     new SqlParameter("studentSubjectID", grade.StudentSubject.ID),
                     new SqlParameter("@semester", Convert.ToInt32(grade.Semester)),
-                    new SqlParameter("@value", grade.Value)
+                    new SqlParameter("@value", grade.Value),
+                    new SqlParameter("@thesis", Convert.ToInt32(grade.Thesis))
                 });
                 connection.Open();
                 command.ExecuteNonQuery();

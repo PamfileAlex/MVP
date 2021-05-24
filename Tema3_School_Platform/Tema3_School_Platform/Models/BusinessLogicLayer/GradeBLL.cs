@@ -47,6 +47,11 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         {
             if (grade == null || grade.StudentSubject == null || grade.Value == default)
                 throw new SchoolPlatformException("Please fill all fields");
+            if (!grade.Thesis) { return; }
+            if (Grades.Where(item => item.Thesis && item.Semester == grade.Semester
+            && item.StudentSubject.Student.ID == grade.StudentSubject.Student.ID
+             && item.StudentSubject.Subject.ID == grade.StudentSubject.Subject.ID).Count() != 0)
+                throw new SchoolPlatformException("Thesis already exists");
         }
     }
 }

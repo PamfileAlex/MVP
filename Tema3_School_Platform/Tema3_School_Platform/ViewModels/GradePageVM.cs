@@ -92,6 +92,18 @@ namespace Tema3_School_Platform.ViewModels
             }
         }
 
+        private bool thesis;
+        public bool Thesis
+        {
+            get { return thesis; }
+            set
+            {
+                thesis = value;
+                NotifyPropertyChanged("Thesis");
+                SelectedGrade = null;
+            }
+        }
+
         private Grade selectedGrade;
         public Grade SelectedGrade
         {
@@ -121,18 +133,20 @@ namespace Tema3_School_Platform.ViewModels
         {
             //grades = GradeBLL.Instance.Grades.Where(grade => StudentSubjectBLL.Instance.StudentSubjectList.Where(ss
             //    => ss.Student.ID == grade.StudentSubject.Student.ID && ss.Subject.ID == grade.StudentSubject.Subject.ID).Count() != 0).ToObservableCollection();
-            Grades = GradeBLL.Instance.Grades.Where(grade => grade.StudentSubject.Student.ID == Student.ID && grade.StudentSubject.Subject.ID == Subject.ID).ToObservableCollection();
+            Grades = GradeBLL.Instance.Grades.Where(grade => grade.StudentSubject.Student.ID == Student.ID && grade.StudentSubject.Subject.ID == Subject.ID && grade.Semester == Semester).ToObservableCollection();
         }
 
         private void Clear()
         {
             Grades = GradeBLL.Instance.Grades.Where(grade => TeacherSubjectClassBLL.Instance.TeacherSubjectClassList.Where(tsc
-                => tsc.Subject.ID == grade.StudentSubject.Subject.ID && tsc.Teacher.ID == UserBLL.Instance.CurrentUser.ID &&
-                grade.Semester == Semester).Count() != 0).ToObservableCollection();
+                => tsc.Subject.ID == grade.StudentSubject.Subject.ID && tsc.Teacher.ID == UserBLL.Instance.CurrentUser.ID).Count() != 0).ToObservableCollection();
             GradeValue = String.Empty;
             Student = null;
             Subject = null;
             SelectedGrade = null;
+            Semester = false;
+            Thesis = false;
+            ErrorMessage = String.Empty;
         }
     }
 }

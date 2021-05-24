@@ -36,6 +36,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Subject:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
                 <ComboBox Grid.Row="0" Grid.Column="1" Name="Subject" ItemsSource="{Binding Subjects}" DisplayMemberPath="Name" SelectedItem="{Binding Subject}"
@@ -54,6 +55,13 @@
                         <ScaleTransform ScaleX="2" ScaleY="2" />
                     </CheckBox.LayoutTransform>
                 </CheckBox>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Thesis:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="4" Grid.Column="1" Name="Thesis" VerticalAlignment="Center" Margin="20,0" IsChecked="{Binding Thesis}"
+                          IsEnabled="{Binding ElementName=Student, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="2" ScaleY="2" />
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="150">
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Add" FontSize="30" FontWeight="Bold" Margin="20"
@@ -64,6 +72,7 @@
                             <Binding ElementName="Subject" Path="SelectedItem"/>
                             <Binding ElementName="Semester" Path="IsChecked"/>
                             <Binding ElementName="Grade" Path="Text"/>
+                            <Binding ElementName="Thesis" Path="IsChecked"/>
                         </MultiBinding>
                     </Button.CommandParameter>
                 </Button>
@@ -85,6 +94,7 @@
                 <DataGridTextColumn Header="Subject" Binding="{Binding StudentSubject.Subject.Name}" Width="140"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding SemesterFormated}" Width="55"/>
                 <DataGridTextColumn Header="Grade" Binding="{Binding Value}" Width="55"/>
+                <DataGridTextColumn Header="Thesis" Binding="{Binding Thesis}" Width="55"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
