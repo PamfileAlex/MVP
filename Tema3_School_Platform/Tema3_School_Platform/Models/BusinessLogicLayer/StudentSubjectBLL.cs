@@ -35,6 +35,11 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             return StudentSubjectList.First(ss => ss.ID == id);
         }
 
+        public StudentSubject GetStudentSubject(int studentID, int subjectID)
+        {
+            return StudentSubjectList.First(ss => ss.Student.ID == studentID && ss.Subject.ID == subjectID);
+        }
+
         public void AddStudentSubject(StudentSubject studentSubject)
         {
             CheckFields(studentSubject);

@@ -88,7 +88,6 @@ namespace Tema3_School_Platform.Models.EntityLayer
             get { return FirstName + " " + LastName; }
         }
 
-        public static User CurrentUser { get; set; } = null;
         public static User NullUser { get; } = new User(0);
         public User(int id)
         {

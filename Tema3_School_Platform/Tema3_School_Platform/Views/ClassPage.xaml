@@ -49,7 +49,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Year:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Name="Year" Text="{Binding Class.Year}"  Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Name="Name" Text="{Binding Class.Name}" Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="ClassName" Text="{Binding Class.Name}" Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Specialization:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
                 <ComboBox Grid.Row="2" Grid.Column="1" Name="Specialization" ItemsSource="{Binding Specializations}" DisplayMemberPath="Name" SelectedItem="{Binding Class.Specialization}" Style="{StaticResource RoundedCorners}" Width="600" Height="60" FontSize="40" Margin="20,10"/>
             </Grid>

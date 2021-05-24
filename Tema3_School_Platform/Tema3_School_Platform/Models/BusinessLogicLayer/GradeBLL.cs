@@ -45,7 +45,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
 
         private void CheckFields(Grade grade)
         {
-            if (grade.StudentSubject == null || grade.Value == default)
+            if (grade == null || grade.StudentSubject == null || grade.Value == default)
                 throw new SchoolPlatformException("Please fill all fields");
         }
     }

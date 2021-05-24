@@ -16,6 +16,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
     {
         public static UserBLL Instance { get; } = new UserBLL();
         public ObservableCollection<User> Users { get; }
+        public User CurrentUser { get; set; }
         static UserBLL() { }
         private UserBLL()
         {
@@ -32,10 +33,10 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
 
         public void UserLogin(String[] loginInfo)
         {
-            User.CurrentUser = UserDAL.UserLogin(loginInfo[0], loginInfo[1]);
-            if (User.CurrentUser == null)
+            CurrentUser = UserDAL.UserLogin(loginInfo[0], loginInfo[1]);
+            if (CurrentUser == null)
                 throw new SchoolPlatformException("Incorrect Email or Password");
-            switch (User.CurrentUser.Role)
+            switch (CurrentUser.Role)
             {
                 case User.UserRole.Admin:
                     ViewNavigator.ChangePage(ViewNavigator.MainPage.Admin);

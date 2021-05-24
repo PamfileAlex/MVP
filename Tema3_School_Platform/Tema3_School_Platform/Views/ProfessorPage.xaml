@@ -21,7 +21,8 @@
         </Grid.RowDefinitions>
         <WrapPanel Orientation="Horizontal" Background="#dddddd">
             <Button Content="Log out" FontSize="34" Padding="25,5" Command="{Binding MenuCommand}" CommandParameter="0"/>
-            <Button Content="HeadTeacher" FontSize="34" Padding="25,5" Command="{Binding MenuCommand}" CommandParameter="1"/>
+            <Button Content="HeadTeacher" FontSize="34" Padding="25,5" Command="{Binding MenuCommand}" CommandParameter="1"
+                    IsEnabled="{Binding HeadTeacher}"/>
             <Button Content="Grades" FontSize="34" Padding="25,5" Command="{Binding MenuCommand}" CommandParameter="2"/>
             <Button Content="Absences" FontSize="34" Padding="25,5" Command="{Binding MenuCommand}" CommandParameter="3"/>
             <Button Content="Calculate final grade" FontSize="34" Padding="25,5" Command="{Binding MenuCommand}" CommandParameter="4"/>

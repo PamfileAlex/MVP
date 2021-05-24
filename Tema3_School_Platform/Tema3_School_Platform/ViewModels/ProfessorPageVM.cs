@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+
 using Tema3_School_Platform.Commands;
+using Tema3_School_Platform.Models.BusinessLogicLayer;
 using Tema3_School_Platform.Utils;
 
 namespace Tema3_School_Platform.ViewModels
@@ -22,6 +24,8 @@ namespace Tema3_School_Platform.ViewModels
                 NotifyPropertyChanged("CurrentPage");
             }
         }
+
+        public bool HeadTeacher { get { return UserBLL.Instance.CurrentUser.Class != null; } }
 
         public ICommand MenuCommand { get; }
 

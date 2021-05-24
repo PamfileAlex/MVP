@@ -67,6 +67,8 @@ namespace Tema3_School_Platform.Utils
         {
             switch (option)
             {
+                case 2:
+                    return new GradePage();
                 default:
                     return null;
             }

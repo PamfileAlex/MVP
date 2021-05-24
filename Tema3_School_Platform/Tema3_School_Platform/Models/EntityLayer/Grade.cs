@@ -13,6 +13,8 @@ namespace Tema3_School_Platform.Models.EntityLayer
         public bool Semester { get; set; }
         public float Value { get; set; }
 
+        public String SemesterFormated { get { return Semester ? "Sem II" : "Sem I"; } }
+
         public Grade() { }
         public Grade(Grade other)
         {

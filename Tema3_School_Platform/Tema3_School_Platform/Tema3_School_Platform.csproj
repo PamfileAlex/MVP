@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="Commands\ActionCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\GradeConverter.cs" />
     <Compile Include="Converters\LoginConverter.cs" />
     <Compile Include="Converters\SelectedIndexToBoolConverter.cs" />
     <Compile Include="Converters\SelectedIndexToVisibilityConverter.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Converters\ProfessorVisibilityConverter.cs" />
     <Compile Include="Exceptions\SchoolPlatformException.cs" />
     <Compile Include="Models\BusinessLogicLayer\ClassBLL.cs" />
+    <Compile Include="Models\BusinessLogicLayer\GradeBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SpecializationBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\StudentSubjectBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SubjectBLL.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Models\BusinessLogicLayer\UserBLL.cs" />
     <Compile Include="Models\DataAccessLayer\ClassDAL.cs" />
     <Compile Include="Models\DataAccessLayer\DALHelper.cs" />
+    <Compile Include="Models\DataAccessLayer\GradeDAL.cs" />
     <Compile Include="Models\DataAccessLayer\SpecializationDAL.cs" />
     <Compile Include="Models\DataAccessLayer\StudentSubjectDAL.cs" />
     <Compile Include="Models\DataAccessLayer\SubjectDAL.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="Models\DataAccessLayer\TeacherSubjectClassDAL.cs" />
     <Compile Include="Models\DataAccessLayer\UserDAL.cs" />
     <Compile Include="Models\EntityLayer\Class.cs" />
+    <Compile Include="Models\EntityLayer\Grade.cs" />
     <Compile Include="Models\EntityLayer\Specialization.cs" />
     <Compile Include="Models\EntityLayer\StudentSubject.cs" />
     <Compile Include="Models\EntityLayer\Subject.cs" />
@@ -98,6 +102,7 @@
     <Compile Include="Utils\ViewNavigator.cs" />
     <Compile Include="ViewModels\AdminPageVM.cs" />
     <Compile Include="ViewModels\ClassPageVM.cs" />
+    <Compile Include="ViewModels\GradePageVM.cs" />
     <Compile Include="ViewModels\SubjectSpecializationPageVM.cs" />
     <Compile Include="ViewModels\TeacherSubjectClassVM.cs" />
     <Compile Include="ViewModels\UserPageVM.cs" />
@@ -110,6 +115,9 @@
     </Compile>
     <Compile Include="Views\ClassPage.xaml.cs">
       <DependentUpon>ClassPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GradePage.xaml.cs">
+      <DependentUpon>GradePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TeacherSubjectClassPage.xaml.cs">
       <DependentUpon>TeacherSubjectClassPage.xaml</DependentUpon>
@@ -165,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ClassPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GradePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
