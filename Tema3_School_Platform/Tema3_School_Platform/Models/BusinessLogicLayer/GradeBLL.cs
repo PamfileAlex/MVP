@@ -29,6 +29,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         public void AddGrade(Grade grade)
         {
             CheckFields(grade);
+            CheckSemesters(grade);
             GradeDAL.AddGrade(grade);
             Grade fromDB = GradeDAL.GetGrade(grade.StudentSubject, grade.Semester, grade.Value);
             if (fromDB == null)
@@ -38,6 +39,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
 
         public void RemoveGrade(Grade grade)
         {
+            CheckSemesters(grade);
             if (!Grades.Remove(grade))
                 throw new SchoolPlatformException("Remove Grade failed");
             GradeDAL.RemoveGrade(grade);
@@ -52,6 +54,20 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             && item.StudentSubject.Student.ID == grade.StudentSubject.Student.ID
              && item.StudentSubject.Subject.ID == grade.StudentSubject.Subject.ID).Count() != 0)
                 throw new SchoolPlatformException("Thesis already exists");
+        }
+
+        private void CheckSemesters(Grade grade)
+        {
+            if (grade.Semester)
+            {
+                if (grade.StudentSubject.FirstSemester)
+                    throw new SchoolPlatformException("StudentSubject is closed\nfor First Semester");
+            }
+            else
+            {
+                if (grade.StudentSubject.SecondSemester)
+                    throw new SchoolPlatformException("StudentSubject is closed\nfor Second Semester");
+            }
         }
     }
 }

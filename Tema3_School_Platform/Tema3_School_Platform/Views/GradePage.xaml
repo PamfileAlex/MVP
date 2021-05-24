@@ -50,21 +50,21 @@
                          IsEnabled="{Binding ElementName=Student, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"/>
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Semester:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
                 <CheckBox Grid.Row="3" Grid.Column="1" Name="Semester" VerticalAlignment="Center" Margin="20,0" IsChecked="{Binding Semester}"
-                          IsEnabled="{Binding ElementName=Student, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}">
+                          IsEnabled="{Binding ElementName=Student, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}" HorizontalAlignment="Left">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="2" ScaleY="2" />
                     </CheckBox.LayoutTransform>
                 </CheckBox>
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Thesis:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
                 <CheckBox Grid.Row="4" Grid.Column="1" Name="Thesis" VerticalAlignment="Center" Margin="20,0" IsChecked="{Binding Thesis}"
-                          IsEnabled="{Binding ElementName=Student, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}">
+                          IsEnabled="{Binding ElementName=Student, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}" HorizontalAlignment="Left">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="2" ScaleY="2" />
                     </CheckBox.LayoutTransform>
                 </CheckBox>
             </Grid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="150">
-                <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Add" FontSize="30" FontWeight="Bold" Margin="20"
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
+                <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Add" FontSize="30" FontWeight="Bold" Margin="20,10"
                         Command="{Binding AddCommand}">
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource GradeConverter}">
@@ -76,13 +76,18 @@
                         </MultiBinding>
                     </Button.CommandParameter>
                 </Button>
-                <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Remove" FontSize="30" FontWeight="Bold" Margin="20"
+                <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Remove" FontSize="30" FontWeight="Bold" Margin="20,10"
                         IsEnabled="{Binding ElementName=DataGrid, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"
                         Command="{Binding RemoveCommand}" CommandParameter="{Binding ElementName=DataGrid, Path=SelectedItem}"/>
-                <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Search" FontSize="30" FontWeight="Bold" Margin="20"
+                <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Final" FontSize="30" FontWeight="Bold" Margin="20,10"
+                        IsEnabled="{Binding ElementName=Student, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"
+                        Command="{Binding FinalGradeCommand}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Search" FontSize="30" FontWeight="Bold" Margin="20,10"
                         IsEnabled="{Binding ElementName=Student, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"
                         Command="{Binding SearchCommand}"/>
-                <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20"
+                <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20,10"
                         Command="{Binding ClearCommand}"/>
             </StackPanel>
             <TextBlock Text="{Binding ErrorMessage}" FontSize="50" Foreground="Red" HorizontalAlignment="Center"/>
@@ -97,5 +102,6 @@
                 <DataGridTextColumn Header="Thesis" Binding="{Binding Thesis}" Width="55"/>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBlock Text="{Binding FinalGrade, StringFormat=Final Grade: {0}}" FontSize="40" Foreground="{StaticResource Text}" Margin="274,348,90,340" VerticalAlignment="Center"/>
     </Grid>
 </Page>

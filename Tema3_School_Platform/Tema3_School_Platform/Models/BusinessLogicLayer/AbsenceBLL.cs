@@ -29,6 +29,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         public void AddAbsence(Absence absence)
         {
             CheckFields(absence);
+            CheckSemesters(absence);
             AbsenceDAL.AddAbsence(absence);
             Absence fromDB = AbsenceDAL.GetAbsence(absence.StudentSubject, absence.Semester, absence.Type);
             if (fromDB == null)
@@ -38,6 +39,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
 
         public void RemoveAbsence(Absence absence)
         {
+            CheckSemesters(absence);
             if (!Absences.Remove(absence))
                 throw new SchoolPlatformException("Remove Absence failed");
             AbsenceDAL.RemoveAbsence(absence);
@@ -45,6 +47,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
 
         public void ModifyAbsence(Absence absence)
         {
+            CheckSemesters(absence);
             if (absence.Type == Absence.AbsenceType.Unmotivated)
                 absence.Type = Absence.AbsenceType.Motivated;
             else if (absence.Type == Absence.AbsenceType.Motivated)
@@ -56,6 +59,20 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         {
             if (absence == null || absence.StudentSubject == null || absence.Type == Absence.AbsenceType.None)
                 throw new SchoolPlatformException("Please fill all fields");
+        }
+
+        private void CheckSemesters(Absence absence)
+        {
+            if (absence.Semester)
+            {
+                if (absence.StudentSubject.FirstSemester)
+                    throw new SchoolPlatformException("StudentSubject is closed\nfor First Semester");
+            }
+            else
+            {
+                if (absence.StudentSubject.SecondSemester)
+                    throw new SchoolPlatformException("StudentSubject is closed\nfor Second Semester");
+            }
         }
     }
 }

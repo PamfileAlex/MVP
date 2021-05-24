@@ -66,6 +66,19 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             }
         }
 
+        public void LockStudentSubject(StudentSubject studentSubject, bool semester)
+        {
+            if (!semester)
+            {
+                studentSubject.FirstSemester = true;
+            }
+            else
+            {
+                studentSubject.SecondSemester = true;
+            }
+            StudentSubjectDAL.LockStudentSubject(studentSubject);
+        }
+
         public void AddStudentSubject(StudentSubject studentSubject)
         {
             CheckFields(studentSubject);

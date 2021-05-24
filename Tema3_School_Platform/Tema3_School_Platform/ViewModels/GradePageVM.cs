@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Tema3_School_Platform.Commands;
+using Tema3_School_Platform.Exceptions;
 using Tema3_School_Platform.Models.BusinessLogicLayer;
 using Tema3_School_Platform.Models.EntityLayer;
 using Tema3_School_Platform.Utils;
@@ -51,7 +52,7 @@ namespace Tema3_School_Platform.ViewModels
             {
                 student = value;
                 NotifyPropertyChanged("Student");
-                SelectedGrade = null;
+                Reset();
             }
         }
 
@@ -64,7 +65,7 @@ namespace Tema3_School_Platform.ViewModels
                 subject = value;
                 NotifyPropertyChanged("Subject");
                 NotifyPropertyChanged("Students");
-                SelectedGrade = null;
+                Reset();
             }
         }
 
@@ -76,7 +77,7 @@ namespace Tema3_School_Platform.ViewModels
             {
                 gradeValue = value;
                 NotifyPropertyChanged("GradeValue");
-                SelectedGrade = null;
+                Reset();
             }
         }
 
@@ -88,7 +89,7 @@ namespace Tema3_School_Platform.ViewModels
             {
                 semester = value;
                 NotifyPropertyChanged("Semester");
-                SelectedGrade = null;
+                Reset();
             }
         }
 
@@ -100,7 +101,7 @@ namespace Tema3_School_Platform.ViewModels
             {
                 thesis = value;
                 NotifyPropertyChanged("Thesis");
-                SelectedGrade = null;
+                Reset();
             }
         }
 
@@ -115,8 +116,20 @@ namespace Tema3_School_Platform.ViewModels
             }
         }
 
+        private String finalGrade;
+        public String FinalGrade
+        {
+            get { return finalGrade; }
+            set
+            {
+                finalGrade = value;
+                NotifyPropertyChanged("FinalGrade");
+            }
+        }
+
         public ICommand AddCommand { get; }
         public ICommand RemoveCommand { get; }
+        public ICommand FinalGradeCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand ClearCommand { get; }
 
@@ -125,8 +138,42 @@ namespace Tema3_School_Platform.ViewModels
             Clear();
             this.AddCommand = new RelayCommand<Grade>(grade => ErrorWrapper(() => { GradeBLL.Instance.AddGrade(grade); Clear(); }));
             this.RemoveCommand = new RelayCommand<Grade>(grade => ErrorWrapper(() => { GradeBLL.Instance.RemoveGrade(grade); Clear(); }));
+            this.FinalGradeCommand = new ActionCommand(() => ErrorWrapper(CalculateFinalGrade));
             this.SearchCommand = new ActionCommand(Search);
             this.ClearCommand = new ActionCommand(Clear);
+        }
+
+        private void CalculateFinalGrade()
+        {
+            List<Grade> finalGrades = Grades.Where(grade => grade.Semester == Semester && grade.StudentSubject.Student.ID == Student.ID && grade.StudentSubject.Subject.ID == Subject.ID).ToList();
+            SubjectSpecialization subjectSpecialization;
+            try
+            {
+                subjectSpecialization = SubjectSpecializationBLL.Instance.SubjectSpecializations.First(ss => ss.Subject.ID == Subject.ID && ss.Specialization.ID == Student.Class.Specialization.ID);
+            }
+            catch { throw new SchoolPlatformException("FinalGrade failed"); }
+            bool hasThesis = subjectSpecialization.Thesis;
+            Grade thesisGrade = null;
+            if (hasThesis && finalGrades.Where(grade => grade.Thesis).Count() == 0)
+            {
+                try
+                {
+                    thesisGrade = finalGrades.First(grade => grade.Thesis);
+                    finalGrades.Remove(thesisGrade);
+                }
+                catch { throw new SchoolPlatformException("There is no thesis"); }
+            }
+            if (finalGrades.Count() < (hasThesis ? 4 : 3))
+            {
+                throw new SchoolPlatformException("Not enought grades");
+            }
+            float result = finalGrades.Select(grade => grade.Value).Average();
+            if (hasThesis && thesisGrade != null)
+            {
+                result = (result + thesisGrade.Value) / 2;
+            }
+            FinalGrade = Math.Round(result, 2).ToString();
+            StudentSubjectBLL.Instance.LockStudentSubject(StudentSubjectBLL.Instance.GetStudentSubject(Student.ID, Subject.ID), Semester);
         }
 
         private void Search()
@@ -147,6 +194,12 @@ namespace Tema3_School_Platform.ViewModels
             Semester = false;
             Thesis = false;
             ErrorMessage = String.Empty;
+        }
+
+        private void Reset()
+        {
+            SelectedGrade = null;
+            FinalGrade = String.Empty;
         }
     }
 }

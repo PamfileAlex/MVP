@@ -104,5 +104,24 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                 command.ExecuteNonQuery();
             }
         }
+
+        public static void LockStudentSubject(StudentSubject studentSubject)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("LockStudentSubject", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                command.Parameters.AddRange(new SqlParameter[]
+                {
+                    new SqlParameter("@id", studentSubject.ID),
+                    new SqlParameter("@firstSemester", studentSubject.FirstSemester),
+                    new SqlParameter("@secondSemester", studentSubject.SecondSemester)
+                });
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }
