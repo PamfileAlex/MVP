@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="Commands\ActionCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\AbsenceConverter.cs" />
     <Compile Include="Converters\GradeConverter.cs" />
     <Compile Include="Converters\LoginConverter.cs" />
     <Compile Include="Converters\SelectedIndexToBoolConverter.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Converters\ProfessorVisibilityConverter.cs" />
     <Compile Include="Exceptions\SchoolPlatformException.cs" />
+    <Compile Include="Models\BusinessLogicLayer\AbsenceBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\ClassBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\GradeBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SpecializationBLL.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Models\BusinessLogicLayer\SubjectSpecializationBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\TeacherSubjectClassBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\UserBLL.cs" />
+    <Compile Include="Models\DataAccessLayer\AbsenceDAL.cs" />
     <Compile Include="Models\DataAccessLayer\ClassDAL.cs" />
     <Compile Include="Models\DataAccessLayer\DALHelper.cs" />
     <Compile Include="Models\DataAccessLayer\GradeDAL.cs" />
@@ -89,6 +92,7 @@
     <Compile Include="Models\DataAccessLayer\SubjectSpecializationDAL.cs" />
     <Compile Include="Models\DataAccessLayer\TeacherSubjectClassDAL.cs" />
     <Compile Include="Models\DataAccessLayer\UserDAL.cs" />
+    <Compile Include="Models\EntityLayer\Absence.cs" />
     <Compile Include="Models\EntityLayer\Class.cs" />
     <Compile Include="Models\EntityLayer\Grade.cs" />
     <Compile Include="Models\EntityLayer\Specialization.cs" />
@@ -100,6 +104,7 @@
     <Compile Include="Utils\BasePropertyChanged.cs" />
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Utils\ViewNavigator.cs" />
+    <Compile Include="ViewModels\AbsencePageVM.cs" />
     <Compile Include="ViewModels\AdminPageVM.cs" />
     <Compile Include="ViewModels\ClassPageVM.cs" />
     <Compile Include="ViewModels\GradePageVM.cs" />
@@ -110,6 +115,9 @@
     <Compile Include="ViewModels\LoginPageVM.cs" />
     <Compile Include="ViewModels\ProfessorPageVM.cs" />
     <Compile Include="ViewModels\StudentPageVM.cs" />
+    <Compile Include="Views\AbsencePage.xaml.cs">
+      <DependentUpon>AbsencePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
@@ -168,6 +176,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AbsencePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

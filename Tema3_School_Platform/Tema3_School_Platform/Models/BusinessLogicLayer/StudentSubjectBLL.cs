@@ -28,6 +28,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         {
             StudentSubjectList = StudentSubjectDAL.GetStudentSubjectList();
             GradeBLL.Instance.UpdateGrades();
+            AbsenceBLL.Instance.UpdateAbsences();
         }
 
         public StudentSubject GetStudentSubject(int id)

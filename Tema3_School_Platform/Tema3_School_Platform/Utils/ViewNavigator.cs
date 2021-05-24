@@ -69,6 +69,8 @@ namespace Tema3_School_Platform.Utils
             {
                 case 2:
                     return new GradePage();
+                case 3:
+                    return new AbsencePage();
                 default:
                     return null;
             }
