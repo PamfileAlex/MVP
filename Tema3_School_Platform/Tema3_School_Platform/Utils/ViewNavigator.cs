@@ -12,7 +12,7 @@ namespace Tema3_School_Platform.Utils
     {
         public enum MainPage
         {
-            None, Login, Admin, Professor, Student
+            None, Login, Admin, Professor, Student, HeadTeacher
         }
         private static MainWindow mainWindow;
         public static MainWindow MainWindow
@@ -42,6 +42,9 @@ namespace Tema3_School_Platform.Utils
                     break;
                 case MainPage.Student:
                     mainWindow.Content = new StudentPage();
+                    break;
+                case MainPage.HeadTeacher:
+                    mainWindow.Content = new HeadTeacherPage();
                     break;
             }
         }
@@ -82,6 +85,21 @@ namespace Tema3_School_Platform.Utils
             {
                 case 1:
                     return new StudentGradePage();
+                case 2:
+                    return new StudentAbsencePage();
+                case 4:
+                    return new StudentFinalGradePage();
+                default:
+                    return null;
+            }
+        }
+
+        public static Page HeadTeacherPageControl(int option)
+        {
+            switch (option)
+            {
+                case 2:
+                    return new HeadTeacherFinalGradePage();
                 default:
                     return null;
             }

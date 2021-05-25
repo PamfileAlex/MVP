@@ -52,6 +52,7 @@ namespace Tema3_School_Platform.ViewModels
             {
                 student = value;
                 NotifyPropertyChanged("Student");
+                NotifyPropertyChanged("HasThesis");
                 Reset();
             }
         }
@@ -124,6 +125,21 @@ namespace Tema3_School_Platform.ViewModels
             {
                 finalGrade = value;
                 NotifyPropertyChanged("FinalGrade");
+            }
+        }
+
+        public bool HasThesis
+        {
+            get
+            {
+                if (Subject == null || Student == null) { return true; }
+                try
+                {
+                    SubjectSpecialization subjectSpec = SubjectSpecializationBLL.Instance.SubjectSpecializations.First(ss => ss.Subject.ID == Subject.ID && ss.Specialization.ID == Student.Class.Specialization.ID);
+                    return subjectSpec.Thesis;
+                }
+                catch { }
+                return false;
             }
         }
 

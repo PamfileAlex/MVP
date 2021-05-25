@@ -12,16 +12,16 @@ using Tema3_School_Platform.Utils;
 
 namespace Tema3_School_Platform.ViewModels
 {
-    class StudentGradePageVM : BaseVM
+    class StudentFinalGradePageVM : BaseVM
     {
-        public ObservableCollection<Grade> Grades
+        public ObservableCollection<FinalGrade> FinalGrades
         {
             get
             {
                 List<int> studentSubjects = StudentSubjectBLL.Instance.StudentSubjectList.Where(ss
                     => ss.Student.ID == UserBLL.Instance.CurrentUser.ID
                     && (Subject == null || ss.Subject.ID == Subject.ID)).Select(ss => ss.ID).ToList();
-                return GradeBLL.Instance.Grades.Where(grade => studentSubjects.Contains(grade.StudentSubject.ID)).ToObservableCollection();
+                return FinalGradeBLL.Instance.FinalGrades.Where(finalGrade => studentSubjects.Contains(finalGrade.StudentSubject.ID)).ToObservableCollection();
             }
         }
         public ObservableCollection<Subject> Subjects
@@ -41,13 +41,15 @@ namespace Tema3_School_Platform.ViewModels
             {
                 subject = value;
                 NotifyPropertyChanged("Subject");
-                NotifyPropertyChanged("Grades");
+                NotifyPropertyChanged("FinalGrades");
             }
         }
 
+        public String GeneralGrade => Math.Round(FinalGrades.Select(finalGrade => finalGrade.Value).Average(), 2).ToString();
+
         public ICommand ClearCommand { get; }
 
-        public StudentGradePageVM()
+        public StudentFinalGradePageVM()
         {
             this.ClearCommand = new ActionCommand(Clear);
         }

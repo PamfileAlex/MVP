@@ -12,16 +12,16 @@ using Tema3_School_Platform.Utils;
 
 namespace Tema3_School_Platform.ViewModels
 {
-    class StudentGradePageVM : BaseVM
+    class StudentAbsencePageVM : BaseVM
     {
-        public ObservableCollection<Grade> Grades
+        public ObservableCollection<Absence> Absences
         {
             get
             {
                 List<int> studentSubjects = StudentSubjectBLL.Instance.StudentSubjectList.Where(ss
                     => ss.Student.ID == UserBLL.Instance.CurrentUser.ID
                     && (Subject == null || ss.Subject.ID == Subject.ID)).Select(ss => ss.ID).ToList();
-                return GradeBLL.Instance.Grades.Where(grade => studentSubjects.Contains(grade.StudentSubject.ID)).ToObservableCollection();
+                return AbsenceBLL.Instance.Absences.Where(absence => studentSubjects.Contains(absence.StudentSubject.ID)).ToObservableCollection();
             }
         }
         public ObservableCollection<Subject> Subjects
@@ -41,13 +41,13 @@ namespace Tema3_School_Platform.ViewModels
             {
                 subject = value;
                 NotifyPropertyChanged("Subject");
-                NotifyPropertyChanged("Grades");
+                NotifyPropertyChanged("Absences");
             }
         }
 
         public ICommand ClearCommand { get; }
 
-        public StudentGradePageVM()
+        public StudentAbsencePageVM()
         {
             this.ClearCommand = new ActionCommand(Clear);
         }

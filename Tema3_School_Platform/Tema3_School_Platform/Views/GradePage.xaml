@@ -18,6 +18,7 @@
     <Page.Resources>
         <convert:SelectedIndexToBoolConverter x:Key="SelectedIndexToBoolConverter"/>
         <convert:GradeConverter x:Key="GradeConverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Page.Resources>
 
     <Grid Margin="30" Background="{StaticResource Surface}">
@@ -55,8 +56,10 @@
                         <ScaleTransform ScaleX="2" ScaleY="2" />
                     </CheckBox.LayoutTransform>
                 </CheckBox>
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Thesis:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Thesis:" FontSize="30" Foreground="{StaticResource Text}" VerticalAlignment="Center"
+                           Visibility="{Binding HasThesis, Converter={StaticResource BoolToVis}}"/>
                 <CheckBox Grid.Row="4" Grid.Column="1" Name="Thesis" VerticalAlignment="Center" Margin="20,0" IsChecked="{Binding Thesis}"
+                          Visibility="{Binding HasThesis, Converter={StaticResource BoolToVis}}"
                           IsEnabled="{Binding ElementName=Student, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}" HorizontalAlignment="Left">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="2" ScaleY="2" />
