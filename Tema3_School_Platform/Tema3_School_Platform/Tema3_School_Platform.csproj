@@ -111,6 +111,7 @@
     <Compile Include="ViewModels\AdminPageVM.cs" />
     <Compile Include="ViewModels\ClassPageVM.cs" />
     <Compile Include="ViewModels\GradePageVM.cs" />
+    <Compile Include="ViewModels\StudentGradePageVM.cs" />
     <Compile Include="ViewModels\SubjectSpecializationPageVM.cs" />
     <Compile Include="ViewModels\TeacherSubjectClassVM.cs" />
     <Compile Include="ViewModels\UserPageVM.cs" />
@@ -129,6 +130,9 @@
     </Compile>
     <Compile Include="Views\GradePage.xaml.cs">
       <DependentUpon>GradePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StudentGradePage.xaml.cs">
+      <DependentUpon>StudentGradePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TeacherSubjectClassPage.xaml.cs">
       <DependentUpon>TeacherSubjectClassPage.xaml</DependentUpon>
@@ -192,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GradePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StudentGradePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

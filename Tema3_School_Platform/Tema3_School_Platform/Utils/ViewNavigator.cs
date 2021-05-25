@@ -75,5 +75,16 @@ namespace Tema3_School_Platform.Utils
                     return null;
             }
         }
+
+        public static Page StudentPageControl(int option)
+        {
+            switch (option)
+            {
+                case 1:
+                    return new StudentGradePage();
+                default:
+                    return null;
+            }
+        }
     }
 }

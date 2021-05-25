@@ -141,8 +141,8 @@ namespace Tema3_School_Platform.ViewModels
             this.SubjectAddCommand = new RelayCommand<Subject>(subject => ErrorWrapper(() => { SubjectBLL.Instance.AddSubject(subject); Clear(); }));
             this.SubjectModifyCommand = new RelayCommand<Subject>(subject => ErrorWrapper(() => { SubjectBLL.Instance.ModifySubject(subject, SubjectSelectedIndex); Clear(); }));
             this.SubjectRemoveCommand = new RelayCommand<Subject>(subject => ErrorWrapper(() => { SubjectBLL.Instance.RemoveSubject(SubjectBLL.Instance.Subjects[SubjectSelectedIndex]); NotifyPropertyChanged("SubjectSpecializations"); Clear(); }));
-            this.SubjectSpecializationAddCommand = new RelayCommand<SubjectSpecialization>(SubjectSpecializationBLL.Instance.AddSubjectSpecialization);
-            this.SubjectSpecializationRemoveCommand = new RelayCommand<SubjectSpecialization>(SubjectSpecializationBLL.Instance.RemoveSubjectSpecialization);
+            this.SubjectSpecializationAddCommand = new RelayCommand<SubjectSpecialization>(ss => ErrorWrapper(() => { SubjectSpecializationBLL.Instance.AddSubjectSpecialization(ss); Clear(); }));
+            this.SubjectSpecializationRemoveCommand = new RelayCommand<SubjectSpecialization>(ss => ErrorWrapper(() => { SubjectSpecializationBLL.Instance.RemoveSubjectSpecialization(ss); Clear(); }));
             this.ClearCommand = new ActionCommand(Clear);
         }
 

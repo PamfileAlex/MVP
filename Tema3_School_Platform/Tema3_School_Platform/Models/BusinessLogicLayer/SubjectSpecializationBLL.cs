@@ -29,6 +29,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
 
         public void AddSubjectSpecialization(SubjectSpecialization subjectSpecialization)
         {
+            //Verificare daca exista deja
             SubjectSpecializationDAL.AddSubjectSpecialization(subjectSpecialization);
             SubjectSpecialization fromDB = SubjectSpecializationDAL.GetSubjectSpecialization(subjectSpecialization.Subject.ID, subjectSpecialization.Specialization.ID);
             if (fromDB == null)
