@@ -98,6 +98,8 @@ namespace Tema3_School_Platform.Utils
         {
             switch (option)
             {
+                case 1:
+                    return new HeadTeacherAbsencePage();
                 case 2:
                     return new HeadTeacherFinalGradePage();
                 default:

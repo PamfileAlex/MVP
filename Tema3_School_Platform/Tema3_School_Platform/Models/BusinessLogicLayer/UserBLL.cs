@@ -121,6 +121,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         {
             foreach (var ss in SubjectSpecializationBLL.Instance.SubjectSpecializations)
             {
+                if (user.Role != User.UserRole.Student) { continue; }
                 if (user.Class.Specialization.ID != ss.Specialization.ID) { continue; }
                 try
                 {

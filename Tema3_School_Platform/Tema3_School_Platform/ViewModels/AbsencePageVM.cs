@@ -39,7 +39,7 @@ namespace Tema3_School_Platform.ViewModels
                 if (Subject == null)
                     return null;
                 return UserBLL.Instance.Users.Where(user => StudentSubjectBLL.Instance.StudentSubjectList.Where(ss
-                    => ss.Subject.ID == Subject.ID && ss.Student.ID == user.ID).Count() != 0).ToObservableCollection();
+                        => ss.Subject.ID == Subject.ID && ss.Student.ID == user.ID).Count() != 0).ToObservableCollection();
             }
         }
         public List<Absence.AbsenceType> AbsenceTypes { get; }
@@ -141,6 +141,7 @@ namespace Tema3_School_Platform.ViewModels
             Student = null;
             Subject = null;
             SelectedAbsence = null;
+            ErrorMessage = String.Empty;
         }
     }
 }

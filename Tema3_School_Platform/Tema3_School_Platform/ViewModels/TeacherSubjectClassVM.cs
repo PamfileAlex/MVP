@@ -101,6 +101,7 @@ namespace Tema3_School_Platform.ViewModels
             TeacherIndex = -1;
             SubjectIndex = -1;
             ClassIndex = -1;
+            ErrorMessage = String.Empty;
         }
     }
 }
