@@ -145,6 +145,13 @@ namespace Tema3_School_Platform.ViewModels
 
         private void CalculateFinalGrade()
         {
+            try
+            {
+                FinalGrade fgResult = FinalGradeBLL.Instance.FinalGrades.First(fg => fg.StudentSubject.Student.ID == Student.ID && fg.StudentSubject.Subject.ID == Subject.ID && fg.Semester == Semester);
+                FinalGrade = fgResult.Value.ToString();
+                return;
+            }
+            catch { }
             List<Grade> finalGrades = Grades.Where(grade => grade.Semester == Semester && grade.StudentSubject.Student.ID == Student.ID && grade.StudentSubject.Subject.ID == Subject.ID).ToList();
             SubjectSpecialization subjectSpecialization;
             try
@@ -172,7 +179,15 @@ namespace Tema3_School_Platform.ViewModels
             {
                 result = (result + thesisGrade.Value) / 2;
             }
-            FinalGrade = Math.Round(result, 2).ToString();
+            FinalGrade finalGrade = new FinalGrade()
+            {
+                ID = 0,
+                StudentSubject = StudentSubjectBLL.Instance.GetStudentSubject(Student.ID, Subject.ID),
+                Semester = Semester,
+                Value = (float)Math.Round(result, 2)
+            };
+            FinalGrade = finalGrade.Value.ToString();
+            FinalGradeBLL.Instance.AddFinalGrade(finalGrade);
             //StudentSubjectBLL.Instance.LockStudentSubject(StudentSubjectBLL.Instance.GetStudentSubject(Student.ID, Subject.ID), Semester);
         }
 

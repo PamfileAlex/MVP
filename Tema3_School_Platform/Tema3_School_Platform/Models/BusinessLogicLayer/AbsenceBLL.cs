@@ -63,16 +63,24 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
 
         private void CheckSemesters(Absence absence)
         {
-            if (absence.Semester)
+            if (FinalGradeBLL.Instance.FinalGrades.Where(fg => fg.StudentSubject.ID == absence.StudentSubject.ID && fg.Semester == absence.Semester).Count() != 0)
             {
-                if (absence.StudentSubject.FirstSemester)
-                    throw new SchoolPlatformException("StudentSubject is closed\nfor First Semester");
-            }
-            else
-            {
-                if (absence.StudentSubject.SecondSemester)
-                    throw new SchoolPlatformException("StudentSubject is closed\nfor Second Semester");
+                throw new SchoolPlatformException("StudentSubject is closed\nfor selected Semester");
             }
         }
+
+        //private void CheckSemesters(Absence absence)
+        //{
+        //    if (absence.Semester)
+        //    {
+        //        if (absence.StudentSubject.FirstSemester)
+        //            throw new SchoolPlatformException("StudentSubject is closed\nfor First Semester");
+        //    }
+        //    else
+        //    {
+        //        if (absence.StudentSubject.SecondSemester)
+        //            throw new SchoolPlatformException("StudentSubject is closed\nfor Second Semester");
+        //    }
+        //}
     }
 }
