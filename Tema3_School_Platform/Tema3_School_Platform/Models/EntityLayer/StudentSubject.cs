@@ -11,16 +11,12 @@ namespace Tema3_School_Platform.Models.EntityLayer
         public int ID { get; set; }
         public User Student { get; set; }
         public Subject Subject { get; set; }
-        public bool FirstSemester { get; set; }
-        public bool SecondSemester { get; set; }
         public StudentSubject() { }
         public StudentSubject(StudentSubject other)
         {
             this.ID = other.ID;
             this.Student = other.Student;
             this.Subject = other.Subject;
-            this.FirstSemester = other.FirstSemester;
-            this.SecondSemester = other.SecondSemester;
         }
     }
 }

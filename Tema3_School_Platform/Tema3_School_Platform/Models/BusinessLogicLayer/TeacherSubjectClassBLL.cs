@@ -91,9 +91,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
                     {
                         ID = 0,
                         Student = user,
-                        Subject = teacherSubjectClass.Subject,
-                        FirstSemester = false,
-                        SecondSemester = false
+                        Subject = teacherSubjectClass.Subject
                     });
                 }
                 catch { }

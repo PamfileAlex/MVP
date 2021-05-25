@@ -13,7 +13,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
     class GradeBLL
     {
         public static GradeBLL Instance { get; } = new GradeBLL();
-        public ObservableCollection<Grade> Grades { get; set; }
+        public ObservableCollection<Grade> Grades { get; private set; }
         static GradeBLL() { }
         private GradeBLL()
         {
@@ -58,7 +58,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
 
         private void CheckSemesters(Grade grade)
         {
-            if (grade.Semester)
+            if (!grade.Semester)
             {
                 if (grade.StudentSubject.FirstSemester)
                     throw new SchoolPlatformException("StudentSubject is closed\nfor First Semester");

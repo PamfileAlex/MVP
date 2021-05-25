@@ -173,7 +173,7 @@ namespace Tema3_School_Platform.ViewModels
                 result = (result + thesisGrade.Value) / 2;
             }
             FinalGrade = Math.Round(result, 2).ToString();
-            StudentSubjectBLL.Instance.LockStudentSubject(StudentSubjectBLL.Instance.GetStudentSubject(Student.ID, Subject.ID), Semester);
+            //StudentSubjectBLL.Instance.LockStudentSubject(StudentSubjectBLL.Instance.GetStudentSubject(Student.ID, Subject.ID), Semester);
         }
 
         private void Search()
@@ -200,6 +200,7 @@ namespace Tema3_School_Platform.ViewModels
         {
             SelectedGrade = null;
             FinalGrade = String.Empty;
+            ErrorMessage = String.Empty;
         }
     }
 }

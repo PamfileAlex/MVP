@@ -13,7 +13,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
     class AbsenceBLL
     {
         public static AbsenceBLL Instance { get; } = new AbsenceBLL();
-        public ObservableCollection<Absence> Absences { get; set; }
+        public ObservableCollection<Absence> Absences { get; private set; }
         static AbsenceBLL() { }
         private AbsenceBLL()
         {

@@ -90,7 +90,7 @@
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20,10"
                         Command="{Binding ClearCommand}"/>
             </StackPanel>
-            <TextBlock Text="{Binding ErrorMessage}" FontSize="50" Foreground="Red" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding ErrorMessage}" FontSize="30" Foreground="Red" HorizontalAlignment="Center"/>
         </StackPanel>
         <DataGrid Grid.Column="1" Name="DataGrid" ItemsSource="{Binding Grades}" SelectedItem="{Binding SelectedGrade}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>

@@ -75,6 +75,7 @@
     <Compile Include="Exceptions\SchoolPlatformException.cs" />
     <Compile Include="Models\BusinessLogicLayer\AbsenceBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\ClassBLL.cs" />
+    <Compile Include="Models\BusinessLogicLayer\FinalGradeBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\GradeBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\SpecializationBLL.cs" />
     <Compile Include="Models\BusinessLogicLayer\StudentSubjectBLL.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Models\DataAccessLayer\AbsenceDAL.cs" />
     <Compile Include="Models\DataAccessLayer\ClassDAL.cs" />
     <Compile Include="Models\DataAccessLayer\DALHelper.cs" />
+    <Compile Include="Models\DataAccessLayer\FinalGradeDAL.cs" />
     <Compile Include="Models\DataAccessLayer\GradeDAL.cs" />
     <Compile Include="Models\DataAccessLayer\SpecializationDAL.cs" />
     <Compile Include="Models\DataAccessLayer\StudentSubjectDAL.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Models\DataAccessLayer\UserDAL.cs" />
     <Compile Include="Models\EntityLayer\Absence.cs" />
     <Compile Include="Models\EntityLayer\Class.cs" />
+    <Compile Include="Models\EntityLayer\FinalGrade.cs" />
     <Compile Include="Models\EntityLayer\Grade.cs" />
     <Compile Include="Models\EntityLayer\Specialization.cs" />
     <Compile Include="Models\EntityLayer\StudentSubject.cs" />
