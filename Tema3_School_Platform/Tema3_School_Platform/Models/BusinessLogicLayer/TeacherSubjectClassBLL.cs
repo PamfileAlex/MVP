@@ -65,6 +65,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             if (!TeacherSubjectClassList.Remove(teacherSubjectClass))
                 throw new SchoolPlatformException("Remove TeacherSubjectClass failed");
             TeacherSubjectClassDAL.RemoveTeacherSubjectClass(teacherSubjectClass);
+            TeachingMaterialBLL.Instance.UpdateTeachingMaterials();
         }
 
         private void CheckFields(TeacherSubjectClass teacherSubjectClass)

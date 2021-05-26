@@ -31,7 +31,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             CheckFields(grade);
             CheckSemesters(grade);
             GradeDAL.AddGrade(grade);
-            Grade fromDB = GradeDAL.GetGrade(grade.StudentSubject, grade.Semester, grade.Value);
+            Grade fromDB = GradeDAL.GetGrade(grade.StudentSubject, grade.Semester, grade.Value, grade.Thesis);
             if (fromDB == null)
                 throw new SchoolPlatformException("Add Grade failed");
             Grades.Add(fromDB);
@@ -49,6 +49,8 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         {
             if (grade == null || grade.StudentSubject == null || grade.Value == default)
                 throw new SchoolPlatformException("Please fill all fields");
+            if (grade.Value > 10)
+                throw new SchoolPlatformException("Invalid grade value");
             if (!grade.Thesis) { return; }
             if (Grades.Where(item => item.Thesis && item.Semester == grade.Semester
             && item.StudentSubject.Student.ID == grade.StudentSubject.Student.ID

@@ -39,7 +39,7 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
             }
         }
 
-        public static Grade GetGrade(StudentSubject studentSubject, bool semester, float value)
+        public static Grade GetGrade(StudentSubject studentSubject, bool semester, float value, bool thesis)
         {
             using (SqlConnection connection = DALHelper.Connection)
             {
@@ -51,7 +51,8 @@ namespace Tema3_School_Platform.Models.DataAccessLayer
                 {
                     new SqlParameter("studentSubjectID", studentSubject.ID),
                     new SqlParameter("@semester", Convert.ToInt32(semester)),
-                    new SqlParameter("@value", value)
+                    new SqlParameter("@value", value),
+                    new SqlParameter("@thesis", Convert.ToInt32(thesis))
                 });
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();

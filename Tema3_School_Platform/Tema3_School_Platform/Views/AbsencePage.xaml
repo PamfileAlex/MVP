@@ -82,15 +82,15 @@
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20,10"
                         Command="{Binding ClearCommand}"/>
             </StackPanel>
-            <TextBlock Text="{Binding ErrorMessage}" FontSize="30" Foreground="Red" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding ErrorMessage}" FontSize="30" Foreground="Red" HorizontalAlignment="Center" Height="80"/>
         </StackPanel>
         <DataGrid Grid.Column="1" Name="DataGrid" ItemsSource="{Binding Absences}" SelectedItem="{Binding SelectedAbsence}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Student first name" Binding="{Binding StudentSubject.Student.FirstName}" Width="120"/>
                 <DataGridTextColumn Header="Student Last name" Binding="{Binding StudentSubject.Student.LastName}" Width="120"/>
                 <DataGridTextColumn Header="Subject" Binding="{Binding StudentSubject.Subject.Name}" Width="140"/>
-                <DataGridTextColumn Header="Semester" Binding="{Binding SemesterFormated}" Width="55"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="70"/>
+                <DataGridTextColumn Header="Semester" Binding="{Binding SemesterFormated}" Width="70"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="90"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

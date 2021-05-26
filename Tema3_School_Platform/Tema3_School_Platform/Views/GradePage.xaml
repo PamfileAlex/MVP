@@ -91,7 +91,7 @@
                 <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20,10"
                         Command="{Binding ClearCommand}"/>
             </StackPanel>
-            <TextBlock Text="{Binding ErrorMessage}" FontSize="30" Foreground="Red" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding ErrorMessage}" FontSize="30" Foreground="Red" HorizontalAlignment="Center" Height="80"/>
         </StackPanel>
         <DataGrid Grid.Column="1" Name="DataGrid" ItemsSource="{Binding Grades}" SelectedItem="{Binding SelectedGrade}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
@@ -100,9 +100,9 @@
                 <DataGridTextColumn Header="Subject" Binding="{Binding StudentSubject.Subject.Name}" Width="140"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding SemesterFormated}" Width="55"/>
                 <DataGridTextColumn Header="Grade" Binding="{Binding Value}" Width="55"/>
-                <DataGridTextColumn Header="Thesis" Binding="{Binding Thesis}" Width="55"/>
+                <DataGridTextColumn Header="Thesis" Binding="{Binding ThesisFormated}" Width="55"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock Text="{Binding FinalGrade, StringFormat=Final Grade: {0}}" FontSize="40" Foreground="{StaticResource Text}" Margin="274,348,90,340" VerticalAlignment="Center"/>
+        <TextBlock Text="{Binding FinalGrade, StringFormat=Final Grade: {0}}" FontSize="40" Foreground="{StaticResource Text}" Margin="272,330,92,356" VerticalAlignment="Center"/>
     </Grid>
 </Page>

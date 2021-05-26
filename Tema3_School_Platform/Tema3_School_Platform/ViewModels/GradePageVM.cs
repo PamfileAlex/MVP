@@ -53,6 +53,7 @@ namespace Tema3_School_Platform.ViewModels
                 student = value;
                 NotifyPropertyChanged("Student");
                 NotifyPropertyChanged("HasThesis");
+                NotifyPropertyChanged("ThesisCheckBox");
                 Reset();
             }
         }
@@ -154,7 +155,7 @@ namespace Tema3_School_Platform.ViewModels
         public GradePageVM()
         {
             Clear();
-            this.AddCommand = new RelayCommand<Grade>(grade => ErrorWrapper(() => { GradeBLL.Instance.AddGrade(grade); Clear(); }));
+            this.AddCommand = new RelayCommand<Grade>(grade => ErrorWrapper(() => { GradeBLL.Instance.AddGrade(grade); Update(); }));
             this.RemoveCommand = new RelayCommand<Grade>(grade => ErrorWrapper(() => { GradeBLL.Instance.RemoveGrade(grade); Clear(); }));
             this.FinalGradeCommand = new ActionCommand(() => ErrorWrapper(CalculateFinalGrade));
             this.SearchCommand = new ActionCommand(Search);
@@ -177,9 +178,14 @@ namespace Tema3_School_Platform.ViewModels
                 subjectSpecialization = SubjectSpecializationBLL.Instance.SubjectSpecializations.First(ss => ss.Subject.ID == Subject.ID && ss.Specialization.ID == Student.Class.Specialization.ID);
             }
             catch { throw new SchoolPlatformException("FinalGrade failed"); }
+            if (finalGrades.Count() < 3)
+            {
+                throw new SchoolPlatformException("Not enought grades");
+            }
             bool hasThesis = subjectSpecialization.Thesis;
             Grade thesisGrade = null;
-            if (hasThesis && finalGrades.Where(grade => grade.Thesis).Count() == 0)
+            // && finalGrades.Where(grade => grade.Thesis).Count() != 0
+            if (hasThesis)
             {
                 try
                 {
@@ -187,10 +193,6 @@ namespace Tema3_School_Platform.ViewModels
                     finalGrades.Remove(thesisGrade);
                 }
                 catch { throw new SchoolPlatformException("There is no thesis"); }
-            }
-            if (finalGrades.Count() < (hasThesis ? 4 : 3))
-            {
-                throw new SchoolPlatformException("Not enought grades");
             }
             float result = finalGrades.Select(grade => grade.Value).Average();
             if (hasThesis && thesisGrade != null)
@@ -218,15 +220,20 @@ namespace Tema3_School_Platform.ViewModels
 
         private void Clear()
         {
-            Grades = GradeBLL.Instance.Grades.Where(grade => TeacherSubjectClassBLL.Instance.TeacherSubjectClassList.Where(tsc
-                => tsc.Subject.ID == grade.StudentSubject.Subject.ID && tsc.Teacher.ID == UserBLL.Instance.CurrentUser.ID).Count() != 0).ToObservableCollection();
-            GradeValue = String.Empty;
+            Update();
             Student = null;
             Subject = null;
             SelectedGrade = null;
             Semester = false;
             Thesis = false;
             ErrorMessage = String.Empty;
+        }
+
+        private void Update()
+        {
+            Grades = GradeBLL.Instance.Grades.Where(grade => TeacherSubjectClassBLL.Instance.TeacherSubjectClassList.Where(tsc
+                => tsc.Subject.ID == grade.StudentSubject.Subject.ID && tsc.Teacher.ID == UserBLL.Instance.CurrentUser.ID).Count() != 0).ToObservableCollection();
+            GradeValue = String.Empty;
         }
 
         private void Reset()

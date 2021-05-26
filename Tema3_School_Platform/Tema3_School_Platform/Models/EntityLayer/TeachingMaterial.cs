@@ -6,25 +6,22 @@ using System.Threading.Tasks;
 
 namespace Tema3_School_Platform.Models.EntityLayer
 {
-    class Grade
+    class TeachingMaterial
     {
         public int ID { get; set; }
-        public StudentSubject StudentSubject { get; set; }
+        public TeacherSubjectClass TeacherSubjectClass { get; set; }
         public bool Semester { get; set; }
-        public float Value { get; set; }
-        public bool Thesis { get; set; }
+        public String Name { get; set; }
 
         public String SemesterFormated { get { return Semester ? "Sem II" : "Sem I"; } }
-        public String ThesisFormated { get { return Thesis ? "YES" : "NO"; } }
 
-        public Grade() { }
-        public Grade(Grade other)
+        public TeachingMaterial() { }
+        public TeachingMaterial(TeachingMaterial other)
         {
             this.ID = other.ID;
-            this.StudentSubject = other.StudentSubject;
+            this.TeacherSubjectClass = other.TeacherSubjectClass;
             this.Semester = other.Semester;
-            this.Value = other.Value;
-            this.Thesis = other.Thesis;
+            this.Name = other.Name == null ? String.Empty : String.Copy(other.Name);
         }
     }
 }

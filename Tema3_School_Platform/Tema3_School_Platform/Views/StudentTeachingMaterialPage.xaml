@@ -1,4 +1,4 @@
-﻿<Page x:Class="Tema3_School_Platform.Views.StudentGradePage"
+﻿<Page x:Class="Tema3_School_Platform.Views.StudentTeachingMaterialPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,10 +9,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1440"
       Background="{StaticResource Background}"
-      Title="StudentGradePageVM">
+      Title="StudentTeachingMaterialPage">
 
     <Page.DataContext>
-        <vm:StudentGradePageVM/>
+        <vm:StudentTeachingMaterialPageVM/>
     </Page.DataContext>
 
     <Page.Resources>
@@ -25,12 +25,11 @@
             <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20,10"
                         Command="{Binding ClearCommand}"/>
         </StackPanel>
-        <DataGrid Name="DataGrid" ItemsSource="{Binding Grades}" AutoGenerateColumns="False" IsReadOnly="True" Margin="30" Height="600" FontSize="30">
+        <DataGrid Name="DataGrid" ItemsSource="{Binding TeachingMaterials}" AutoGenerateColumns="False" IsReadOnly="True" Margin="30" Height="600" FontSize="30">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Subject" Binding="{Binding StudentSubject.Subject.Name}" Width="600"/>
-                <DataGridTextColumn Header="Semester" Binding="{Binding SemesterFormated}" Width="150"/>
-                <DataGridTextColumn Header="Grade" Binding="{Binding Value}" Width="200"/>
-                <DataGridTextColumn Header="Thesis" Binding="{Binding ThesisFormated}" Width="150"/>
+                <DataGridTextColumn Header="Subject" Binding="{Binding TeacherSubjectClass.Subject.Name}" Width="500"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="500"/>
+                <DataGridTextColumn Header="Semester" Binding="{Binding SemesterFormated}" Width="230"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>
