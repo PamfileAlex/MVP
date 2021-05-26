@@ -143,6 +143,8 @@ namespace Tema3_School_Platform.ViewModels
             }
         }
 
+        public bool ThesisCheckBox { get { return Student != null && HasThesis; } }
+
         public ICommand AddCommand { get; }
         public ICommand RemoveCommand { get; }
         public ICommand FinalGradeCommand { get; }

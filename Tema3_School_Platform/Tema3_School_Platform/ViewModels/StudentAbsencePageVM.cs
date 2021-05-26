@@ -55,6 +55,7 @@ namespace Tema3_School_Platform.ViewModels
         private void Clear()
         {
             Subject = null;
+            ErrorMessage = String.Empty;
         }
     }
 }

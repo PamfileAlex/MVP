@@ -63,6 +63,7 @@ namespace Tema3_School_Platform.ViewModels
         private void Clear()
         {
             Student = null;
+            ErrorMessage = String.Empty;
         }
     }
 }

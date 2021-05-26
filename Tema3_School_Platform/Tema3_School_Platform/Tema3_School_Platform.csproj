@@ -113,6 +113,7 @@
     <Compile Include="ViewModels\GradePageVM.cs" />
     <Compile Include="ViewModels\HeadTeacherAbsencePageVM.cs" />
     <Compile Include="ViewModels\HeadTeacherFinalGradePageVM.cs" />
+    <Compile Include="ViewModels\HeadTeacherStatusPageVM.cs" />
     <Compile Include="ViewModels\HeadTeacherPageVM.cs" />
     <Compile Include="ViewModels\StudentAbsencePageVM.cs" />
     <Compile Include="ViewModels\StudentFinalGradePageVM.cs" />
@@ -144,6 +145,9 @@
     </Compile>
     <Compile Include="Views\HeadTeacherPage.xaml.cs">
       <DependentUpon>HeadTeacherPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HeadTeacherStatusPage.xaml.cs">
+      <DependentUpon>HeadTeacherStatusPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StudentAbsencePage.xaml.cs">
       <DependentUpon>StudentAbsencePage.xaml</DependentUpon>
@@ -228,6 +232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HeadTeacherPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HeadTeacherStatusPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

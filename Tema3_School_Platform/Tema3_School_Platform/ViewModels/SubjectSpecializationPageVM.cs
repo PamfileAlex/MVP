@@ -151,6 +151,7 @@ namespace Tema3_School_Platform.ViewModels
             SpecializationSelectedIndex = -1;
             SubjectSelectedIndex = -1;
             SubjectSpecializationSelectedIndex = -1;
+            ErrorMessage = String.Empty;
         }
     }
 }

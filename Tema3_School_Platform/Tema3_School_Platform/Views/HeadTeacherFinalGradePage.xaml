@@ -27,7 +27,8 @@
         </StackPanel>
         <DataGrid Name="DataGrid" ItemsSource="{Binding FinalGrades}" AutoGenerateColumns="False" IsReadOnly="True" Margin="30,30,30,10" Height="550" FontSize="30">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Subject" Binding="{Binding StudentSubject.Subject.Name}" Width="600"/>
+                <DataGridTextColumn Header="Student" Binding="{Binding StudentSubject.Student.Name}" Width="440"/>
+                <DataGridTextColumn Header="Subject" Binding="{Binding StudentSubject.Subject.Name}" Width="440"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding SemesterFormated}" Width="200"/>
                 <DataGridTextColumn Header="Grade" Binding="{Binding Value}" Width="200"/>
             </DataGrid.Columns>

@@ -82,6 +82,7 @@ namespace Tema3_School_Platform.ViewModels
             Student = null;
             AbsenceType = Absence.AbsenceType.None;
             SelectedAbsence = null;
+            ErrorMessage = String.Empty;
         }
     }
 }

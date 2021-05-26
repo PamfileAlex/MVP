@@ -57,6 +57,7 @@ namespace Tema3_School_Platform.ViewModels
         private void Clear()
         {
             SelectedIndex = -1;
+            ErrorMessage = String.Empty;
         }
     }
 }

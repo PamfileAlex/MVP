@@ -102,6 +102,8 @@ namespace Tema3_School_Platform.Utils
                     return new HeadTeacherAbsencePage();
                 case 2:
                     return new HeadTeacherFinalGradePage();
+                case 3:
+                    return new HeadTeacherStatusPage();
                 default:
                     return null;
             }

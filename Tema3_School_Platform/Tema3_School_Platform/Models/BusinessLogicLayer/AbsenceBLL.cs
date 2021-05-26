@@ -48,10 +48,19 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         public void ModifyAbsence(Absence absence)
         {
             CheckSemesters(absence);
-            if (absence.Type == Absence.AbsenceType.Unmotivated)
-                absence.Type = Absence.AbsenceType.Motivated;
-            else if (absence.Type == Absence.AbsenceType.Motivated)
-                absence.Type = Absence.AbsenceType.Motivated;
+            switch (absence.Type)
+            {
+                case Absence.AbsenceType.Motivated:
+                    absence.Type = Absence.AbsenceType.Unmotivated;
+                    break;
+                case Absence.AbsenceType.Unmotivated:
+                    absence.Type = Absence.AbsenceType.Motivated;
+                    break;
+                case Absence.AbsenceType.Unmotivatable:
+                    throw new SchoolPlatformException("Can't modify this absence");
+                default:
+                    break;
+            }
             AbsenceDAL.ModifyAbsence(absence);
         }
 
