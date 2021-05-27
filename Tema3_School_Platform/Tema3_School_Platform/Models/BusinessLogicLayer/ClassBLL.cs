@@ -53,6 +53,8 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             CheckClassFields(classObj);
             if (!classObj.Name.Equals(Classes[selectedIndex].Name))
                 CheckForClassExistence(classObj);
+            if (classObj.Specialization.ID != Classes[selectedIndex].Specialization.ID)
+                StudentSubject(classObj);
             Classes[selectedIndex] = classObj;
             ClassDAL.ModifyClass(classObj);
         }
@@ -67,6 +69,29 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         {
             if (String.IsNullOrEmpty(classObj.Name) || String.IsNullOrEmpty(classObj.Year) || classObj.Specialization == null)
                 throw new SchoolPlatformException("Please fill all fields");
+        }
+
+        private void StudentSubject(Class classObj)
+        {
+            foreach (var student in UserBLL.Instance.Users)
+            {
+                if (student.Role != User.UserRole.Student) { continue; }
+                if (student.Class.ID != classObj.ID) { continue; }
+                foreach (var ss in SubjectSpecializationBLL.Instance.SubjectSpecializations)
+                {
+                    if (classObj.Specialization.ID != ss.Specialization.ID) { continue; }
+                    try
+                    {
+                        StudentSubjectBLL.Instance.AddStudentSubject(new StudentSubject()
+                        {
+                            ID = 0,
+                            Student = student,
+                            Subject = ss.Subject
+                        });
+                    }
+                    catch { }
+                }
+            }
         }
     }
 }

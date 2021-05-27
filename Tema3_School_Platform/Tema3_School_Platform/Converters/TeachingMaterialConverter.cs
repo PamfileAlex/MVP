@@ -30,7 +30,8 @@ namespace Tema3_School_Platform.Converters
                 ID = 0,
                 TeacherSubjectClass = tscResult,
                 Name = values[2].ToString(),
-                Semester = (bool)values[3]
+                Semester = (bool)values[3],
+                Path = String.Empty
             };
         }
 

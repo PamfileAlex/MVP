@@ -57,9 +57,10 @@
         </StackPanel>
         <DataGrid Grid.Column="1" Name="ListBox" ItemsSource="{Binding Materials}" SelectedItem="{Binding SelectedMaterial}" FontSize="25" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Subject" Binding="{Binding TeacherSubjectClass.Subject.Name}" Width="380"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="380"/>
-                <DataGridTextColumn Header="Semester" Binding="{Binding SemesterFormated}" Width="200"/>
+                <DataGridTextColumn Header="Subject" Binding="{Binding TeacherSubjectClass.Subject.Name}" Width="300"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="300"/>
+                <DataGridTextColumn Header="Semester" Binding="{Binding SemesterFormated}" Width="180"/>
+                <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

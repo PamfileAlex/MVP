@@ -23,7 +23,7 @@
             <Button Content="Log out" FontSize="34" Padding="25,5" FontWeight="Bold" Command="{Binding MenuCommand}" CommandParameter="0"/>
             <Button Content="Grades" FontSize="34" Padding="25,5" FontWeight="Bold" Command="{Binding MenuCommand}" CommandParameter="1"/>
             <Button Content="Absences" FontSize="34" Padding="25,5" FontWeight="Bold" Command="{Binding MenuCommand}" CommandParameter="2"/>
-            <Button Content="Material" FontSize="34" Padding="25,5" FontWeight="Bold" Command="{Binding MenuCommand}" CommandParameter="3"/>
+            <Button Content="Teaching Material" FontSize="34" Padding="25,5" FontWeight="Bold" Command="{Binding MenuCommand}" CommandParameter="3"/>
             <Button Content="Final grades" FontSize="34" Padding="25,5" FontWeight="Bold" Command="{Binding MenuCommand}" CommandParameter="4"/>
         </WrapPanel>
         <Frame Grid.Row="1" Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden">

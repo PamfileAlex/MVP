@@ -14,7 +14,14 @@ namespace Tema3_School_Platform.ViewModels
 {
     class TeachingMaterialPageVM : BaseVM
     {
-        public ObservableCollection<TeachingMaterial> Materials { get; }
+        public ObservableCollection<TeachingMaterial> Materials
+        {
+            get
+            {
+                return TeachingMaterialBLL.Instance.TeachingMaterials.Where(tm => tm.TeacherSubjectClass.Teacher.ID == UserBLL.Instance.CurrentUser.ID
+                && (Subject == null || Subject.ID == tm.TeacherSubjectClass.Subject.ID) && (Class == null || Class.ID == tm.TeacherSubjectClass.Class.ID)).ToObservableCollection();
+            }
+        }
 
         public ObservableCollection<Subject> Subjects
         {
@@ -42,7 +49,8 @@ namespace Tema3_School_Platform.ViewModels
             set
             {
                 classObj = value;
-                NotifyPropertyChanged("Student");
+                NotifyPropertyChanged("Class");
+                NotifyPropertyChanged("Materials");
                 SelectedMaterial = null;
                 ErrorMessage = String.Empty;
             }
@@ -56,7 +64,8 @@ namespace Tema3_School_Platform.ViewModels
             {
                 subject = value;
                 NotifyPropertyChanged("Subject");
-                NotifyPropertyChanged("Students");
+                NotifyPropertyChanged("Classes");
+                NotifyPropertyChanged("Materials");
                 SelectedMaterial = null;
                 ErrorMessage = String.Empty;
             }
@@ -110,6 +119,7 @@ namespace Tema3_School_Platform.ViewModels
         {
             Subject = null;
             Class = null;
+            NotifyPropertyChanged("Materials");
             SelectedMaterial = null;
             MaterialName = String.Empty;
             ErrorMessage = String.Empty;

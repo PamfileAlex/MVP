@@ -19,7 +19,7 @@
         <convert:LoginConverter x:Key="LoginConverter"/>
     </Page.Resources>
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Surface}">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Surface}" Width="700">
         <TextBlock Text="Login" FontSize="90" FontWeight="Bold" Foreground="{StaticResource Text}" HorizontalAlignment="Center" Margin="0,0,0,30"/>
         <TextBox Name="Email" Style="{StaticResource RoundedCorners}" Width="500" Height="60" FontSize="40" Margin="20,10"/>
         <TextBox Name="Password" Style="{StaticResource RoundedCorners}" Width="500" Height="60" FontSize="40" Margin="20,10"/>
@@ -31,6 +31,6 @@
                 </MultiBinding>
             </Button.CommandParameter>
         </Button>
-        <TextBlock Text="{Binding ErrorMessage}" FontSize="50" Foreground="Red"/>
+        <TextBlock Text="{Binding ErrorMessage}" FontSize="50" Foreground="Red" HorizontalAlignment="Center"/>
     </StackPanel>
 </Page>

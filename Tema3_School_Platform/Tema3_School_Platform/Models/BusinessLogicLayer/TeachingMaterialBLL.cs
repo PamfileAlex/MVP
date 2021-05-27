@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +31,7 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
         public void AddTeachingMaterial(TeachingMaterial teachingMaterial)
         {
             CheckFields(teachingMaterial);
+            UploadFile(teachingMaterial);
             TeachingMaterialDAL.AddTeachingMaterial(teachingMaterial);
             TeachingMaterial fromDB = TeachingMaterialDAL.GetTeachingMaterial(teachingMaterial.TeacherSubjectClass.ID, teachingMaterial.Name);
             if (fromDB == null)
@@ -50,5 +53,20 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
                 throw new SchoolPlatformException("Name is taken");
         }
 
+        private void UploadFile(TeachingMaterial teachingMaterial)
+        {
+            OpenFileDialog op = new OpenFileDialog
+            {
+                Title = "Select a file",
+                Filter = "Pdf files (*.pdf)|*.pdf|Office Files|*.doc;*.xls;*.ppt|txt files (*.txt)|*.txt"
+            };
+            if (op.ShowDialog() == true)
+            {
+                var fileName = op.FileName;
+                teachingMaterial.Path = fileName;
+                //System.IO.File.Copy(fileName, "..\\..\\..\\Files\\" + teachingMaterial.Name + System.IO.Path.GetExtension(fileName));
+            }
+            else { throw new SchoolPlatformException("UploadFile failed"); }
+        }
     }
 }

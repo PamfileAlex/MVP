@@ -28,6 +28,11 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             TeacherSubjectClassList = TeacherSubjectClassDAL.GetTeacherSubjectClassList();
         }
 
+        public TeacherSubjectClass GetTeacherSubjectClass(int id)
+        {
+            return TeacherSubjectClassList.First(tsc => tsc.ID == id);
+        }
+
         public void RemovedSubjectSpecialization(int subjectID, int specializationID)
         {
             List<int> classIDs = new List<int>();

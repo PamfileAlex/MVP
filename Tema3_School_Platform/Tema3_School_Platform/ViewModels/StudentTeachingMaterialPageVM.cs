@@ -18,9 +18,11 @@ namespace Tema3_School_Platform.ViewModels
         {
             get
             {
-                List<int> tscList = TeacherSubjectClassBLL.Instance.TeacherSubjectClassList.Where(tsc => (Subject == null || tsc.Subject.ID == Subject.ID)
-                & tsc.Class.ID == UserBLL.Instance.CurrentUser.Class.ID).Select(tsc => tsc.ID).ToList();
-                return TeachingMaterialBLL.Instance.TeachingMaterials.Where(tm => tscList.Contains(tm.TeacherSubjectClass.ID)).ToObservableCollection();
+                return TeachingMaterialBLL.Instance.TeachingMaterials.Where(tm => tm.TeacherSubjectClass.Class.ID == UserBLL.Instance.CurrentUser.Class.ID
+                && (Subject == null || Subject.ID == tm.TeacherSubjectClass.Subject.ID)).ToObservableCollection();
+                //List<int> tscList = TeacherSubjectClassBLL.Instance.TeacherSubjectClassList.Where(tsc => (Subject == null || tsc.Subject.ID == Subject.ID)
+                //& tsc.Class.ID == UserBLL.Instance.CurrentUser.Class.ID).Select(tsc => tsc.ID).ToList();
+                //return TeachingMaterialBLL.Instance.TeachingMaterials.Where(tm => tscList.Contains(tm.TeacherSubjectClass.ID)).ToObservableCollection();
             }
         }
         public ObservableCollection<Subject> Subjects
