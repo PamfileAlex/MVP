@@ -24,6 +24,9 @@
             <ComboBox Name="Subject" ItemsSource="{Binding Subjects}" DisplayMemberPath="Name" SelectedItem="{Binding Subject}" Width="580" Height="60" FontSize="40" Margin="20,10"/>
             <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Clear" FontSize="30" FontWeight="Bold" Margin="20,10"
                         Command="{Binding ClearCommand}"/>
+            <Button Style="{StaticResource RoundedCorners}" Width="150" Height="60" Content="Copy" FontSize="30" FontWeight="Bold" Margin="20,10"
+                    Command="{Binding CopyCommand}" CommandParameter="{Binding ElementName=DataGrid, Path=SelectedItem}"
+                    IsEnabled="{Binding ElementName=DataGrid, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"/>
         </StackPanel>
         <DataGrid Name="DataGrid" ItemsSource="{Binding TeachingMaterials}" AutoGenerateColumns="False" IsReadOnly="True" Margin="30" Height="600" FontSize="30">
             <DataGrid.Columns>

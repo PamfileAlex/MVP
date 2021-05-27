@@ -27,7 +27,8 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" VerticalAlignment="Center">
             <ComboBox Name="Subjects" ItemsSource="{Binding Subjects}" SelectedItem="{Binding Subject}" DisplayMemberPath="Name" Width="300" FontSize="40" Margin="10"/>
-            <ComboBox Name="Classes" ItemsSource="{Binding Classes}" SelectedItem="{Binding Class}" DisplayMemberPath="Name" Width="300" FontSize="40" Margin="10"/>
+            <ComboBox Name="Classes" ItemsSource="{Binding Classes}" SelectedItem="{Binding Class}" DisplayMemberPath="Name" Width="300" FontSize="40" Margin="10"
+                      IsEnabled="{Binding ElementName=Subjects, Path=SelectedIndex, Converter={StaticResource SelectedIndexToBoolConverter}}"/>
             <TextBox Name="MaterialName" Text="{Binding MaterialName}" Style="{StaticResource RoundedCorners}" Width="300" FontSize="40" Margin="0,10"/>
             <StackPanel Orientation="Horizontal" Margin="25,10,0,50">
                 <TextBlock Text="Semester: " FontSize="30" Foreground="{StaticResource Text}"/>

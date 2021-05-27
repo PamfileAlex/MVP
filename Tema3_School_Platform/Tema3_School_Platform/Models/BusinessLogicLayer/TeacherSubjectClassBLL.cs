@@ -81,7 +81,8 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
 
         private void CheckExistence(TeacherSubjectClass tscParam)
         {
-            if (TeacherSubjectClassList.Where(tsc => tsc.Teacher.ID == tscParam.Teacher.ID && tsc.Subject.ID == tscParam.Subject.ID && tsc.Class.ID == tscParam.Class.ID).Count() != 0)
+            //if (TeacherSubjectClassList.Where(tsc => tsc.Teacher.ID == tscParam.Teacher.ID && tsc.Subject.ID == tscParam.Subject.ID && tsc.Class.ID == tscParam.Class.ID).Count() != 0)
+            if (TeacherSubjectClassList.Where(tsc => tsc.Subject.ID == tscParam.Subject.ID && tsc.Class.ID == tscParam.Class.ID).Count() != 0)
                 throw new SchoolPlatformException("Relation already exists");
         }
 

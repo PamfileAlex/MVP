@@ -47,10 +47,12 @@ namespace Tema3_School_Platform.ViewModels
         }
 
         public ICommand ClearCommand { get; }
+        public ICommand CopyCommand { get; }
 
         public StudentTeachingMaterialPageVM()
         {
             this.ClearCommand = new ActionCommand(Clear);
+            this.CopyCommand = new RelayCommand<TeachingMaterial>(tm => ErrorWrapper(() => { TeachingMaterialBLL.Instance.CopyTeachingMaterial(tm); Clear(); }));
         }
 
         private void Clear()

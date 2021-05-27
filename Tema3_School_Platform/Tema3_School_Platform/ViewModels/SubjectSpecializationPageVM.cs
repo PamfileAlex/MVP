@@ -8,14 +8,42 @@ using System.Windows.Input;
 using Tema3_School_Platform.Commands;
 using Tema3_School_Platform.Models.BusinessLogicLayer;
 using Tema3_School_Platform.Models.EntityLayer;
+using Tema3_School_Platform.Utils;
 
 namespace Tema3_School_Platform.ViewModels
 {
     class SubjectSpecializationPageVM : BaseVM
     {
-        public ObservableCollection<Specialization> Specializations { get { return SpecializationBLL.Instance.Specializations; } }
-        public ObservableCollection<Subject> Subjects { get { return SubjectBLL.Instance.Subjects; } }
-        public ObservableCollection<SubjectSpecialization> SubjectSpecializations { get { return SubjectSpecializationBLL.Instance.SubjectSpecializations; } }
+        public ObservableCollection<Specialization> Specializations
+        {
+            get
+            {
+                //List<Specialization> specializations = SpecializationBLL.Instance.Specializations.ToList();
+                //specializations.Sort((item1, item2) => item1.Name.CompareTo(item2.Name));
+                //return specializations.ToObservableCollection();
+                return SpecializationBLL.Instance.Specializations;
+            }
+        }
+        public ObservableCollection<Subject> Subjects
+        {
+            get
+            {
+                //List<Subject> subjects = SubjectBLL.Instance.Subjects.ToList();
+                //subjects.Sort((item1, item2) => item1.Name.CompareTo(item2.Name));
+                //return subjects.ToObservableCollection();
+                return SubjectBLL.Instance.Subjects;
+            }
+        }
+        public ObservableCollection<SubjectSpecialization> SubjectSpecializations
+        {
+            get
+            {
+                //List<SubjectSpecialization> subjectSpecializations = SubjectSpecializationBLL.Instance.SubjectSpecializations.ToList();
+                //subjectSpecializations.Sort((item1, item2) => item1.Format.CompareTo(item2.Format));
+                //return subjectSpecializations.ToObservableCollection();
+                return SubjectSpecializationBLL.Instance.SubjectSpecializations;
+            }
+        }
 
         private Specialization specialization;
         public Specialization Specialization
@@ -98,6 +126,7 @@ namespace Tema3_School_Platform.ViewModels
             {
                 subjectSpecializationSelectedIndex = value;
                 NotifyPropertyChanged("SubjectSpecializationSelectedIndex");
+                NotifyPropertyChanged("Thesis");
                 if (SubjectSpecializationSelectedIndex != -1)
                 {
                     SubjectSelectedIndex = -1;
@@ -136,10 +165,10 @@ namespace Tema3_School_Platform.ViewModels
             Specialization = new Specialization(0);
             Clear();
             this.SpecializationAddCommand = new RelayCommand<Specialization>(specialization => ErrorWrapper(() => { SpecializationBLL.Instance.AddSpecialization(specialization); Clear(); }));
-            this.SpecializationModifyCommand = new RelayCommand<Specialization>(specialization => ErrorWrapper(() => { SpecializationBLL.Instance.ModifySpecialization(specialization, SpecializationSelectedIndex); Clear(); }));
+            this.SpecializationModifyCommand = new RelayCommand<Specialization>(specialization => ErrorWrapper(() => { SpecializationBLL.Instance.ModifySpecialization(specialization, SpecializationSelectedIndex); NotifyPropertyChanged("SubjectSpecializations"); Clear(); }));
             this.SpecializationRemoveCommand = new RelayCommand<Specialization>(specialization => ErrorWrapper(() => { SpecializationBLL.Instance.RemoveSpecialization(SpecializationBLL.Instance.Specializations[SpecializationSelectedIndex]); NotifyPropertyChanged("SubjectSpecializations"); Clear(); }));
             this.SubjectAddCommand = new RelayCommand<Subject>(subject => ErrorWrapper(() => { SubjectBLL.Instance.AddSubject(subject); Clear(); }));
-            this.SubjectModifyCommand = new RelayCommand<Subject>(subject => ErrorWrapper(() => { SubjectBLL.Instance.ModifySubject(subject, SubjectSelectedIndex); Clear(); }));
+            this.SubjectModifyCommand = new RelayCommand<Subject>(subject => ErrorWrapper(() => { SubjectBLL.Instance.ModifySubject(subject, SubjectSelectedIndex); NotifyPropertyChanged("SubjectSpecializations"); Clear(); }));
             this.SubjectRemoveCommand = new RelayCommand<Subject>(subject => ErrorWrapper(() => { SubjectBLL.Instance.RemoveSubject(SubjectBLL.Instance.Subjects[SubjectSelectedIndex]); NotifyPropertyChanged("SubjectSpecializations"); Clear(); }));
             this.SubjectSpecializationAddCommand = new RelayCommand<SubjectSpecialization>(ss => ErrorWrapper(() => { SubjectSpecializationBLL.Instance.AddSubjectSpecialization(ss); Clear(); }));
             this.SubjectSpecializationRemoveCommand = new RelayCommand<SubjectSpecialization>(ss => ErrorWrapper(() => { SubjectSpecializationBLL.Instance.RemoveSubjectSpecialization(ss); Clear(); }));

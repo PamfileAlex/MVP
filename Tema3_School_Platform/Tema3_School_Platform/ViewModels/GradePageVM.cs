@@ -67,6 +67,7 @@ namespace Tema3_School_Platform.ViewModels
                 subject = value;
                 NotifyPropertyChanged("Subject");
                 NotifyPropertyChanged("Students");
+                NotifyPropertyChanged("ThesisCheckBox");
                 Reset();
             }
         }

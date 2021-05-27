@@ -68,5 +68,14 @@ namespace Tema3_School_Platform.Models.BusinessLogicLayer
             }
             else { throw new SchoolPlatformException("UploadFile failed"); }
         }
+
+        public void CopyTeachingMaterial(TeachingMaterial tm)
+        {
+            try
+            {
+                System.IO.File.Copy(tm.Path, Path.Combine(Directory.GetCurrentDirectory(), tm.Name + Path.GetExtension(tm.Path)));
+            }
+            catch { throw new SchoolPlatformException("CopyFile failed"); }
+        }
     }
 }

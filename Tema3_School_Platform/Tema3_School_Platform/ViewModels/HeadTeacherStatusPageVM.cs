@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,7 +105,7 @@ namespace Tema3_School_Platform.ViewModels
             {
                 List<int> studentSubjects = StudentSubjectBLL.Instance.StudentSubjectList.Where(ss => ss.Student.ID == student.ID).Select(ss => ss.ID).ToList();
                 float value = CalculateGeneralGrade(studentSubjects);
-                inter.Add(new Tuple<string, float>(student.Name, value));
+                inter.Add(new Tuple<string, float>(student.Name, (float)Math.Round(value, 2)));
             }
             inter.Sort((item1, item2) => item2.Item2.CompareTo(item1.Item2));
             return inter.Select(item => item.Item1 + " - " + item.Item2).ToList();
@@ -161,11 +162,11 @@ namespace Tema3_School_Platform.ViewModels
                     continue;
                 if (corigent.Count > 2)
                 {
-                    Repeaters.Add(student.Name + " - " + value);
+                    Repeaters.Add(student.Name + " - " + Math.Round(value, 2));
                     return;
                 }
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.Append(student.Name + " - " + value);
+                stringBuilder.Append(student.Name + " - " + Math.Round(value, 2));
                 foreach (var cor in corigent)
                 {
                     stringBuilder.Append("\n" + cor);
@@ -176,13 +177,13 @@ namespace Tema3_School_Platform.ViewModels
 
         private List<String> GetExmatriculated()
         {
-            int permitedAbsences = 10;
+            int permitedAbsences = Convert.ToInt32(ConfigurationManager.AppSettings["PermitedAbsences"]); ;
             List<String> exmat = new List<String>();
             foreach (var student in Students)
             {
                 List<int> studentSubjects = StudentSubjectBLL.Instance.StudentSubjectList.Where(ss => ss.Student.ID == student.ID).Select(ss => ss.ID).ToList();
-                int sem1 = AbsenceBLL.Instance.Absences.Where(abs => abs.Semester = false && studentSubjects.Contains(abs.StudentSubject.ID)).Count();
-                int sem2 = AbsenceBLL.Instance.Absences.Where(abs => abs.Semester = true && studentSubjects.Contains(abs.StudentSubject.ID)).Count();
+                int sem1 = AbsenceBLL.Instance.Absences.Where(abs => abs.Type != Absence.AbsenceType.Motivated && abs.Semester == false && studentSubjects.Contains(abs.StudentSubject.ID)).Count();
+                int sem2 = AbsenceBLL.Instance.Absences.Where(abs => abs.Type != Absence.AbsenceType.Motivated && abs.Semester == true && studentSubjects.Contains(abs.StudentSubject.ID)).Count();
                 if (sem1 > permitedAbsences || sem2 > permitedAbsences)
                     exmat.Add(student.Name);
             }

@@ -38,7 +38,9 @@ namespace Tema3_School_Platform.ViewModels
                 if (Subject == null)
                     return null;
                 return TeacherSubjectClassBLL.Instance.TeacherSubjectClassList.Where(tsc => tsc.Teacher.ID == UserBLL.Instance.CurrentUser.ID
-                && Subjects.Select(s => s.ID).Contains(tsc.Subject.ID)).Select(tsc => tsc.Class).ToObservableCollection();
+                && tsc.Subject.ID == Subject.ID).Select(tsc => tsc.Class).Distinct().ToObservableCollection();
+                //return TeacherSubjectClassBLL.Instance.TeacherSubjectClassList.Where(tsc => tsc.Teacher.ID == UserBLL.Instance.CurrentUser.ID
+                //&& Subjects.Select(s => s.ID).Contains(tsc.Subject.ID)).Select(tsc => tsc.Class).Distinct().ToObservableCollection();
             }
         }
 

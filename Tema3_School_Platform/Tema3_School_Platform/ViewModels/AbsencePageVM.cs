@@ -117,7 +117,7 @@ namespace Tema3_School_Platform.ViewModels
         {
             Clear();
             AbsenceTypes = Enum.GetValues(typeof(Absence.AbsenceType)).Cast<Absence.AbsenceType>().ToList();
-            this.AddCommand = new RelayCommand<Absence>(absences => ErrorWrapper(() => { AbsenceBLL.Instance.AddAbsence(absences); Clear(); }));
+            this.AddCommand = new RelayCommand<Absence>(absences => ErrorWrapper(() => { AbsenceBLL.Instance.AddAbsence(absences); Update(); }));
             this.RemoveCommand = new RelayCommand<Absence>(absences => ErrorWrapper(() => { AbsenceBLL.Instance.RemoveAbsence(absences); Clear(); }));
             this.ModifyCommand = new RelayCommand<Absence>(absences => ErrorWrapper(() => { AbsenceBLL.Instance.ModifyAbsence(absences); Clear(); }));
             this.SearchCommand = new ActionCommand(Search);
@@ -126,7 +126,16 @@ namespace Tema3_School_Platform.ViewModels
 
         private void Search()
         {
-            Absences = AbsenceBLL.Instance.Absences.Where(absence => absence.StudentSubject.Student.ID == Student.ID && absence.StudentSubject.Subject.ID == Subject.ID).ToObservableCollection();
+            Absences = AbsenceBLL.Instance.Absences.Where(absence => absence.StudentSubject.Student.ID == Student.ID
+            && absence.StudentSubject.Subject.ID == Subject.ID && absence.Semester == Semester).ToObservableCollection();
+            ErrorMessage = String.Empty;
+        }
+
+        private void Update()
+        {
+            Absences = AbsenceBLL.Instance.Absences.Where(absence => TeacherSubjectClassBLL.Instance.TeacherSubjectClassList.Where(tsc
+                   => tsc.Subject.ID == absence.StudentSubject.Subject.ID && tsc.Teacher.ID == UserBLL.Instance.CurrentUser.ID).Count() != 0).ToObservableCollection();
+            ErrorMessage = String.Empty;
         }
 
         private void Clear()
@@ -134,9 +143,7 @@ namespace Tema3_School_Platform.ViewModels
             //Grades = GradeBLL.Instance.Grades.Where(grade => TeacherSubjectClassBLL.Instance.TeacherSubjectClassList.Where(tsc
             //    => tsc.Subject.ID == grade.StudentSubject.Subject.ID && tsc.Teacher.ID == UserBLL.Instance.CurrentUser.ID &&
             //    grade.Semester == Semester).Count() != 0).ToObservableCollection();
-            Absences = AbsenceBLL.Instance.Absences.Where(absence => TeacherSubjectClassBLL.Instance.TeacherSubjectClassList.Where(tsc
-                   => tsc.Subject.ID == absence.StudentSubject.Subject.ID && tsc.Teacher.ID == UserBLL.Instance.CurrentUser.ID &&
-                   absence.Semester == Semester).Count() != 0).ToObservableCollection();
+            Update();
             Type = Absence.AbsenceType.None;
             Student = null;
             Subject = null;
